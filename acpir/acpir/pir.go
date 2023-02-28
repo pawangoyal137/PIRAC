@@ -8,14 +8,11 @@ type PIR interface {
 	Name() string
 
 	// sets up the client and server states, setup the database
-	Setup(p Params, dataentries []string)  (ClientState, ServerState, *Database)
+	// Only database is passed around as reference, else all other objects are
+	// passed by value
+	Setup(p Params, dataentries []DatabaseEntry)
 	
-	Query(i uint64, clstate ClientState) (ClientState, QueryMsg)
+	Run(i uint64) DatabaseEntry
 
-	Answer(DB *Database, query QueryMsg, server ServerState) AnswerMsg
-
-	Recover(i uint64, clstate ClientState, answer AnswerMsg) string
-
-	// Return a new database encrypted under the provided keys
-	EncryptDB(database *Database, enckeys EncParams) *Database
+	EncryptAndRun(i uint64, enckeys EncParams) DatabaseEntry
 }
