@@ -31,13 +31,13 @@ void destroyAES(struct AES *aes)
     free(aes);
 }
 
-void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint128_t *input, uint128_t *output)
+void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint64_t *input, uint64_t *output)
 {
     uint64_t i;
     for (i = 0; i < size * elemsize; i += elemsize)
     {
         int len = 0;
-        if (1 != EVP_EncryptUpdate(aes->ctx, (uint8_t *)&output[i], &len, (uint8_t *)&input[i], sizeof(uint128_t) * elemsize))
+        if (1 != EVP_EncryptUpdate(aes->ctx, (uint8_t *)&output[i], &len, (uint8_t *)&input[i], sizeof(uint64_t) * elemsize))
             printf("errors occurred when encrypting\n");
     }
 }
