@@ -9,6 +9,6 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 
-uint64_t *encryptDatabase(uint64_t *database, uint64_t seed, uint64_t size, uint64_t elemsize);
+void encryptDatabase(uint64_t *database, uint64_t *encrpytedDB, uint64_t seed, uint64_t size, uint64_t elemsize);
 
 #endif
