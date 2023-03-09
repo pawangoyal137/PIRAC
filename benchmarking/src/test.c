@@ -10,7 +10,7 @@
 
 struct Sha_256 sha_256;
 
-float testReKeying(uint64_t size, uint64_t elemsize){
+float testReKeying(uint64_t size){
     uint128_t *seeds = malloc(sizeof(uint128_t) * size);
     RAND_bytes((uint8_t *)seeds, sizeof(uint128_t) * size);
 
