@@ -19,12 +19,12 @@ if __name__ == "__main__":
     for size in db_sizes:
         for elem_size in elem_sizes:
             time_rekeying = c_lib.testReKeying(size, elem_size)
-            time_reencryptioin = c_lib.testReEncryption(size, elem_size)
+            time_re_encryption = c_lib.testReEncryption(size, elem_size)
 
             db_size_bits = size * elem_size * 128
             bits_in_mb = 8 * 1000000
             db_size_mB = db_size_bits / bits_in_mb
-            throughput = db_size_mB / ((time_rekeying+time_reencryptioin) / 1000.0)
+            throughput = db_size_mB / ((time_rekeying+time_re_encryption) / 1000.0)
             throughputs[elem_size] = throughput
             print("Re-encryption for {}, {} in MB/s {}\n".format(size, elem_size, throughput))
     
