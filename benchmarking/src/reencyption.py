@@ -41,7 +41,7 @@ def benchmark_reencryption_elem_size(db_size, elem_sizes):
         t = c_lib.testReEncryption(db_size, elem_size)
         time_ms.append(t)
     
-    time_us_per_entry = [1000*time_ms[i]/db_size for i in range(len(db_sizes))]
+    time_us_per_entry = [1000*time_ms[i]/db_size for i in range(len(time_ms))]
     plt.figure()
     plt.plot(np.log2(elem_sizes), time_us_per_entry, "-o")
     plt.xlabel("Size of entry in log")
