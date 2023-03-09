@@ -31,7 +31,7 @@ float testReKeying(uint64_t size){
 
     clock_t end = clock();
     totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    printf("Re-Keying took %f ms\n", totalTime);
+    // printf("Re-Keying took %f ms\n", totalTime);
     free(seeds);
     return totalTime;
 }
@@ -55,13 +55,13 @@ float testReEncryption(uint64_t size, uint64_t elemsize){
     }
     RAND_bytes((uint8_t *)database, sizeof(uint128_t) * size * elemsize);
 
-    printf("Done filling database with random bytes\n");
+    // printf("Done filling database with random bytes\n");
 
     clock_t start = clock();
     reencrypt(aes, size, elemsize, database, output);
     clock_t end = clock();
     totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    printf("Re-encryption took %f ms\n", totalTime);
+    // printf("Re-encryption took %f ms\n", totalTime);
 
     free(database);
     free(output);
