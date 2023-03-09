@@ -4,7 +4,8 @@ import pathlib
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-mpl.use('tkagg')
+
+#np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
 
 def benchmark_rekeying(db_sizes):
     time_ms = []
@@ -19,8 +20,7 @@ def benchmark_rekeying(db_sizes):
     plt.ylabel("Time for rekeying/entry (in us)")
     plt.savefig("../images/rekeying.png")
 
-    print("mean:{.2f}, std:{.2f}".format(np.mean(time_us_per_entry), np.std(time_us_per_entry)))
-
+    print("mean:{0:0.2f}, std:{1:0.3f}".format(np.mean(time_us_per_entry), np.std(time_us_per_entry)))
 
 if __name__ == "__main__":
     # Load the shared library into ctypes
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     c_lib.testReKeying.restype = ctypes.c_float
     c_lib.testReEncryption.restype = ctypes.c_float
 
-    db_sizes = [1 << i for i in [10,15,20,25]]
+    db_sizes = [1 << i for i in [10,12,14,16,18,20]]
     # db_sizes = [1 << i for i in [20]]
     elem_sizes = [32, 64, 128, 256]
 
