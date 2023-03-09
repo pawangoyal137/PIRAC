@@ -22,6 +22,32 @@ def benchmark_rekeying(db_sizes):
 
     print("mean:{0:0.2f}, std:{1:0.3f}".format(np.mean(time_us_per_entry), np.std(time_us_per_entry)))
 
+def benchmark_reencryption_dbsize(db_sizes, elem_size):
+    time_ms = []
+    for size in db_sizes:
+        t = c_lib.testReEncryption(size, elem_size)
+        time_ms.append(t)
+    
+    time_us_per_entry = [1000*time_ms[i]/db_sizes[i] for i in range(len(db_sizes))]
+    plt.figure()
+    plt.plot(np.log2(db_sizes), time_us_per_entry, "-o")
+    plt.xlabel("Size of database in log")
+    plt.ylabel("Time for reencryption/entry (in us)")
+    plt.savefig("../images/reencryption_dbsizes.png")
+
+def benchmark_reencryption_elem_size(db_size, elem_sizes):
+    time_ms = []
+    for elem_size in elem_sizes:
+        t = c_lib.testReEncryption(db_size, elem_size)
+        time_ms.append(t)
+    
+    time_us_per_entry = [1000*time_ms[i]/db_size for i in range(len(db_sizes))]
+    plt.figure()
+    plt.plot(np.log2(elem_sizes), time_us_per_entry, "-o")
+    plt.xlabel("Size of entry in log")
+    plt.ylabel("Time for reencryption/entry (in us)")
+    plt.savefig("../images/reencryption_elemsize.png")
+
 if __name__ == "__main__":
     # Load the shared library into ctypes
     libname = pathlib.Path().absolute() / "test.so"
@@ -32,10 +58,11 @@ if __name__ == "__main__":
     c_lib.testReEncryption.restype = ctypes.c_float
 
     db_sizes = [1 << i for i in [10,12,14,16,18,20]]
-    # db_sizes = [1 << i for i in [20]]
     elem_sizes = [32, 64, 128, 256]
 
-    benchmark_rekeying(db_sizes)
+    # benchmark_rekeying(db_sizes)
+    benchmark_reencryption_dbsize(db_sizes, 128)
+    benchmark_reencryption_elem_size(1<<20, elem_sizes)
     # throughputs = {}
 
     # for size in db_sizes:
