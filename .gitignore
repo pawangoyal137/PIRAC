@@ -1,3 +1,6 @@
 .DS_Store
 .vscode
 *.so
+__pycache__
+*.out
+*.log

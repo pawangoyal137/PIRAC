@@ -1,6 +1,3 @@
-#ifndef _ENCRYPTION
-#define _ENCRYPTION
-
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
@@ -9,6 +6,6 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 
-void encryptDatabase(uint64_t *database, uint64_t *encrpytedDB, uint64_t seed, uint64_t size, uint64_t elemsize);
+typedef unsigned __int128 uint128_t;
 
-#endif
+uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t size, uint64_t elemsize);

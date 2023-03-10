@@ -9,6 +9,9 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 
+typedef __int128 int128_t;
+typedef unsigned __int128 uint128_t;
+
 struct AES
 {
    EVP_CIPHER_CTX *ctx;
@@ -19,6 +22,6 @@ typedef struct aes AES;
 extern struct AES *initAES(uint8_t *seed);
 extern void destroyAES(struct AES *aes);
 
-extern void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint64_t *input, uint64_t *output);
+extern void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint128_t *input, uint128_t *output);
 
 #endif

@@ -11,14 +11,14 @@
 
 struct Sha_256 sha_256;
 
-uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t size, uint64_t elemsize){
+void encryptDatabase(uint64_t *database, uint64_t *encrpytedDB, uint64_t seed, uint64_t size, uint64_t elemsize){
     struct AES *aes = initAES((uint8_t *)&seed);
-    uint128_t *encrpytedDB = malloc(sizeof(uint128_t) * size * elemsize);
-    if (encrpytedDB == NULL)
-    {
-        printf("failed to allocate space");
-        exit(0);
-    }
+    // uint64_t *encrpytedDB = malloc(sizeof(uint64_t) * size * elemsize);
+    // if (encrpytedDB == NULL)
+    // {
+    //     printf("failed to allocate space");
+    //     exit(0);
+    // }
     if (sizeof(*encrpytedDB) != sizeof(*database))
     {
         printf("Different size of input and output database");
@@ -26,5 +26,5 @@ uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t size, u
     }
     reencrypt(aes, size, elemsize, database, encrpytedDB);
 
-    return encrpytedDB;
+    // return encrpytedDB;
 }
