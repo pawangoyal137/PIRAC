@@ -686,3 +686,48 @@ func BenchmarkDoublePirBatchLarge(b *testing.B) {
 			strconv.FormatFloat(avg(tputs), 'f', 4, 64)})
 	}
 }
+
+// Test SimplePIR correctness on DB with short entries and includes.
+// offline computation in throughput
+func TestSimplePirOfflineInclude(t *testing.T) {
+	N := uint64(1 << 20)
+	d := uint64(8)
+	pir := SimplePIR{}
+	p := pir.PickParams(N, d, SEC_PARAM, LOGQ)
+
+	DB := MakeRandomDB(N, d, &p)
+	RunPIROfflineInclude(&pir, DB, p, []uint64{262144})
+}
+
+// Benchmark SimplePIR performance with offline computation.
+func BenchmarkSimplePirOfflineIncludeSingle(b *testing.B) {
+
+	N := uint64(1 << 20)
+	d := uint64(2048)
+
+	log_N, _ := strconv.Atoi(os.Getenv("LOG_N"))
+	D, _ := strconv.Atoi(os.Getenv("D"))
+	if log_N != 0 {
+		N = uint64(1 << log_N)
+	}
+	if D != 0 {
+		d = uint64(D)
+	}
+
+	pir := SimplePIR{}
+	p := pir.PickParams(N, d, SEC_PARAM, LOGQ)
+
+	i := uint64(0) // index to query
+	if i >= p.L*p.M {
+		panic("Index out of dimensions")
+	}
+
+	DB := MakeRandomDB(N, d, &p)
+	var tputs []float64
+	for j := 0; j < 5; j++ {
+		tput, _ := RunPIROfflineInclude(&pir, DB, p, []uint64{i})
+		tputs = append(tputs, tput)
+	}
+	fmt.Printf("Avg SimplePIR tput, except for first run: %f MB/s\n", avg(tputs))
+	fmt.Printf("Std dev of SimplePIR tput, except for first run: %f MB/s\n", stddev(tputs))
+}
