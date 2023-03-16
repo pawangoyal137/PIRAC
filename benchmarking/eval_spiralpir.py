@@ -4,8 +4,12 @@ import json
 
 SpiralPirPath = "../../spiral"
 
-def run_SpiralPIR(N, D, output=False):
-    process = subprocess.Popen(f'python3 select_params.py {N} {D//8}', 
+def run_SpiralPIR(N, D, stream=False, output=False):
+    """
+    Take db sizes in log 2 and elem_sizes in bits
+    """
+    stream_flag = "--stream" if stream else ""
+    process = subprocess.Popen(f'python3 select_params.py {N} {D//8} {stream_flag}', 
                             shell=True,
                             stdout=subprocess.PIPE, 
                             stderr=subprocess.PIPE,
@@ -16,7 +20,7 @@ def run_SpiralPIR(N, D, output=False):
         i = 0
         while True:
             output = process.stdout.readline()
-            print(i, output.strip())
+            print(i, output.rstrip())
             i+=1
             try:
                 statistics = json.loads(output)
@@ -41,15 +45,16 @@ def run_SpiralPIR(N, D, output=False):
     assert statistics is not None
     return statistics["dbsize"]/statistics["total_us"]
 
-def benchmark_SpiralPir(db_sizes, elem_sizes):
+def benchmark_SpiralPir(db_sizes, elem_sizes, stream=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
     throughputs = []
     for db_size in db_sizes:
         for elem_size in elem_sizes:
-            throughput = run_SpiralPIR(db_size, elem_size)
-            print(f"Throughput on SpiralPIR with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
+            throughput = run_SpiralPIR(db_size, elem_size, stream)
+            stream_print = "(with streaming)" if stream else ""
+            print(f"Throughput on SpiralPIR {stream_print} with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
             throughputs.append(throughput)
     
     return throughputs
@@ -61,8 +66,8 @@ if __name__ == "__main__":
     db_sizes = [10,12,14,16,18,20]
     elem_sizes = [1<<i for i in [7,9,11,13,15]] #in bits
 
-    throughputs_dbsizes = benchmark_SpiralPir(db_sizes, [2048])
-    # throughputs_elemsizes = benchmark_SimplePir(12, elem_sizes)
+    # throughputs_dbsizes = benchmark_SpiralPir(db_sizes, [2048])
+    throughputs_elemsizes = benchmark_SpiralPir([20], elem_sizes, True)
 
-    print(throughputs_dbsizes)
-    # print(throughputs_elemsizes)
+    # print(throughputs_dbsizes)
+    print(throughputs_elemsizes)
