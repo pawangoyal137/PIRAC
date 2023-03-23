@@ -5,11 +5,12 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
+from utils import *
 
 SimplePirPath = "../simplepir/pir"
 
 # declare the constants/ defaults for the experiments
-LOG2_DB_SIZES = [10,12,14,16,18]
+LOG2_DB_SIZES = [14,16,18]
 
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
@@ -82,13 +83,11 @@ def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False, pirac_mode=
     
     return throughputs
 
-def cal_tput_with_pirac(pir, pirac):
-    return [1/(1/pir[i] + 1/pirac[i]) for i in range(len(pir))]
-
-def pretty_print(throughputs):
+def pretty_print(throughputs, offline_include, pirac_mode):
     min_tput = np.min(throughputs)
     max_tput = np.max(throughputs)
-    pp = "Throughputs in the range {0:0.0f}-{1:0.0f}Mb/s".format(min_tput, max_tput)
+    pp = f"Offline Mode = {offline_include}, Pirac Mode = {pirac_mode}\n"
+    pp = pp + "Throughputs in the range {0:0.1f}-{1:0.1f}Mb/s".format(min_tput, max_tput)
     print(pp)
 
 if __name__ == "__main__":
@@ -104,14 +103,14 @@ if __name__ == "__main__":
     throughputs_simplepir = benchmark_SimplePir(log2_db_sizes, elem_sizes, 
                         offline_include=offline_include, pirac_mode=pirac_mode)
     if pirac_mode is None:
-        pretty_print(throughputs_simplepir)
+        pretty_print(throughputs_simplepir, offline_include, pirac_mode)
     elif pirac_mode=="re":
         throughputs_re = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = False)
         throughputs_combined = cal_tput_with_pirac(throughputs_simplepir, throughputs_re)
-        pretty_print(throughputs_combined)
+        pretty_print(throughputs_combined, offline_include, pirac_mode)
     elif pirac_mode=="pirac":
         throughputs_pirac = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = True)
         throughputs_combined = cal_tput_with_pirac(throughputs_simplepir, throughputs_pirac)
-        pretty_print(throughputs_combined)
+        pretty_print(throughputs_combined, offline_include, pirac_mode)
     else:
         raise Exception("Shouldn't reach here")
