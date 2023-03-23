@@ -1,8 +1,34 @@
 import subprocess
 import os
 import re
+import argparse
+import numpy as np
+
+from eval_pirac import benchmark_pirac
 
 SimplePirPath = "../simplepir/pir"
+
+# declare the constants/ defaults for the experiments
+LOG2_DB_SIZES = [10,12,14,16,18]
+
+LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
+ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
+
+# define the parser for running the experiments
+parser = argparse.ArgumentParser(description='Run benchmarking for simplepir')
+parser.add_argument('-ds','--dbSizes', nargs='+',
+                     required=False, type=int, default=LOG2_DB_SIZES,
+                     help='Log 2 Database sizes to run experiment on.')
+parser.add_argument('-es','--elemSizes', nargs='+',
+                     required=False, type=int, default=ELEM_SIZES,
+                     help='Element sizes (in bits) to run experiment on.')
+parser.add_argument('-o','--offline', action='store_true',
+                     required=False, 
+                     help='If the flag is passed, include the offline time')
+parser.add_argument('-wp','--withPirac', choices=['re', 'pirac'],
+                    required=False,
+                    help='If passed "re", runs with reencryption. If passed with "pirac", run\
+                        both rekeying and reencryption')
 
 def run_SimplePIR(N, D, offline_include=False, output=False):
     if offline_include:
@@ -42,7 +68,7 @@ def run_SimplePIR(N, D, offline_include=False, output=False):
     
     return throughput[0]
 
-def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False):
+def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False, pirac_mode=None):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
@@ -56,16 +82,36 @@ def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False):
     
     return throughputs
 
+def cal_tput_with_pirac(pir, pirac):
+    return [1/(1/pir[i] + 1/pirac[i]) for i in range(len(pir))]
+
+def pretty_print(throughputs):
+    min_tput = np.min(throughputs)
+    max_tput = np.max(throughputs)
+    pp = "Throughputs in the range {0:0.0f}-{1:0.0f}Mb/s".format(min_tput, max_tput)
+    print(pp)
+
 if __name__ == "__main__":
+    args = parser.parse_args()
+    log2_db_sizes = args.dbSizes
+    elem_sizes = args.elemSizes
+    offline_include = args.offline
+    pirac_mode = args.withPirac
+
     os.chdir(SimplePirPath)
     print(os.getcwd())
 
-    # db_sizes = [10,12,14,16,18,20]
-    # elem_sizes = [1<<i for i in [7,9,11,13,15]] #in bits
-
-    # throughputs_dbsizes = benchmark_SimplePir(db_sizes, [2048])
-    # throughputs_elemsizes = benchmark_SimplePir(12, elem_sizes)
-
-    # print(throughputs_dbsizes)
-    # print(throughputs_elemsizes)
-    run_SimplePIR(20, 2048, True, True)
+    throughputs_simplepir = benchmark_SimplePir(log2_db_sizes, elem_sizes, 
+                        offline_include=offline_include, pirac_mode=pirac_mode)
+    if pirac_mode is None:
+        pretty_print(throughputs_simplepir)
+    elif pirac_mode=="re":
+        throughputs_re = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = False)
+        throughputs_combined = cal_tput_with_pirac(throughputs_simplepir, throughputs_re)
+        pretty_print(throughputs_combined)
+    elif pirac_mode=="pirac":
+        throughputs_pirac = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = True)
+        throughputs_combined = cal_tput_with_pirac(throughputs_simplepir, throughputs_pirac)
+        pretty_print(throughputs_combined)
+    else:
+        raise Exception("Shouldn't reach here")

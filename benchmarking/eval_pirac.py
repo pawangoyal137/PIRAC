@@ -30,16 +30,13 @@ ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for PIRAC')
-parser.add_argument('-b','--benchType', choices=['rk', 're', 'pir'],    # re-keying, re-encryption and pirac
+parser.add_argument('-b','--benchType', choices=['rk', 're', 'pirac'],    # re-keying, re-encryption and pirac
                      required=True, type=str,
                      help='Tells script what aspect to benchmark')
-parser.add_argument('-e','--expType', choices=['ds', 'es'],
-                     required=True, type=str,
-                     help='Tells file if to run db_size or elem_size experiments')
-parser.add_argument('-ds','--dbSizes', nargs='+',
+parser.add_argument('-ds','--dbSizes', nargs='+', default=LOG2_DB_SIZES,
                      required=False, type=int,
                      help='Log 2 Database sizes to run experiment on.')
-parser.add_argument('-es','--elemSizes', nargs='+',
+parser.add_argument('-es','--elemSizes', nargs='+', default=ELEM_SIZES,
                      required=False, type=int,
                      help='Element sizes (in bits) to run experiment on.')
 parser.add_argument('-n','--numIter',
@@ -91,19 +88,9 @@ def benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, rekeying = False, thro
 if __name__ == "__main__":
     args = parser.parse_args()
     bench_type = args.benchType
-    exp_type = args.expType
     log2_db_sizes = args.dbSizes
     elem_sizes = args.elemSizes
     num_iter = args.numIter
-
-    if exp_type=="ds":
-        log2_db_sizes = LOG2_DB_SIZES if log2_db_sizes is None else log2_db_sizes
-        elem_sizes = [ELEM_SIZE] if elem_sizes is None else elem_sizes
-    elif exp_type=="es":
-        log2_db_sizes = [LOG2_DB_SIZE] if log2_db_sizes is None else log2_db_sizes
-        elem_sizes = ELEM_SIZES if elem_sizes is None else elem_sizes
-    else:
-        raise Exception("Shouldn't reach here")
     
     if bench_type == "rk":
         entries_per_sec = benchmark_rekeying(num_iter)
@@ -111,6 +98,6 @@ if __name__ == "__main__":
     elif bench_type == "re":
         throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, throughput=False)
         print(throughputs)
-    elif bench_type == "pir":
+    elif bench_type == "pirac":
         throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, True, throughput=False)
         print(throughputs)
