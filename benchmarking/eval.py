@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 import os
 import numpy as np
 import argparse
+import itertools
 
-# plt.style.use('seaborn')
+plt.style.use('seaborn')
 
 # declare the paths for the other PIR schemes
 SimplePirPath = "../simplepir/pir"
@@ -59,20 +60,34 @@ def run_PIRs(log2_db_sizes, elem_sizes):
     
     return results
 
+def cal_tput_with_pirac(pir, pirac):
+    return [1/(1/pir[i] + 1/pirac[i]) for i in range(len(pir))]
+
 def gen_save_plot(results, x_values, x_label, fig_name):
     plt.figure()
     plt.yscale("log")
 
-    plt.plot(x_values, results["simplepir"], "r-o", label="SimplePIR")
-    plt.plot(x_values, results["simplepir_offline_include"], "r--o", label="SimplePIR (offline time included)")
-    plt.plot(x_values, results["spiralpir"], "g-o", label="SpiralPIR")
-    plt.plot(x_values, results["spiralpir_stream"], "g--o", label="SpiralPIR Stream")
-    plt.plot(x_values, results["pirac"], "b-o", label="PIRAC")
+    schemes = ["simplepir", "simplepir_offline_include", "spiralpir", "spiralpir_stream"]
+    colors = ['b', 'c', 'r', 'orange']
+    cc = itertools.cycle(colors)
+    plot_lines = []
+
+    for scheme in schemes:
+        tput_with_pirac = cal_tput_with_pirac(results[scheme], results["pirac"])
+        c = next(cc)
+        l1, = plt.plot(x_values, results[scheme], color=c)
+        l2, = plt.plot(x_values, tput_with_pirac, color=c, linestyle="dashed")
+        plot_lines.append([l1, l2])
+    
+    legend1 = plt.legend([l[0] for l in plot_lines], schemes, loc=2)
+    legend2 = plt.legend(plot_lines[0], ["Without AC", "With AC"], loc=4)
+    plt.gca().add_artist(legend1)
+    plt.gca().add_artist(legend2)
+
     plt.xlabel(x_label)
     plt.ylabel("Throughput (in Mb/s)")
-    plt.legend()
     plt.savefig(f"images/{fig_name}.png")
-    print("Successfully generated and save the plot")
+    print(f"Successfully generated and save the plot with name {fig_name}")
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -102,4 +117,3 @@ if __name__ == "__main__":
     
     results = run_PIRs(log2_db_sizes, elem_sizes)
     gen_save_plot(results, x_values, x_label, fig_name)
-    
