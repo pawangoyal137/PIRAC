@@ -5,7 +5,9 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-#np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
+import argparse
+
+# np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
 NUM_ITER = 5
 BITS_IN_MB = 8 * 1000000
 
@@ -17,72 +19,98 @@ c_lib = ctypes.CDLL(libname)
 c_lib.testReKeying.restype = ctypes.c_float
 c_lib.testReEncryption.restype = ctypes.c_float
 
-def benchmark_rekeying(db_sizes, figure=False, num_iter=NUM_ITER):
-    entries_per_sec = []
-    for db_size in db_sizes:
-        t = []
-        for _ in range(num_iter):
-            t.append(c_lib.testReKeying(db_size))
-        entry_per_sec = 1000*db_size/np.mean(t)
-        entries_per_sec.append(entry_per_sec)
+# declare the constants/ defaults for the experiments
+LOG2_DB_SIZE = 16
+ELEM_SIZE = 1024
+
+LOG2_DB_SIZES = [10,12,14,16,18]
+
+LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
+ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
+
+# define the parser for running the experiments
+parser = argparse.ArgumentParser(description='Run benchmarking for PIRAC')
+parser.add_argument('-b','--benchType', choices=['rk', 're', 'pir'],    # re-keying, re-encryption and pirac
+                     required=True, type=str,
+                     help='Tells script what aspect to benchmark')
+parser.add_argument('-e','--expType', choices=['ds', 'es'],
+                     required=True, type=str,
+                     help='Tells file if to run db_size or elem_size experiments')
+parser.add_argument('-ds','--dbSizes', nargs='+',
+                     required=False, type=int,
+                     help='Log 2 Database sizes to run experiment on.')
+parser.add_argument('-es','--elemSizes', nargs='+',
+                     required=False, type=int,
+                     help='Element sizes (in bits) to run experiment on.')
+parser.add_argument('-n','--numIter',
+                     required=False, type=int,
+                     default=NUM_ITER,
+                     help='Number of interations to run experiments')
+
+def benchmark_rekeying(num_iter):
+    time_array = []
+    db_size = 1 << LOG2_DB_SIZE
+    for _ in range(num_iter):
+        time_array.append(c_lib.testReKeying(db_size))
+    # KEY_SIZE = 128 #bits
+    # ms_per_MB_array = [i*BITS_IN_MB/(db_size*KEY_SIZE) for i in time_array]
+    records_per_sec_array = [db_size*1000/i for i in time_array]
     
-    if figure:
-        plt.figure()
-        plt.plot(np.log2(db_sizes), entries_per_sec, "-o")
-        plt.xlabel("Size of database in log")
-        plt.ylabel("Number of keys rekeyed per sec")
-        plt.savefig("../images/rekeying.png")
+    return records_per_sec_array
 
-    return entries_per_sec
-
-def benchmark_pirac(db_sizes, elem_sizes, rekeying = False, figure=False, xvalues=None, xlabel=None, ylabel=None, figname=None, num_iter=NUM_ITER):
+def benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, rekeying = False, throughput=True):
     """
-    Take db sizes in abolsute values and elem_sizes as multiple of 128 bits
+    Take db sizes in log base 2 and elem_sizes in bits
     """
-    assert (len(db_sizes)==1 or len(elem_sizes)==1)
 
     throughputs = []
+    records_per_sec_array = []
+    db_sizes = [1<<i for i in log2_db_sizes]
+    elem_sizes_128 = [i//128 for i in elem_sizes]
     for db_size in db_sizes:
-        for elem_size in elem_sizes:
+        for elem_size in elem_sizes_128:
             t = []
             for _ in range(num_iter):
                 re_encrypt_time = c_lib.testReEncryption(db_size, elem_size)
                 rekeying_time = c_lib.testReKeying(db_size) if rekeying else 0
                 t.append(re_encrypt_time+rekeying_time)
-            db_size_bits = db_size * elem_size * 128
-            db_size_mB = db_size_bits / BITS_IN_MB
-            throughput = 1000*db_size_mB/np.mean(t)
-            print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size} bits = {throughput}Mb/s")
-            throughputs.append(throughput)   
+            if throughput:
+                db_size_bits = db_size * elem_size * 128
+                db_size_mB = db_size_bits / BITS_IN_MB
+                throughput = 1000*db_size_mB/np.mean(t)
+                print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size} bits = {throughput}Mb/s")
+                throughputs.append(throughput)  
+            else:
+                records_per_sec = 1000*db_size/np.mean(t) 
+                print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size} bits = {records_per_sec}records/s")
+                records_per_sec_array.append(records_per_sec)
 
-    if figure:
-        plt.figure()
-        plt.plot(xvalues, throughputs, "-o")
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
-        plt.savefig(figname)
+    return throughputs if throughput else records_per_sec_array
 
-    return throughputs
 
 if __name__ == "__main__":
-    db_sizes = [1 << i for i in [10,12,14,16,18,20]]
-    elem_sizes = [32, 64, 128, 256] # in 128 bits
+    args = parser.parse_args()
+    bench_type = args.benchType
+    exp_type = args.expType
+    log2_db_sizes = args.dbSizes
+    elem_sizes = args.elemSizes
+    num_iter = args.numIter
 
-    # rekeying benchmarking statistics
-    benchmark_rekeying(db_sizes)
-
-    # re-encryption benchmarking statistics
-    benchmark_pirac(db_sizes, [128], False, True, np.log2(db_sizes), "Size of database in log2",
-                     "Throughput for re-encryption in MB/s",  "../images/reencryption_dbsizes.png")
-    benchmark_pirac([1<<12], elem_sizes, False, True, elem_sizes, "Size of entry (in 128 bits)",
-                     "Throughput for re-encryption in MB/s", "../images/reencryption_elemsize.png")
-
-    # complete benchmarking statistics
-    benchmark_pirac(db_sizes, [128], True, True, np.log2(db_sizes), "Size of database in log2",
-                    "Throughput for (rekeying+re-encryption) in MB/s",
-                    "../images/pirac_dbsizes.png")
-    benchmark_pirac([1<<12], elem_sizes, True, True, elem_sizes, "Size of entry (in 128 bits)",
-                    "Throughput for (rekeying+re-encryption) in MB/s",
-                    "../images/pirac_elemsize.png")
+    if exp_type=="ds":
+        log2_db_sizes = LOG2_DB_SIZES if log2_db_sizes is None else log2_db_sizes
+        elem_sizes = [ELEM_SIZE] if elem_sizes is None else elem_sizes
+    elif exp_type=="es":
+        log2_db_sizes = [LOG2_DB_SIZE] if log2_db_sizes is None else log2_db_sizes
+        elem_sizes = ELEM_SIZES if elem_sizes is None else elem_sizes
+    else:
+        raise Exception("Shouldn't reach here")
     
-    # benchmark_pirac(db_sizes, [128], rekeying = True)
+    if bench_type == "rk":
+        entries_per_sec = benchmark_rekeying(num_iter)
+        print("Throughput:{0:0.0f} keys/sec +- {1:0.0f}".format(np.mean(entries_per_sec), np.std(entries_per_sec)))
+    elif bench_type == "re":
+        throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, throughput=False)
+        print(throughputs)
+    elif bench_type == "pir":
+        throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, True, throughput=False)
+        print(throughputs)

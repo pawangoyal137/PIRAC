@@ -55,8 +55,7 @@ def run_PIRs(log2_db_sizes, elem_sizes):
     results["spiralpir_stream"] = benchmark_SpiralPir(log2_db_sizes, elem_sizes, True)
 
     os.chdir(owd)
-    results["pirac"] = benchmark_pirac([1<<i for i in log2_db_sizes], 
-                            [i//128 for i in elem_sizes], True, num_iter=5)
+    results["pirac"] = benchmark_pirac(log2_db_sizes, elem_sizes, num_iter=5, rekeying=True)
     
     return results
 
