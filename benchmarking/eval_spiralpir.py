@@ -10,7 +10,7 @@ from utils import *
 SpiralPirPath = "../../spiral"
 
 # declare the constants/ defaults for the experiments
-LOG2_DB_SIZES = [12,14,16,18]
+LOG2_DB_SIZES = [14,16,18]
 
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
@@ -26,17 +26,23 @@ parser.add_argument('-es','--elemSizes', nargs='+',
 parser.add_argument('-s','--stream', action='store_true',
                      required=False, 
                      help='If the flag is passed, run in streaming mode')
+parser.add_argument('-p','--pack', action='store_true',
+                     required=False, 
+                     help='If the flag is passed, run in pack mode')
 parser.add_argument('-wp','--withPirac', choices=['re', 'pirac'],
                     required=False,
                     help='If passed "re", runs with reencryption. If passed with "pirac", run\
                         both rekeying and reencryption')
 
-def run_SpiralPIR(N, D, stream=False, output=False):
+def run_SpiralPIR(N, D, stream=False, pack=False, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
-    stream_flag = "--stream" if stream else ""
-    process = subprocess.Popen(f'python3 select_params.py {N} {D//8} {stream_flag}', 
+    # if "pack" in system:
+    #     cmd += " --high-rate"
+    stream_flag = "--direct-upload" if stream else ""
+    pack_flag = " --high-rate" if pack else ""
+    process = subprocess.Popen(f'python3 select_params.py {N} {D//8} {stream_flag} {pack_flag}', 
                             shell=True,
                             stdout=subprocess.PIPE, 
                             stderr=subprocess.PIPE,
@@ -72,14 +78,14 @@ def run_SpiralPIR(N, D, stream=False, output=False):
     assert statistics is not None
     return statistics["dbsize"]/statistics["total_us"]
 
-def benchmark_SpiralPir(db_sizes, elem_sizes, stream=False):
+def benchmark_SpiralPir(db_sizes, elem_sizes, stream=False, pack=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
     throughputs = []
     for db_size in db_sizes:
         for elem_size in elem_sizes:
-            throughput = run_SpiralPIR(db_size, elem_size, stream)
+            throughput = run_SpiralPIR(db_size, elem_size, stream, pack)
             stream_print = "(with streaming)" if stream else ""
             print(f"Throughput on SpiralPIR {stream_print} with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
             throughputs.append(throughput)
@@ -98,12 +104,13 @@ if __name__ == "__main__":
     log2_db_sizes = args.dbSizes
     elem_sizes = args.elemSizes
     stream = args.stream
+    pack = args.pack
     pirac_mode = args.withPirac
 
     os.chdir(SpiralPirPath)
     print(os.getcwd())
 
-    throughputs_spiralpir = benchmark_SpiralPir(log2_db_sizes, elem_sizes, stream=stream)
+    throughputs_spiralpir = benchmark_SpiralPir(log2_db_sizes, elem_sizes, stream=stream, pack=pack)
 
     if pirac_mode is None:
         pretty_print(throughputs_spiralpir, stream, pirac_mode)
