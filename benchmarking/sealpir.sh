@@ -9,4 +9,4 @@ python3 eval_sealpir.py -wp pirac  &>> "$FILE"
 
 echo "-----------------------------------------------"
 echo "Final Results are as follows:"
-grep -E "^Streaming|^Throughputs in the range" "$FILE" 
+grep -E "^Pirac Mode|^Throughputs in the range" "$FILE" 

@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     os.chdir(SealPirPath)
     print(os.getcwd())
-    print(output)
+    
     throughputs_sealpir = benchmark_SealPir(log2_db_sizes, elem_sizes, output=output)
 
     if pirac_mode is None:
