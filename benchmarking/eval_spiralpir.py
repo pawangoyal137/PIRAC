@@ -29,6 +29,9 @@ parser.add_argument('-s','--stream', action='store_true',
 parser.add_argument('-p','--pack', action='store_true',
                      required=False, 
                      help='If the flag is passed, run in pack mode')
+parser.add_argument('-o','--output', action='store_true',
+                     required=False, 
+                     help='If the flag is passed, display the output of the spiralpir')
 parser.add_argument('-wp','--withPirac', choices=['re', 'pirac'],
                     required=False,
                     help='If passed "re", runs with reencryption. If passed with "pirac", run\
@@ -78,24 +81,24 @@ def run_SpiralPIR(N, D, stream=False, pack=False, output=False):
     assert statistics is not None
     return statistics["dbsize"]/statistics["total_us"]
 
-def benchmark_SpiralPir(db_sizes, elem_sizes, stream=False, pack=False):
+def benchmark_SpiralPir(db_sizes, elem_sizes, stream=False, pack=False, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
     throughputs = []
     for db_size in db_sizes:
         for elem_size in elem_sizes:
-            throughput = run_SpiralPIR(db_size, elem_size, stream, pack)
+            throughput = run_SpiralPIR(db_size, elem_size, stream, pack, output)
             stream_print = "(with streaming)" if stream else ""
             print(f"Throughput on SpiralPIR {stream_print} with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
             throughputs.append(throughput)
     
     return throughputs
 
-def pretty_print(throughputs, stream, pirac_mode):
+def pretty_print(throughputs, stream, pack, pirac_mode):
     min_tput = np.min(throughputs)
     max_tput = np.max(throughputs)
-    pp = f"Streaming = {stream}, Pirac Mode = {pirac_mode}\n"
+    pp = f"Streaming = {stream}, Packing = {pack}, Pirac Mode = {pirac_mode}\n"
     pp = pp + "Throughputs in the range {0:0.1f}-{1:0.1f}Mb/s".format(min_tput, max_tput)
     print(pp)
 
@@ -105,22 +108,23 @@ if __name__ == "__main__":
     elem_sizes = args.elemSizes
     stream = args.stream
     pack = args.pack
+    output = args.output
     pirac_mode = args.withPirac
 
     os.chdir(SpiralPirPath)
     print(os.getcwd())
 
-    throughputs_spiralpir = benchmark_SpiralPir(log2_db_sizes, elem_sizes, stream=stream, pack=pack)
+    throughputs_spiralpir = benchmark_SpiralPir(log2_db_sizes, elem_sizes, stream=stream, pack=pack, output=output)
 
     if pirac_mode is None:
-        pretty_print(throughputs_spiralpir, stream, pirac_mode)
+        pretty_print(throughputs_spiralpir, stream, pack, pirac_mode)
     elif pirac_mode=="re":
         throughputs_re = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = False)
         throughputs_combined = cal_tput_with_pirac(throughputs_spiralpir, throughputs_re)
-        pretty_print(throughputs_combined, stream, pirac_mode)
+        pretty_print(throughputs_combined, stream, pack, pirac_mode)
     elif pirac_mode=="pirac":
         throughputs_pirac = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = True)
         throughputs_combined = cal_tput_with_pirac(throughputs_spiralpir, throughputs_pirac)
-        pretty_print(throughputs_combined, stream, pirac_mode)
+        pretty_print(throughputs_combined, stream, pack, pirac_mode)
     else:
         raise Exception("Shouldn't reach here")
