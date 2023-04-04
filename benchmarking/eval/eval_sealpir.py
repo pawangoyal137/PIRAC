@@ -6,9 +6,7 @@ import numpy as np
 import re
 
 from eval_pirac import benchmark_pirac
-from utils import *
-
-SealPirPath = "../../SealPIR/bin"
+from utils import cal_tput_with_pirac, SealPirPath
 
 # declare the constants/ defaults for the experiments
 LOG2_DB_SIZES = [14,16,18]

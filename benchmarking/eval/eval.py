@@ -1,26 +1,16 @@
 from eval_pirac import benchmark_pirac
 from eval_simplepir import benchmark_SimplePir
 from eval_spiralpir import benchmark_SpiralPir
+from eval_sealpir import benchmark_SealPir
 import matplotlib.pyplot as plt
 import os
 import numpy as np
 import argparse
 import itertools
 
+from utils import *
+
 plt.style.use('seaborn')
-
-# declare the paths for the other PIR schemes
-SimplePirPath = "../simplepir/pir"
-SpiralPirPath = "../../spiral"
-
-# declare the constants/ defaults for the experiments
-LOG2_DB_SIZE = 16
-ELEM_SIZE = 1024
-
-LOG2_DB_SIZES = [10,12,14,16,18]
-
-LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
-ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run evaluation by comparing\
@@ -45,29 +35,30 @@ def run_PIRs(log2_db_sizes, elem_sizes):
     owd = os.getcwd()
     results = {}
 
-    os.chdir(SimplePirPath)
-    results["simplepir"] = benchmark_SimplePir(log2_db_sizes, elem_sizes)
-    results["simplepir_offline_include"] = benchmark_SimplePir(log2_db_sizes, elem_sizes, True)
+    # os.chdir(SimplePirPath)
+    # results["simplepir"] = benchmark_SimplePir(log2_db_sizes, elem_sizes)
+    # results["simplepir_offline_include"] = benchmark_SimplePir(log2_db_sizes, elem_sizes, True)
 
     os.chdir(owd)
     os.chdir(SpiralPirPath)
     results["spiralpir"] = benchmark_SpiralPir(log2_db_sizes, elem_sizes)
-    results["spiralpir_stream"] = benchmark_SpiralPir(log2_db_sizes, elem_sizes, True)
+    results["spiralpir_stream_pack"] = benchmark_SpiralPir(log2_db_sizes, elem_sizes, stream=True, pack=True)
 
+    os.chdir(owd)
+    os.chdir(SealPirPath)
+    results["sealpir"] = benchmark_SealPir(log2_db_sizes, elem_sizes)
+    
     os.chdir(owd)
     results["pirac"] = benchmark_pirac(log2_db_sizes, elem_sizes, num_iter=5, rekeying=True)
     
     return results
 
-def cal_tput_with_pirac(pir, pirac):
-    return [1/(1/pir[i] + 1/pirac[i]) for i in range(len(pir))]
-
 def gen_save_plot(results, x_values, x_label, fig_name):
     plt.figure()
     plt.yscale("log")
 
-    schemes = ["simplepir", "simplepir_offline_include", "spiralpir", "spiralpir_stream"]
-    colors = ['b', 'c', 'r', 'orange']
+    schemes = ["spiralpir", "spiralpir_stream_pack", "sealpir"]
+    colors = ['b', 'c', 'r']
     cc = itertools.cycle(colors)
     plot_lines = []
 

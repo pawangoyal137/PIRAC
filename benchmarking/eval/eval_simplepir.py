@@ -5,9 +5,7 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
-from utils import *
-
-SimplePirPath = "../../simplepir/pir"
+from utils import cal_tput_with_pirac, SimplePirPath
 
 # declare the constants/ defaults for the experiments
 LOG2_DB_SIZES = [14,16,18]

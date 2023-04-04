@@ -5,9 +5,7 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
-from utils import *
-
-SpiralPirPath = "../../spiral"
+from utils import cal_tput_with_pirac, SpiralPirPath
 
 # declare the constants/ defaults for the experiments
 LOG2_DB_SIZES = [14,16,18]
@@ -90,7 +88,8 @@ def benchmark_SpiralPir(db_sizes, elem_sizes, stream=False, pack=False, output=F
         for elem_size in elem_sizes:
             throughput = run_SpiralPIR(db_size, elem_size, stream, pack, output)
             stream_print = "(with streaming)" if stream else ""
-            print(f"Throughput on SpiralPIR {stream_print} with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
+            pack_print = "(with pack)" if pack else ""
+            print(f"Throughput on SpiralPIR {stream_print} {pack_print} with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
             throughputs.append(throughput)
     
     return throughputs
