@@ -23,7 +23,10 @@ parser.add_argument('-ds','--dbSizes', nargs='+',
 parser.add_argument('-es','--elemSizes', nargs='+',
                      required=False, type=int, default=ELEM_SIZES,
                      help='Element sizes (in bits) to run experiment on.')
-parser.add_argument('-o','--offline', action='store_true',
+parser.add_argument('-o','--output', action='store_true',
+                     required=False, 
+                     help='If the flag is passed, display the output of the simplepir')
+parser.add_argument('-off','--offline', action='store_true',
                      required=False, 
                      help='If the flag is passed, include the offline time')
 parser.add_argument('-wp','--withPirac', choices=['re', 'pirac'],
@@ -36,7 +39,7 @@ def run_SimplePIR(N, D, offline_include=False, output=False):
         test_name = "BenchmarkSimplePirOfflineIncludeSingle"
     else:
         test_name = "BenchmarkSimplePirSingle"
-    process = subprocess.Popen(f"LOG_N={N} D={D} go test '-bench=^{test_name}$' -timeout 0 '-run=^{test_name}$'", 
+    process = subprocess.Popen(f"LOG_N={N} D={D} go test '-bench=^{test_name}$' -timeout 0 '-run=^$'", 
                             shell=True,
                             stdout=subprocess.PIPE, 
                             stderr=subprocess.PIPE,
@@ -69,14 +72,14 @@ def run_SimplePIR(N, D, offline_include=False, output=False):
     
     return throughput[0]
 
-def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False, pirac_mode=None):
+def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False, pirac_mode=None, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
     throughputs = []
     for db_size in db_sizes:
         for elem_size in elem_sizes:
-            throughput = run_SimplePIR(db_size, elem_size, offline_include)
+            throughput = run_SimplePIR(db_size, elem_size, offline_include, output=output)
             offline_print = "(with offline time)" if offline_include else ""
             print(f"Throughput on SimplePIR {offline_print} with log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}Mb/s")
             throughputs.append(throughput)
@@ -95,13 +98,14 @@ if __name__ == "__main__":
     log2_db_sizes = args.dbSizes
     elem_sizes = args.elemSizes
     offline_include = args.offline
+    output = args.output
     pirac_mode = args.withPirac
 
     os.chdir(SimplePirPath)
     print(os.getcwd())
 
     throughputs_simplepir = benchmark_SimplePir(log2_db_sizes, elem_sizes, 
-                        offline_include=offline_include, pirac_mode=pirac_mode)
+                        offline_include=offline_include, pirac_mode=pirac_mode, output=output)
     if pirac_mode is None:
         pretty_print(throughputs_simplepir, offline_include, pirac_mode)
     elif pirac_mode=="re":
