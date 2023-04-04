@@ -11,11 +11,9 @@ git clone git@github.com:pawangoyal137/PIRAC.git
 * GNU Make
 * Cmake
 
-## Getting everything to run (tested on Ubuntu, CentOS, and MacOS)
 
 |Dependency |Install dependencies (Ubuntu): | Install dependencies (CentOS):|
 |--------------|--------------|-----------|
-|GMP library |```sudo apt-get install libgmp3-dev```| ```sudo yum install gmp-devel```|
 |Go |```sudo apt-get install golang-go```| ```sudo yum install golang```|
 |OpenSSL |```sudo apt install libssl-dev```|```sudo yum install openssl-devel```|
 |Make |```sudo apt-get install build-essential``` |  ```sudo yum groupinstall 'Development Tools'```|
@@ -23,32 +21,41 @@ git clone git@github.com:pawangoyal137/PIRAC.git
 
 
 ## Python Packages
+Install following python packages
 ```
 sudo apt install python3-pip
 sudo apt-get install python3-numpy
 sudo apt-get install python3-matplotlib
 ```
-## Setup
 
-### Create shared library
-```
-cd acpir/src
-make test.so
-```
-
+## Setup PIR schemes
 ### Setup Spiral
+Run following commands to download and setup Spiral PIR in home direcotry 
 ```
+# install dependencies
 sudo apt-get install curl zip unzip tar
 sudo apt-get install -y clang-12 git-lfs
 git lfs install
+
+# clone the vcpkg to build hexl
 cd ~
 git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 ./vcpkg/vcpkg install hexl
+
+# clone the spiral github
 git clone https://github.com/menonsamir/spiral.git
 ```
 
+Run following commands to ensure spiral pir is correctly working
+```
+cd ~/spiral
+python3 select_params.py 20 256
+```
+More information can be found at https://github.com/menonsamir/spiral
+
 ### Setup Seal
+Run following commands to download and setup Seal PIR in home direcotry
 ```
 # clone the SEAL
 cd ~
@@ -72,4 +79,12 @@ cd SealPIR
 cmake .
 make
 ctest .
+```
+More information can be found at https://github.com/microsoft/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
+## Setup
+
+### Create shared library
+```
+cd acpir/src
+make test.so
 ```

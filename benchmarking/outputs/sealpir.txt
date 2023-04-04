@@ -1,0 +1,87 @@
+/home/ubuntu/SealPIR/bin
+False
+Throughput on SealPIR with log2 dbsize = 14, elem size = 128 bits = 10.48576Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 512 bits = 19.065018181818182Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 2048 bits = 31.53612030075188Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 8192 bits = 47.66254545454545Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 32768 bits = 59.652323555555554Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 128 bits = 17.772474576271186Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 512 bits = 33.0260157480315Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 2048 bits = 50.231185628742516Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 8192 bits = 66.51027155599604Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 32768 bits = 72.39359654800431Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 128 bits = 31.300776119402986Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 512 bits = 50.994577507598784Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 2048 bits = 71.0146708994709Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 8192 bits = 80.61124804804805Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 32768 bits = 79.84991626385067Mb/s
+Pirac Mode = None
+Throughputs in the range 10.5-80.6Mb/s
+/home/ubuntu/SealPIR/bin
+False
+Throughput on SealPIR with log2 dbsize = 14, elem size = 128 bits = 10.48576Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 512 bits = 19.065018181818182Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 2048 bits = 32.01758778625954Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 8192 bits = 47.39326553672316Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 32768 bits = 59.23112444836717Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 128 bits = 17.772474576271186Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 512 bits = 32.768Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 2048 bits = 50.231185628742516Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 8192 bits = 64.46576753121998Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 32768 bits = 72.19888542227004Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 128 bits = 31.06891851851852Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 512 bits = 50.994577507598784Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 2048 bits = 70.86469271383315Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 8192 bits = 80.24976263079223Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 32768 bits = 80.30377862538329Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 128 bits = 793.4140459309173Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 512 bits = 1420.4497484893911Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 2048 bits = 1798.5866444633398Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 8192 bits = 1517.229091219571Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 32768 bits = 1501.3403788296073Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 128 bits = 794.5563369540848Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 512 bits = 2424.3130456223344Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 2048 bits = 1501.007938903002Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 8192 bits = 1471.0049440792834Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 32768 bits = 1519.0217945387944Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 128 bits = 796.5330407763736Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 512 bits = 1233.5009109254602Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 2048 bits = 1465.16628111508Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 8192 bits = 1495.3829938565077Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 32768 bits = 1523.4724020433712Mb/s
+Pirac Mode = re
+Throughputs in the range 10.3-76.3Mb/s
+/home/ubuntu/SealPIR/bin
+False
+Throughput on SealPIR with log2 dbsize = 14, elem size = 128 bits = 10.48576Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 512 bits = 19.065018181818182Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 2048 bits = 31.775030303030302Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 8192 bits = 47.79833618233618Mb/s
+Throughput on SealPIR with log2 dbsize = 14, elem size = 32768 bits = 59.70539501779359Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 128 bits = 17.772474576271186Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 512 bits = 32.768Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 2048 bits = 50.081241791044775Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 8192 bits = 66.37869831849653Mb/s
+Throughput on SealPIR with log2 dbsize = 16, elem size = 32768 bits = 72.08256068743287Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 128 bits = 31.06891851851852Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 512 bits = 51.15004878048781Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 2048 bits = 71.08989830508474Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 8192 bits = 80.3218001196888Mb/s
+Throughput on SealPIR with log2 dbsize = 18, elem size = 32768 bits = 80.4903916041979Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 128 bits = 11.766680890302881Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 512 bits = 45.2608408804402Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 2048 bits = 170.43919376405702Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 8192 bits = 510.7483829467262Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 32768 bits = 1022.7110042863533Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 128 bits = 11.842428501119311Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 512 bits = 48.05539811309831Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 2048 bits = 171.25077865291595Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 8192 bits = 509.28285549491784Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 32768 bits = 1020.4157288423529Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 128 bits = 11.840088465362532Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 512 bits = 46.281004487041415Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 2048 bits = 170.11541476247544Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 8192 bits = 506.91257818874544Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 32768 bits = 1017.9040876601953Mb/s
+Pirac Mode = pirac
+Throughputs in the range 5.5-74.6Mb/s

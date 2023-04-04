@@ -1,0 +1,4 @@
+/home/ubuntu/PIRAC/simplepir/pir
+Throughput on SimplePIR  with log2 dbsize = 18, elem size = 128 bits = 10843.161574Mb/s
+Offline Mode = False, Pirac Mode = None
+Throughputs in the range 10843.2-10843.2Mb/s

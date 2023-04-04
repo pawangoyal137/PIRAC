@@ -1,0 +1,84 @@
+/home/ubuntu/spiral
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 128 bits = 9.138753437133682Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 512 bits = 7.828611744679581Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 2048 bits = 12.107533896617122Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 8192 bits = 35.321421428375935Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 32768 bits = 72.43977983806289Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 128 bits = 9.027308102896106Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 512 bits = 12.329805747613001Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 2048 bits = 35.36311381940741Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 8192 bits = 76.53717207982537Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 32768 bits = 156.40065907994492Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 128 bits = 12.351045816879717Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 512 bits = 35.430026756432Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 2048 bits = 76.93059278025518Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 8192 bits = 158.04275186502906Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 32768 bits = 244.60889820479053Mb/s
+Streaming = False, Packing = False, Pirac Mode = None
+Throughputs in the range 7.8-244.6Mb/s
+/home/ubuntu/spiral
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 128 bits = 9.06433612980468Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 512 bits = 9.151714567496095Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 2048 bits = 12.218139446815329Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 8192 bits = 34.74162273199783Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 32768 bits = 76.85984151326316Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 128 bits = 9.011713949311172Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 512 bits = 12.301635113138097Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 2048 bits = 35.34285094343995Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 8192 bits = 76.50349293205655Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 32768 bits = 149.91101242466348Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 128 bits = 12.280204948031034Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 512 bits = 35.51816003184039Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 2048 bits = 76.84769561796968Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 8192 bits = 156.26036150518695Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 32768 bits = 259.8363663334686Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 128 bits = 798.4891885750804Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 512 bits = 1411.0833007770534Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 2048 bits = 1778.0762050029027Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 8192 bits = 1495.308840646838Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 32768 bits = 1396.9721238809263Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 128 bits = 725.0560022526286Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 512 bits = 1582.57705837597Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 2048 bits = 1372.7399517283193Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 8192 bits = 1467.704121755148Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 32768 bits = 1523.3500847320752Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 128 bits = 813.66959926345Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 512 bits = 1210.2503102637725Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 2048 bits = 1460.6474781543684Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 8192 bits = 1492.1835030082634Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 32768 bits = 1525.6151336590187Mb/s
+Streaming = False, Packing = False, Pirac Mode = re
+Throughputs in the range 8.9-222.0Mb/s
+/home/ubuntu/spiral
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 128 bits = 9.111753179323859Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 512 bits = 7.974265181185596Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 2048 bits = 12.341742019202758Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 8192 bits = 35.48300424682334Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 14, elem size = 32768 bits = 75.71056885987723Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 128 bits = 8.047552715900151Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 512 bits = 12.348354996835116Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 2048 bits = 35.55489246992803Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 8192 bits = 76.48535686932419Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 16, elem size = 32768 bits = 154.9416367387131Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 128 bits = 12.087401080121499Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 512 bits = 35.345010217624875Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 2048 bits = 76.73425554734827Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 8192 bits = 155.5777791945103Mb/s
+Throughput on SpiralPIR  with log2 dbsize = 18, elem size = 32768 bits = 245.6004474022194Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 128 bits = 11.73460336126421Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 512 bits = 45.17971517703096Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 2048 bits = 169.52573449770816Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 8192 bits = 512.4034382820518Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 32768 bits = 1022.7359401872768Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 128 bits = 11.79935896696096Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 512 bits = 47.916338894990325Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 2048 bits = 170.74013667378233Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 8192 bits = 509.9035380188312Mb/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 32768 bits = 1021.1614072819468Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 128 bits = 11.804380012858099Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 512 bits = 46.107023218074566Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 2048 bits = 169.88863195999141Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 8192 bits = 508.2318429194248Mb/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 32768 bits = 1021.2460999939073Mb/s
+Streaming = False, Packing = False, Pirac Mode = pirac
+Throughputs in the range 4.8-198.0Mb/s
