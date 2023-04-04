@@ -29,6 +29,15 @@ sudo apt-get install python3-matplotlib
 ```
 
 ## Setup PIR schemes
+
+### Setup Spiral
+Run following commands to download and setup Spiral PIR in home direcotry 
+```
+cd ~
+git clone https://github.com/pawangoyal137/simplepir
+```
+The above repo is a copy of the original repo with slight modifications
+
 ### Setup Spiral
 Run following commands to download and setup Spiral PIR in home direcotry 
 ```
