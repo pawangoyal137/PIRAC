@@ -7,11 +7,9 @@
 #include <time.h>
 #include "../include/encryption.h"
 #include "../include/aes.h"
-#include "../include/sha256.h"
 
-struct Sha_256 sha_256;
-
-uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t size, uint64_t elemsize){
+uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t size, uint64_t elemsize)
+{
     struct AES *aes = initAES((uint8_t *)&seed);
     uint128_t *encrpytedDB = malloc(sizeof(uint128_t) * size * elemsize);
     if (encrpytedDB == NULL)

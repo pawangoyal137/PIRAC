@@ -6,27 +6,46 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../include/aes.h"
-#include "../include/sha256.h"
 
-struct Sha_256 sha_256;
-
-float testReKeying(uint64_t size){
+float testReKeying(uint64_t size)
+{
     uint128_t *seeds = malloc(sizeof(uint128_t) * size);
     RAND_bytes((uint8_t *)seeds, sizeof(uint128_t) * size);
+
+    static uint8_t *prfKey = NULL; //(uint8_t*) malloc(16);
+    static EVP_CIPHER_CTX *prfCtx;
+    static uint128_t counter = 0;
+
+    if (!prfKey)
+    {
+        prfKey = (uint8_t *)malloc(16);
+
+        if (!(prfCtx = EVP_CIPHER_CTX_new()))
+            printf("errors ocurred when generating context\n");
+
+        if (!RAND_bytes(prfKey, 16))
+        {
+            printf("failed to seed randomness\n");
+        }
+
+        if (1 != EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ecb(), NULL, prfKey, NULL))
+            printf("errors ocurred when generating context\n");
+        EVP_CIPHER_CTX_set_padding(prfCtx, 0);
+    }
 
     float totalTime = 0;
     clock_t start = clock();
     uint64_t i;
     for (i = 0; i < size; i++)
     {
-        // hash to get new key
-        uint8_t hash[32];
-        sha_256_init(&sha_256, hash);
-        sha_256_write(&sha_256, (uint8_t *)&seeds[i], sizeof(uint128_t));
-        sha_256_close(&sha_256);
+        // apply PRF to old key to get new key
+        uint8_t newKey[16];
+        int len = 0;
+        if (1 != EVP_EncryptUpdate(prfCtx, (uint8_t *)&newKey, &len, (uint8_t *)&seeds[i], 16))
+            printf("failed to generate new key\n");
 
         // key AES with the new key
-        struct AES *aes = initAES((uint8_t *)&hash);
+        struct AES *aes = initAES((uint8_t *)&newKey);
     }
 
     clock_t end = clock();
@@ -36,7 +55,8 @@ float testReKeying(uint64_t size){
     return totalTime;
 }
 
-float testReEncryption(uint64_t size, uint64_t elemsize){
+float testReEncryption(uint64_t size, uint64_t elemsize)
+{
     uint128_t *seeds = malloc(sizeof(uint128_t) * 1);
     RAND_bytes((uint8_t *)seeds, sizeof(uint128_t) * 1);
 
@@ -80,19 +100,7 @@ void testReEncrypt()
 
     float totalTime = 0;
     clock_t start = clock();
-    uint64_t i;
-    for (i = 0; i < size; i++)
-    {
-        // hash to get new key
-        uint8_t hash[32];
-        sha_256_init(&sha_256, hash);
-        sha_256_write(&sha_256, (uint8_t *)&seeds[i], sizeof(uint128_t));
-        sha_256_close(&sha_256);
-
-        // key AES with the new key
-        struct AES *aes = initAES((uint8_t *)&hash);
-    }
-
+    testReKeying(size);
     clock_t end = clock();
     float ms = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
     totalTime += ms;

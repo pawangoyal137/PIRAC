@@ -12,13 +12,11 @@ test.so: test.o libpir.a
 test.o: test.c ../include/aes.h
 	gcc $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
-libpir.a: aes.o sha256.o
+libpir.a: aes.o 
 	ar rcs $@ $^
 
 aes.o: aes.c ../include/aes.h 
 	gcc $(CFLAGS) -c -o $@ $< $(LDFLAGS)
 
-sha256.o: sha256.c ../include/sha256.h
-	gcc $(CFLAGS) -c -o $@ $< 
 clean:
 	rm -f *.o *.a $(TARGET)
