@@ -2,6 +2,7 @@ from eval_pirac import benchmark_pirac
 from eval_simplepir import benchmark_SimplePir
 from eval_spiralpir import benchmark_SpiralPir
 from eval_sealpir import benchmark_SealPir
+import matplotlib
 import matplotlib.pyplot as plt
 import os
 import numpy as np
@@ -10,7 +11,22 @@ import itertools
 
 from utils import *
 
-plt.style.use('seaborn')
+###########################
+# PLOT PARAMETERS
+###########################
+TINY_SIZE = 7
+SMALL_SIZE = 7
+MEDIUM_SIZE = 8
+BIGGER_SIZE = 10
+matplotlib.rcParams['font.family'] = 'serif'
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=MEDIUM_SIZE)    # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=TINY_SIZE)     # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+plt.rc('hatch', linewidth=0.5)
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run evaluation by comparing\
@@ -49,7 +65,8 @@ def run_PIRs(log2_db_sizes, elem_sizes):
     results["sealpir"] = benchmark_SealPir(log2_db_sizes, elem_sizes)
     
     os.chdir(owd)
-    results["pirac"] = benchmark_pirac(log2_db_sizes, elem_sizes, num_iter=5, rekeying=True)
+    results["tier2"] = benchmark_pirac(log2_db_sizes, elem_sizes, num_iter=5, rekeying=False)
+    results["tier3"] = benchmark_pirac(log2_db_sizes, elem_sizes, num_iter=5, rekeying=True)
     
     return results
 
@@ -58,25 +75,29 @@ def gen_save_plot(results, x_values, x_label, fig_name):
     plt.yscale("log")
 
     schemes = ["spiralpir", "spiralpir_stream_pack", "sealpir"]
-    colors = ['b', 'c', 'r']
+    colors = ['#08519c', '#ff7f00', '#16a085'] #'#8e44ad', '#c0392b', '#333']
     cc = itertools.cycle(colors)
     plot_lines = []
 
     for scheme in schemes:
-        tput_with_pirac = cal_tput_with_pirac(results[scheme], results["pirac"])
+        tput_with_tier2 = cal_tput_with_pirac(results[scheme], results["tier2"])
+        tput_with_tier3 = cal_tput_with_pirac(results[scheme], results["tier3"])
         c = next(cc)
-        l1, = plt.plot(x_values, results[scheme], color=c)
-        l2, = plt.plot(x_values, tput_with_pirac, color=c, linestyle="dashed")
-        plot_lines.append([l1, l2])
+        l1, = plt.plot(x_values, results[scheme], color=c, linestyle='-',  alpha=0.7)
+        l2, = plt.plot(x_values, tput_with_tier2, color=c, linestyle='--')
+        l3, = plt.plot(x_values, tput_with_tier3, color=c, linestyle=':')
+        plot_lines.append([l1, l2, l3])
     
-    legend1 = plt.legend([l[0] for l in plot_lines], schemes, loc=2)
-    legend2 = plt.legend(plot_lines[0], ["Without AC", "With AC"], loc=4)
+    scheme_labels = ["SpiralPIR", "SpiralStreamPack", "SealPIR"]
+    legend1 = plt.legend([l[0] for l in plot_lines], scheme_labels, loc=2)
+    legend2 = plt.legend(plot_lines[0], ["Basic", "With MP", "With MP+FS"], loc=4)
     plt.gca().add_artist(legend1)
     plt.gca().add_artist(legend2)
 
     plt.xlabel(x_label)
     plt.ylabel("Throughput (in Mb/s)")
-    plt.savefig(f"images/{fig_name}.png")
+    plt.tight_layout()
+    plt.savefig(f"images/{fig_name}.pdf")
     print(f"Successfully generated and save the plot with name {fig_name}")
 
 if __name__ == "__main__":

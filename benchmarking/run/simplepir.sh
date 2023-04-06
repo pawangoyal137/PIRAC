@@ -9,7 +9,7 @@ python3 "$EVAL_FILE" &>> "$OUTPUT_FILE"
 python3 "$EVAL_FILE" -wp re  &>> "$OUTPUT_FILE"
 python3 "$EVAL_FILE" -wp pirac  &>> "$OUTPUT_FILE"
 
-python3 "$OUTPUT_FILE" -off &>> "$OUTPUT_FILE"
+python3 "$EVAL_FILE" -off &>> "$OUTPUT_FILE"
 python3 "$EVAL_FILE" -wp re -off  &>> "$OUTPUT_FILE"
 python3 "$EVAL_FILE" -wp pirac -off  &>> "$OUTPUT_FILE"
 

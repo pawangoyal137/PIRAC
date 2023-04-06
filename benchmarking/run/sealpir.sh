@@ -1,5 +1,5 @@
 OUTPUT_FILE=outputs/sealpir.txt
-EVAL_FILE=eval/$EVAL_FILE
+EVAL_FILE=eval/eval_sealpir.py
 
 if test -f "$OUTPUT_FILE"; then
     truncate -s 0 "$OUTPUT_FILE"
