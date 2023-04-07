@@ -43,6 +43,10 @@ parser.add_argument('-n','--numIter',
                      required=False, type=int,
                      default=NUM_ITER,
                      help='Number of interations to run experiments')
+parser.add_argument('-t','--throughput', action='store_true',
+                     required=False, default=False,
+                     help='If the flag is passed, return benchmark as MB/s \
+                         instead of records per sec')
 
 def benchmark_rekeying(num_iter):
     time_array = []
@@ -75,7 +79,7 @@ def benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, rekeying = False, thro
                 db_size_bits = db_size * elem_size * 128
                 db_size_mB = db_size_bits / BITS_IN_MB
                 throughput = 1000*db_size_mB/np.mean(t)
-                print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size} bits = {throughput}Mb/s")
+                print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size} bits = {throughput}MB/s")
                 throughputs.append(throughput)  
             else:
                 records_per_sec = 1000*db_size/np.mean(t) 
@@ -91,13 +95,14 @@ if __name__ == "__main__":
     log2_db_sizes = args.dbSizes
     elem_sizes = args.elemSizes
     num_iter = args.numIter
-    
+    throughput = args.throughput
+
     if bench_type == "rk":
         entries_per_sec = benchmark_rekeying(num_iter)
         print("Throughput:{0:0.0f} keys/sec +- {1:0.0f}".format(np.mean(entries_per_sec), np.std(entries_per_sec)))
     elif bench_type == "re":
-        throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, throughput=False)
+        throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, throughput=throughput)
         print(throughputs)
     elif bench_type == "pirac":
-        throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, True, throughput=False)
+        throughputs = benchmark_pirac(log2_db_sizes, elem_sizes,  num_iter, True, throughput=throughput)
         print(throughputs)

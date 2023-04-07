@@ -4,6 +4,7 @@ import json
 import argparse
 import numpy as np
 import re
+import math 
 
 from eval_pirac import benchmark_pirac
 from utils import cal_tput_with_pirac, SealPirPath
@@ -30,17 +31,30 @@ parser.add_argument('-wp','--withPirac', choices=['re', 'pirac'],
                     help='If passed "re", runs with reencryption. If passed with "pirac", run\
                         both rekeying and reencryption')
 
+def get_factor(itemsize, maxsize):
+    factor = 1
+    if itemsize <= maxsize:
+        factor = 1
+    else:
+        factor = math.ceil(itemsize / maxsize)
+    return factor
+
 def run_SealPIR(N, D, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
-    process = subprocess.Popen(f'./main {N} {D//8}', 
+    maxsize = 24576 # 3072 bytes
+    factor = get_factor(D, maxsize)
+    elem_size = min(maxsize, D)
+    process = subprocess.Popen(f'./main {N} {elem_size//8}', 
                             shell=True,
                             stdout=subprocess.PIPE, 
                             stderr=subprocess.PIPE,
                             universal_newlines=True)
 
     total_re = r"Main: PIRServer reply generation time.*:\s+([0-9]+)"
+    exp_re = r"Server: Expansion time.*:\s+([0-9]+)"
+    exp_us = 0
     if output:
         i = 0
         while True:
@@ -49,6 +63,11 @@ def run_SealPIR(N, D, output=False):
             i+=1
             try:
                 total_us = int(re.search(total_re, output).group(1))*1000
+            except:
+                pass # invalid parsing
+
+            try:
+                exp_us += int(re.search(exp_re, output).group(1))
             except:
                 pass # invalid parsing
 
@@ -62,9 +81,13 @@ def run_SealPIR(N, D, output=False):
     else:
         stdout, _ = process.communicate()
         total_us = int(re.search(total_re, stdout).group(1))*1000
+        exp_us = sum([int(i) for i in re.findall(exp_re, stdout)])
     
     database_size_bytes = (1<<N)*(D//8)
-    return database_size_bytes/total_us
+    total_including_factor = (factor * (total_us-exp_us) + exp_us)
+    print(f"Total server time: {total_us} us, Expansion Time: {exp_us} us, Total Time after factor = {total_including_factor} us")
+    print(f"Factor = {factor}, elem size = {elem_size}")
+    return database_size_bytes/total_including_factor
 
 def benchmark_SealPir(db_sizes, elem_sizes, output=False):
     """
@@ -93,8 +116,8 @@ if __name__ == "__main__":
     output = args.output
     pirac_mode = args.withPirac
 
-    for elem_size in elem_sizes:
-        assert elem_size <= 10*1000*8, "Elem size should be <= 10KB" #current support is < 10KB
+    # for elem_size in elem_sizes:
+    #     assert elem_size <= 10*1000*8, "Elem size should be <= 10KB" #current support is < 10KB
 
     os.chdir(SealPirPath)
     print(os.getcwd())
