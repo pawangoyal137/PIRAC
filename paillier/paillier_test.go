@@ -9,7 +9,7 @@ import (
 )
 
 var NUMITERS int = 1000
-var BITS int = 3072
+var BITS int = 2048
 
 func BenchmarkMultiplyMod(b *testing.B) {
     x := generateRandomNumber(BITS)

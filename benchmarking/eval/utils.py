@@ -1,8 +1,10 @@
 
 # declare the paths for the other PIR schemes
+# relative to benchmarking folder
 SimplePirPath = "../../simplepir/pir"
 SpiralPirPath = "../../spiral"
 SealPirPath = "../../SealPIR/bin"
+PaillierPath = "../paillier"
 
 # declare the constants/ defaults for the experiments
 LOG2_DB_SIZE = 16
