@@ -50,31 +50,25 @@ def run_SpiralPIR(N, D, stream=False, pack=False, output=False):
                             universal_newlines=True)
 
     statistics = None
-    if output:
-        i = 0
-        while True:
-            output = process.stdout.readline()
-            print(i, output.rstrip())
+    i = 0
+    while True:
+        line = process.stdout.readline()
+        try:
+            statistics = json.loads(line)
+        except:
+            pass # invalid parsing
+        
+        if output:
+            print(i, line.rstrip())
             i+=1
-            try:
-                statistics = json.loads(output)
-            except:
-                pass # invalid parsing
 
-            return_code = process.poll()
-            if return_code is not None:
-                print('RETURN CODE', return_code)
-                # Process has finished, read rest of the output 
-                for output in process.stdout.readlines():
-                    print(output.strip())
-                break
-    else:
-        stdout, _ = process.communicate()
-        for line in stdout.split('\n'):
-            try:
-                statistics = json.loads(line)
-            except:
-                pass # invalid parsing
+        return_code = process.poll()
+        if return_code is not None:
+            print('RETURN CODE', return_code)
+            # Process has finished, read rest of the output 
+            for line in process.stdout.readlines():
+                print(line.strip())
+            break
     
     assert statistics is not None
     return statistics["dbsize"]/statistics["total_us"]

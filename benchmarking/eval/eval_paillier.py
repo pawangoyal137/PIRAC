@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
-from utils import cal_tput_with_pirac, PaillierPath
+from utils import cal_tput_with_pirac, PaillierPath, extract_num
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for paillier')
@@ -28,30 +28,22 @@ def run_Paillier(output=False):
                             universal_newlines=True)
 
     throughput = None
-    if output:
-        while True:
-            output = process.stdout.readline()
-            print(output.rstrip())
-            if "Average throughput for paillier" in output:
-                temp = re.findall(r'\d+\.?\d+', output)
-                throughput = list(map(float, temp))
-            return_code = process.poll()
+    while True:
+        line = process.stdout.readline()
+        if "Average throughput for paillier" in line:
+            throughput = extract_num(line)
+        
+        if output:
+            print(line.rstrip())
 
-            if return_code is not None:
-                print('RETURN CODE', return_code)
-                # Process has finished, read rest of the output 
-                for output in process.stdout.readlines():
-                    print(output.strip())
-                break
-    else:
-        stdout, _ = process.communicate()
-        for line in stdout.split('\n'):
-            if "Average throughput for paillier" in line:
-                temp = re.findall(r'\d+\.?\d+', line)
-                throughput = list(map(float, temp))
+        return_code = process.poll()
+        if return_code is not None:
+            print('RETURN CODE', return_code)
+            # Process has finished, read rest of the output 
+            for line in process.stdout.readlines():
+                print(line.strip())
+            break
                 
-    assert len(throughput)==1
-    throughput = throughput[0]
     print(f"Throughput of Paillier = {throughput} MB/s")
     return throughput
 

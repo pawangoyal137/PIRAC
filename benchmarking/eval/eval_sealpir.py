@@ -55,33 +55,30 @@ def run_SealPIR(N, D, output=False):
     total_re = r"Main: PIRServer reply generation time.*:\s+([0-9]+)"
     exp_re = r"Server: Expansion time.*:\s+([0-9]+)"
     exp_us = 0
-    if output:
-        i = 0
-        while True:
-            output = process.stdout.readline()
-            print(i, output.rstrip())
+    i = 0
+    while True:
+        line = process.stdout.readline()
+        try:
+            total_us = int(re.search(total_re, line).group(1))*1000
+        except:
+            pass # invalid parsing
+
+        try:
+            exp_us += int(re.search(exp_re, line).group(1))
+        except:
+            pass # invalid parsing
+
+        if output:
+            print(i, line.rstrip())
             i+=1
-            try:
-                total_us = int(re.search(total_re, output).group(1))*1000
-            except:
-                pass # invalid parsing
 
-            try:
-                exp_us += int(re.search(exp_re, output).group(1))
-            except:
-                pass # invalid parsing
-
-            return_code = process.poll()
-            if return_code is not None:
-                print('RETURN CODE', return_code)
-                # Process has finished, read rest of the output 
-                for output in process.stdout.readlines():
-                    print(output.strip())
-                break
-    else:
-        stdout, _ = process.communicate()
-        total_us = int(re.search(total_re, stdout).group(1))*1000
-        exp_us = sum([int(i) for i in re.findall(exp_re, stdout)])
+        return_code = process.poll()
+        if return_code is not None:
+            print('RETURN CODE', return_code)
+            # Process has finished, read rest of the output 
+            for line in process.stdout.readlines():
+                print(line.strip())
+            break
     
     database_size_bytes = (1<<N)*(D//8)
     total_including_factor = (factor * (total_us-exp_us) + exp_us)

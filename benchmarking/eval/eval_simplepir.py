@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
-from utils import cal_tput_with_pirac, SimplePirPath
+from utils import cal_tput_with_pirac, SimplePirPath, extract_num
 
 # declare the constants/ defaults for the experiments
 LOG2_DB_SIZES = [14,16,18]
@@ -44,31 +44,23 @@ def run_SimplePIR(N, D, offline_include=False, output=False):
                             universal_newlines=True)
 
     throughput = None
-    if output:
-        while True:
-            output = process.stdout.readline()
-            print(output.rstrip())
-            if "Avg SimplePIR tput, except for first run" in output:
-                temp = re.findall(r'\d+\.?\d+', output)
-                throughput = list(map(float, temp))
-                assert len(throughput)==1
-            return_code = process.poll()
+    while True:
+        line = process.stdout.readline()
+        if "Avg SimplePIR tput, except for first run" in line:
+            throughput = extract_num(line)
+        
+        if output:
+            print(line.rstrip())
 
-            if return_code is not None:
-                print('RETURN CODE', return_code)
-                # Process has finished, read rest of the output 
-                for output in process.stdout.readlines():
-                    print(output.strip())
-                break
-    else:
-        stdout, _ = process.communicate()
-        for line in stdout.split('\n'):
-            if "Avg SimplePIR tput, except for first run" in line:
-                temp = re.findall(r'\d+\.?\d+', line)
-                throughput = list(map(float, temp))
-                assert len(throughput)==1
+        return_code = process.poll()
+        if return_code is not None:
+            print('RETURN CODE', return_code)
+            # Process has finished, read rest of the output 
+            for line in process.stdout.readlines():
+                print(line.strip())
+            break
     
-    return throughput[0]
+    return throughput
 
 def benchmark_SimplePir(db_sizes, elem_sizes, offline_include=False, pirac_mode=None, output=False):
     """
