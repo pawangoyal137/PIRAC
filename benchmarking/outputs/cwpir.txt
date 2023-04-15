@@ -1,0 +1,190 @@
+/home/ubuntu/constant-weight-pir/src/build
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 32
+9 	Max Item Hex Length: 40960
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 3
+14 	Compression Factor: 12
+15 	Encoding size: 2955
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :       3368 ms
+24 	Expansion time: :      20722 ms
+25 	Sel. Vec. Calc. :      40485 ms
+26 	Inner Product   :       1578 ms
+27 	Total Server    :      62792 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+RETURN CODE 0
+Throughput on CWPIR  with kw = 32, Hamming weight = 3 
+         log2 dbsize = 10, elem size = 163840 bits = 0.3339839469996178MB/s
+/home/ubuntu/constant-weight-pir/src/build
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 32
+9 	Max Item Hex Length: 81920
+10 	Response Cipher Count: 2
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 3
+14 	Compression Factor: 12
+15 	Encoding size: 2955
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :       6675 ms
+24 	Expansion time: :      21017 ms
+25 	Sel. Vec. Calc. :      40484 ms
+26 	Inner Product   :       2046 ms
+27 	Total Server    :      63558 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 206 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+RETURN CODE 0
+Throughput on CWPIR  with kw = 32, Hamming weight = 3 
+         log2 dbsize = 10, elem size = 327680 bits = 0.6599175556184902MB/s
+/home/ubuntu/constant-weight-pir/src/build
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 32
+9 	Max Item Hex Length: 163840
+10 	Response Cipher Count: 4
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 3
+14 	Compression Factor: 12
+15 	Encoding size: 2955
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :      13238 ms
+24 	Expansion time: :      20828 ms
+25 	Sel. Vec. Calc. :      40330 ms
+26 	Inner Product   :       3334 ms
+27 	Total Server    :      64509 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 412 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+RETURN CODE 0
+Throughput on CWPIR  with kw = 32, Hamming weight = 3 
+         log2 dbsize = 10, elem size = 655360 bits = 1.3003779317614597MB/s
+/home/ubuntu/constant-weight-pir/src/build
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 32
+9 	Max Item Hex Length: 327680
+10 	Response Cipher Count: 8
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 3
+14 	Compression Factor: 12
+15 	Encoding size: 2955
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :      26349 ms
+24 	Expansion time: :      20639 ms
+25 	Sel. Vec. Calc. :      40338 ms
+26 	Inner Product   :       5876 ms
+27 	Total Server    :      66883 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1083 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 825 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+RETURN CODE 0
+Throughput on CWPIR  with kw = 32, Hamming weight = 3 
+         log2 dbsize = 10, elem size = 1310720 bits = 2.508442504074279MB/s
+/home/ubuntu/constant-weight-pir/src/build
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 32
+9 	Max Item Hex Length: 655360
+10 	Response Cipher Count: 16
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 3
+14 	Compression Factor: 12
+15 	Encoding size: 2955
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :      52594 ms
+24 	Expansion time: :      20800 ms
+25 	Sel. Vec. Calc. :      40631 ms
+26 	Inner Product   :      11040 ms
+27 	Total Server    :      72528 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 1648 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+RETURN CODE 0
+Throughput on CWPIR  with kw = 32, Hamming weight = 3 
+         log2 dbsize = 10, elem size = 2621440 bits = 4.6264107654974636MB/s

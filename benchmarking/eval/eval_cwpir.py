@@ -41,7 +41,10 @@ def run_CWPIR(db_size, elem_size, kw, h, output=False):
     i = 0
     while True:
         line = process.stdout.readline()
-        
+        if output:
+            print(i, line.rstrip())
+            i+=1
+            
         if "Number of Keywords" in line:
             assert extract_num(line)==num_entries
         elif "Keyword Max Bitlength" in line:
@@ -57,9 +60,7 @@ def run_CWPIR(db_size, elem_size, kw, h, output=False):
         elif "Total Server" in line:
             statistics["total_ms"] = extract_num(line)
 
-        if output:
-            print(i, line.rstrip())
-            i+=1
+        
 
         return_code = process.poll()
         if return_code is not None:
