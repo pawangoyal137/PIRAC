@@ -4,7 +4,7 @@ import argparse
 import numpy as np
 import math
 
-from utils import CWPIR, extract_num
+import utils
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for spiralpir')
@@ -46,24 +46,24 @@ def run_CWPIR(db_size, elem_size, kw, h, output=False):
             i+=1
             
         if "Number of Keywords" in line:
-            assert extract_num(line)==num_entries
+            assert utils.extract_num(line)==num_entries
         elif "Keyword Max Bitlength" in line:
-            assert extract_num(line)==kw
+            assert utils.extract_num(line)==kw
         elif "Max Item Hex Length" in line:
-            assert extract_num(line)==elem_size_bytes*2
+            assert utils.extract_num(line)==elem_size_bytes*2
         elif "Hamming Weight" in line:
-            assert extract_num(line)==h
+            assert utils.extract_num(line)==h
         elif "Correct Response!" in line:
             correct_response = True
         elif "Response Cipher Count" in line:
-            statistics["num_output_ciphers"] = extract_num(line)
+            statistics["num_output_ciphers"] = utils.extract_num(line)
         elif "Total Server" in line:
-            statistics["total_ms"] = extract_num(line)
+            statistics["total_ms"] = utils.extract_num(line)
 
         
 
         return_code = process.poll()
-        if return_code is not None:
+        if return_code is not None and output:
             print('RETURN CODE', return_code)
             # Process has finished, read rest of the output 
             for line in process.stdout.readlines():
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     kw = args.keyWordLength
     output = args.output
 
-    os.chdir(CWPIR)
+    os.chdir(utils.CWPIR)
     print(os.getcwd())
 
     run_CWPIR(log2_db_size, elem_size, kw, h, output=output)

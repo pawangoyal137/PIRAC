@@ -1,0 +1,219 @@
+/home/ubuntu/FastPIR
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 4958.0 us, Total Time after factor = 4958.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 128 bits = 52.87293263412666Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 12625.0 us, Total Time after factor = 12625.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 512 bits = 83.05552475247525Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 47255.0 us, Total Time after factor = 47255.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 2048 bits = 88.75894614326526Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 181494.0 us, Total Time after factor = 181494.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 8192 bits = 92.4395076421259Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 719006.0 us, Total Time after factor = 719006.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 32768 bits = 93.33561055123323Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 12301.0 us, Total Time after factor = 12301.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 128 bits = 85.24315096333632Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 30010.0 us, Total Time after factor = 30010.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 512 bits = 139.76354548483837Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 105422.0 us, Total Time after factor = 105422.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 2048 bits = 159.1434046024549Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 402166.0 us, Total Time after factor = 402166.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 8192 bits = 166.86856671125852Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 1591189.0 us, Total Time after factor = 1591189.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 32768 bits = 168.701176290183Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 43319.0 us, Total Time after factor = 43319.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 128 bits = 96.82365705579538Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 99128.0 us, Total Time after factor = 99128.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 512 bits = 169.24800258251958Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 339692.0 us, Total Time after factor = 339692.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 2048 bits = 197.55797604889136Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 1285046.0 us, Total Time after factor = 1285046.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 8192 bits = 208.89170971311532Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 5072138.0 us, Total Time after factor = 5072138.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 32768 bits = 211.69412661879468Mb/s
+Pirac Mode = None
+Throughputs in the range 52.9-211.7Mb/s
+/home/ubuntu/FastPIR
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 4980.0 us, Total Time after factor = 4980.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 128 bits = 52.63935742971888Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 12655.0 us, Total Time after factor = 12655.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 512 bits = 82.85863295140261Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 47015.0 us, Total Time after factor = 47015.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 2048 bits = 89.21203871104966Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 182266.0 us, Total Time after factor = 182266.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 8192 bits = 92.04797384043101Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 719378.0 us, Total Time after factor = 719378.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 32768 bits = 93.2873454567696Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 12373.0 us, Total Time after factor = 12373.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 128 bits = 84.74711064414451Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 30048.0 us, Total Time after factor = 30048.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 512 bits = 139.58679446219384Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 105836.0 us, Total Time after factor = 105836.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 2048 bits = 158.5208813636192Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 401519.0 us, Total Time after factor = 401519.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 8192 bits = 167.13745551269056Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 1589858.0 us, Total Time after factor = 1589858.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 32768 bits = 168.84240982528Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 43125.0 us, Total Time after factor = 43125.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 128 bits = 97.2592231884058Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 99029.0 us, Total Time after factor = 99029.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 512 bits = 169.41720102192286Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 339944.0 us, Total Time after factor = 339944.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 2048 bits = 197.4115266043819Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 1285384.0 us, Total Time after factor = 1285384.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 8192 bits = 208.83678029289302Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 5077379.0 us, Total Time after factor = 5077379.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 32768 bits = 211.47561054630745Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 128 bits = 789.1149917055435MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 512 bits = 1382.79838571912MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 2048 bits = 1795.9681721314792MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 8192 bits = 1530.18148371219MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 32768 bits = 1516.6256164871807MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 128 bits = 786.1568416191535MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 512 bits = 2440.8193308204945MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 2048 bits = 1510.5219374601934MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 8192 bits = 1491.3147133133764MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 32768 bits = 1518.3413028937775MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 128 bits = 794.4961313576168MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 512 bits = 1219.3364536022816MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 2048 bits = 1483.1474761535685MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 8192 bits = 1493.8916970557584MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 32768 bits = 1518.6531219309743MB/s
+Pirac Mode = re
+Throughputs in the range 49.3-185.6Mb/s
+/home/ubuntu/FastPIR
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 4987.0 us, Total Time after factor = 4987.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 128 bits = 52.5654702225787Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 12615.0 us, Total Time after factor = 12615.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 512 bits = 83.12136345620293Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 46868.0 us, Total Time after factor = 46868.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 2048 bits = 89.4918494495178Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 182220.0 us, Total Time after factor = 182220.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 8192 bits = 92.07121062451981Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 720072.0 us, Total Time after factor = 720072.0 us
+Throughput on FastPIR with log2 dbsize = 14, elem size = 32768 bits = 93.19743581197436Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 12324.0 us, Total Time after factor = 12324.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 128 bits = 85.08406361570918Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 29833.0 us, Total Time after factor = 29833.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 512 bits = 140.59276639962457Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 105547.0 us, Total Time after factor = 105547.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 2048 bits = 158.95493003117096Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 402394.0 us, Total Time after factor = 402394.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 8192 bits = 166.7740175052312Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 1593697.0 us, Total Time after factor = 1593697.0 us
+Throughput on FastPIR with log2 dbsize = 16, elem size = 32768 bits = 168.4356913516183Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 128
+Total server time: 43066.0 us, Total Time after factor = 43066.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 128 bits = 97.39246737565597Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 512
+Total server time: 99573.0 us, Total Time after factor = 99573.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 512 bits = 168.49161921404396Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 2048
+Total server time: 339690.0 us, Total Time after factor = 339690.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 2048 bits = 197.55913921516677Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 8192
+Total server time: 1282366.0 us, Total Time after factor = 1282366.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 8192 bits = 209.3282697763353Mb/s
+RETURN CODE 0
+Factor = 1, elem size = 32768
+Total server time: 5075331.0 us, Total Time after factor = 5075331.0 us
+Throughput on FastPIR with log2 dbsize = 18, elem size = 32768 bits = 211.5609452861301Mb/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 128 bits = 16.621268764277676MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 512 bits = 63.75058505605914MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 2048 bits = 233.03112926528158MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 8192 bits = 648.8060464667453MB/s
+Throughput on PIRAC with log2 dbsize = 14.0, elem size = 32768 bits = 1138.8745303744165MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 128 bits = 16.63959985259203MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 512 bits = 68.0461589301648MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 2048 bits = 232.81867030376262MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 8192 bits = 633.8302011065898MB/s
+Throughput on PIRAC with log2 dbsize = 16.0, elem size = 32768 bits = 1127.4873386602478MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 128 bits = 16.670120213481216MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 512 bits = 64.58416501208879MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 2048 bits = 230.54834102487823MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 8192 bits = 631.0836145096786MB/s
+Throughput on PIRAC with log2 dbsize = 18.0, elem size = 32768 bits = 1125.528169199746MB/s
+Pirac Mode = pirac
+Throughputs in the range 12.6-178.1Mb/s

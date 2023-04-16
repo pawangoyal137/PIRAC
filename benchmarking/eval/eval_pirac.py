@@ -1,12 +1,11 @@
 import ctypes
 import pathlib
-
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
 import argparse
 
+import utils
 # np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
 NUM_ITER = 5
 BITS_IN_MB = 8 * 1000000
@@ -19,24 +18,15 @@ c_lib = ctypes.CDLL(libname)
 c_lib.testReKeying.restype = ctypes.c_float
 c_lib.testReEncryption.restype = ctypes.c_float
 
-# declare the constants/ defaults for the experiments
-LOG2_DB_SIZE = 16
-ELEM_SIZE = 1024
-
-LOG2_DB_SIZES = [10,12,14,16,18]
-
-LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
-ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
-
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for PIRAC')
 parser.add_argument('-b','--benchType', choices=['rk', 're', 'pirac'],    # re-keying, re-encryption and pirac
                      required=True, type=str,
                      help='Tells script what aspect to benchmark')
-parser.add_argument('-ds','--dbSizes', nargs='+', default=LOG2_DB_SIZES,
+parser.add_argument('-ds','--dbSizes', nargs='+', default=utils.LOG2_DB_SIZES,
                      required=False, type=int,
                      help='Log 2 Database sizes to run experiment on.')
-parser.add_argument('-es','--elemSizes', nargs='+', default=ELEM_SIZES,
+parser.add_argument('-es','--elemSizes', nargs='+', default=utils.ELEM_SIZES,
                      required=False, type=int,
                      help='Element sizes (in bits) to run experiment on.')
 parser.add_argument('-n','--numIter',
@@ -50,7 +40,7 @@ parser.add_argument('-t','--throughput', action='store_true',
 
 def benchmark_rekeying(num_iter):
     time_array = []
-    db_size = 1 << LOG2_DB_SIZE
+    db_size = 1 << utils.LOG2_DB_SIZE
     for _ in range(num_iter):
         time_array.append(c_lib.testReKeying(db_size))
     # KEY_SIZE = 128 #bits

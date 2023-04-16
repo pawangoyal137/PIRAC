@@ -5,8 +5,8 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
-from utils import cal_tput_with_pirac, PaillierPath, extract_num
 
+import utils
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for paillier')
 parser.add_argument('-o','--output', action='store_true',
@@ -31,13 +31,13 @@ def run_Paillier(output=False):
     while True:
         line = process.stdout.readline()
         if "Average throughput for paillier" in line:
-            throughput = extract_num(line)
+            throughput = utils.extract_num(line)
         
         if output:
             print(line.rstrip())
 
         return_code = process.poll()
-        if return_code is not None:
+        if return_code is not None and output:
             print('RETURN CODE', return_code)
             # Process has finished, read rest of the output 
             for line in process.stdout.readlines():
@@ -57,18 +57,18 @@ if __name__ == "__main__":
     output = args.output
     pirac_mode = args.withPirac
 
-    os.chdir(PaillierPath)
+    os.chdir(utils.PaillierPath)
 
     throughput_paillier = run_Paillier(output=output)
     if pirac_mode is None:
         pretty_print(throughput_paillier, pirac_mode)
     elif pirac_mode=="re":
         throughputs_re = benchmark_pirac([16], [BITS],  10, rekeying = False)
-        throughputs_combined = cal_tput_with_pirac([throughput_paillier], throughputs_re)
+        throughputs_combined = utils.cal_tput_with_pirac([throughput_paillier], throughputs_re)
         pretty_print(throughputs_combined[0], pirac_mode)
     elif pirac_mode=="pirac":
         throughputs_pirac = benchmark_pirac([16], [BITS],  10, rekeying = True)
-        throughputs_combined = cal_tput_with_pirac([throughput_paillier], throughputs_pirac)
+        throughputs_combined = utils.cal_tput_with_pirac([throughput_paillier], throughputs_pirac)
         pretty_print(throughputs_combined[0], pirac_mode)
     else:
         raise Exception("Shouldn't reach here")

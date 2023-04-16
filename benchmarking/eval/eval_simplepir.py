@@ -5,21 +5,15 @@ import argparse
 import numpy as np
 
 from eval_pirac import benchmark_pirac
-from utils import cal_tput_with_pirac, SimplePirPath, extract_num
-
-# declare the constants/ defaults for the experiments
-LOG2_DB_SIZES = [14,16,18]
-
-LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
-ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
+import utils
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for simplepir')
 parser.add_argument('-ds','--dbSizes', nargs='+',
-                     required=False, type=int, default=LOG2_DB_SIZES,
+                     required=False, type=int, default=utils.LOG2_DB_SIZES,
                      help='Log 2 Database sizes to run experiment on.')
 parser.add_argument('-es','--elemSizes', nargs='+',
-                     required=False, type=int, default=ELEM_SIZES,
+                     required=False, type=int, default=utils.ELEM_SIZES,
                      help='Element sizes (in bits) to run experiment on.')
 parser.add_argument('-o','--output', action='store_true',
                      required=False, 
@@ -47,13 +41,13 @@ def run_SimplePIR(N, D, offline_include=False, output=False):
     while True:
         line = process.stdout.readline()
         if "Avg SimplePIR tput, except for first run" in line:
-            throughput = extract_num(line)
+            throughput = utils.extract_num(line)
         
         if output:
             print(line.rstrip())
 
         return_code = process.poll()
-        if return_code is not None:
+        if return_code is not None and output:
             print('RETURN CODE', return_code)
             # Process has finished, read rest of the output 
             for line in process.stdout.readlines():
@@ -91,7 +85,7 @@ if __name__ == "__main__":
     output = args.output
     pirac_mode = args.withPirac
 
-    os.chdir(SimplePirPath)
+    os.chdir(utils.SimplePirPath)
     print(os.getcwd())
 
     throughputs_simplepir = benchmark_SimplePir(log2_db_sizes, elem_sizes, 
@@ -100,11 +94,11 @@ if __name__ == "__main__":
         pretty_print(throughputs_simplepir, offline_include, pirac_mode)
     elif pirac_mode=="re":
         throughputs_re = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = False)
-        throughputs_combined = cal_tput_with_pirac(throughputs_simplepir, throughputs_re)
+        throughputs_combined = utils.cal_tput_with_pirac(throughputs_simplepir, throughputs_re)
         pretty_print(throughputs_combined, offline_include, pirac_mode)
     elif pirac_mode=="pirac":
         throughputs_pirac = benchmark_pirac(log2_db_sizes, elem_sizes,  10, rekeying = True)
-        throughputs_combined = cal_tput_with_pirac(throughputs_simplepir, throughputs_pirac)
+        throughputs_combined = utils.cal_tput_with_pirac(throughputs_simplepir, throughputs_pirac)
         pretty_print(throughputs_combined, offline_include, pirac_mode)
     else:
         raise Exception("Shouldn't reach here")

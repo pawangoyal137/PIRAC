@@ -1,8 +1,10 @@
 
 import re
+import math
 
 # declare the paths for the other PIR schemes
 # relative to benchmarking folder
+FastPirPath = "../../FastPIR"
 SimplePirPath = "../../simplepir/pir"
 SpiralPirPath = "../../spiral"
 SealPirPath = "../../SealPIR/bin"
@@ -13,7 +15,7 @@ CWPIR = "../../constant-weight-pir/src/build"
 LOG2_DB_SIZE = 16
 ELEM_SIZE = 1024
 
-LOG2_DB_SIZES = [10,12,14,16,18]
+LOG2_DB_SIZES = [14,16,18]
 
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
@@ -31,7 +33,11 @@ def extract_num(s):
         return float(match.group())
     else:
         return None
-    # temp = re.findall(r'\d+\.?\d+', s)
-    # temp = re.findall(r'\d+(\.\d+)?', s)
-    # print(s, temp)
-    # return list(map(float, temp))
+
+def get_factor(itemsize, maxsize):
+    factor = 1
+    if itemsize <= maxsize:
+        factor = 1
+    else:
+        factor = math.ceil(itemsize / maxsize)
+    return factor
