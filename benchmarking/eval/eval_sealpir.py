@@ -60,7 +60,7 @@ def run_SealPIR(N, D, output=False):
             i+=1
 
         return_code = process.poll()
-        if return_code is not None and output:
+        if return_code is not None:
             print('RETURN CODE', return_code)
             # Process has finished, read rest of the output 
             for line in process.stdout.readlines():

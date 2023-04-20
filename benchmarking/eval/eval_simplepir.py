@@ -47,7 +47,7 @@ def run_SimplePIR(N, D, offline_include=False, output=False):
             print(line.rstrip())
 
         return_code = process.poll()
-        if return_code is not None and output:
+        if return_code is not None:
             print('RETURN CODE', return_code)
             # Process has finished, read rest of the output 
             for line in process.stdout.readlines():

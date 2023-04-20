@@ -15,10 +15,10 @@ import utils
 ###########################
 # PLOT PARAMETERS
 ###########################
-TINY_SIZE = 7
-SMALL_SIZE = 7
-MEDIUM_SIZE = 8
-BIGGER_SIZE = 10
+TINY_SIZE = 8
+SMALL_SIZE = 8
+MEDIUM_SIZE = 10
+BIGGER_SIZE = 12
 matplotlib.rcParams['font.family'] = 'serif'
 plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
 plt.rc('axes', titlesize=BIGGER_SIZE)    # fontsize of the axes title
@@ -33,12 +33,9 @@ plt.rc('hatch', linewidth=0.5)
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run evaluation by comparing\
                                             different schemes')
-parser.add_argument('-e','--expType', choices=['ds', 'es'],
-                     required=True, type=str,
-                     help='Tells file if to run db_size or elem_size experiments')
-parser.add_argument('-ds','--dbSizes', nargs='+',
+parser.add_argument('-ds','--dbSize',
                      required=False, type=int,
-                     help='Log 2 Database sizes to run experiment on.')
+                     help='Log 2 Database size to run experiment on.')
 parser.add_argument('-es','--elemSizes', nargs='+',
                      required=False, type=int,
                      help='Element sizes (in bits) to run experiment on.')
@@ -76,9 +73,10 @@ def run_PIRs(log2_db_sizes, elem_sizes):
     
     return results
 
-def gen_save_plot(results, x_values, x_label, fig_name):
+def gen_save_plot(results, x_values, fig_name):
     plt.figure()
     plt.yscale("log")
+    plt.xscale("log")
 
     schemes = ["spiralpir", "spiralpir_stream_pack", "sealpir", "fastpir"]
     colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad'] #, '#c0392b', '#333']
@@ -95,42 +93,28 @@ def gen_save_plot(results, x_values, x_label, fig_name):
         plot_lines.append([l1, l2, l3])
     
     scheme_labels = ["SpiralPIR", "SpiralStreamPack", "SealPIR", "FastPIR"]
-    legend1 = plt.legend([l[0] for l in plot_lines], scheme_labels, loc=2)
-    legend2 = plt.legend(plot_lines[0], ["Basic", "With MP", "With MP+FS"], loc=4)
+    legend1 = plt.legend([l[0] for l in plot_lines], scheme_labels, loc="upper left")
+    legend2 = plt.legend(plot_lines[0], ["Basic", "With MP", "With MP+FS"], loc="upper right")
     plt.gca().add_artist(legend1)
     plt.gca().add_artist(legend2)
 
-    plt.xlabel(x_label)
+    plt.xlabel("Entry size (in bytes)")
     plt.ylabel("Throughput (in MB/s)")
+
     plt.tight_layout()
     plt.savefig(f"images/{fig_name}.pdf", dpi=300)
     print(f"Successfully generated and save the plot with name {fig_name}")
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    exp_type = args.expType
-    log2_db_sizes = args.dbSizes
+    log2_db_size = args.dbSize
     elem_sizes = args.elemSizes
-    x_label = args.xLabel
     fig_name = args.figName
     
-    if exp_type=="ds":
-        log2_db_sizes = utils.LOG2_DB_SIZES if log2_db_sizes is None else log2_db_sizes
-        elem_sizes = [utils.ELEM_SIZE] if elem_sizes is None else elem_sizes
-        x_label = "Log2 of Number of Database entries" if x_label is None else x_label
-        fig_name = "comparision_db_sizes" if fig_name is None else fig_name
-        x_values = log2_db_sizes
-    elif exp_type=="es":
-        log2_db_sizes = [utils.LOG2_DB_SIZE] if log2_db_sizes is None else log2_db_sizes
-        elem_sizes = utils.ELEM_SIZES if elem_sizes is None else elem_sizes
-        x_label = "Log2 of Entry size (in bits)" if x_label is None else x_label
-        fig_name = "comparision_elem_sizes" if fig_name is None else fig_name
-        x_values = np.log2(elem_sizes)
-    else:
-        raise Exception("Shouldn't reach here")
-
-    assert ((len(elem_sizes)==1) and (exp_type=="ds")) or \
-            ((len(log2_db_sizes)==1) and (exp_type=="es"))
+    log2_db_sizes = [utils.LOG2_DB_SIZE] if log2_db_size is None else [log2_db_size]
+    elem_sizes = utils.ELEM_SIZES if elem_sizes is None else elem_sizes
+    fig_name = "comparision_elem_sizes" if fig_name is None else fig_name
+    x_values = [e//8 for e in elem_sizes]
     
     results = run_PIRs(log2_db_sizes, elem_sizes)
-    gen_save_plot(results, x_values, x_label, fig_name)
+    gen_save_plot(results, x_values, fig_name)
