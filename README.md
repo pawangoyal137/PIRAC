@@ -26,6 +26,7 @@ Install following python packages
 sudo apt install python3-pip
 sudo apt-get install python3-numpy
 sudo apt-get install python3-matplotlib
+sudo apt-get install python3-pandas
 ```
 
 ## Setup PIR schemes
