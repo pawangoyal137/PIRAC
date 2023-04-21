@@ -1,0 +1,12 @@
+ Pirac Mode = None
+   log2_db_size  elem_size  simplepir_tput
+0            12        512     6855.605172
+Throughputs in the range 6855.61-6855.61MB/s
+ Pirac Mode = re
+   log2_db_size  elem_size  simplepir_re_tput
+0            12        512        1795.678312
+Throughputs in the range 1795.68-1795.68MB/s
+ Pirac Mode = pirac
+   log2_db_size  elem_size  simplepir_pirac_tput
+0            12        512             66.135376
+Throughputs in the range 66.14-66.14MB/s

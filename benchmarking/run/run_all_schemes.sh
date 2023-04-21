@@ -6,3 +6,6 @@ echo "Running SpiralPir"
 echo "-----------------------------------------------"
 echo "Running SealPir"
 ./run/sealpir.sh
+echo "-----------------------------------------------"
+echo "Running FastPir"
+./run/fastpir.sh
