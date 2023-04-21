@@ -7,12 +7,12 @@ if test -f "$OUTPUT_FILE"; then
 fi
 
 add_flags=('{}' '{"stream":"True"}' '{"pack":"True"}' '{"stream":"True", "pack":"True"}' )
+pir_schemes=my_array=("spiralpir" "spiralstream" "spiralpack" "spiralstreampack")
 
-for str in "${add_flags[@]}"
-do  
-    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/spiralpir.json" -arg="$str" &>> "$OUTPUT_FILE"
-    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/spiralpir_re.json" -wp re  -arg="$str" &>> "$OUTPUT_FILE"
-    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/spiralpir_pirac.json" -wp pirac  -arg="$str" &>> "$OUTPUT_FILE"
+for i in "${!my_array1[@]}"; do 
+    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/${my_array2[i]}.json" -arg="${my_array1[i]}" &>> "$OUTPUT_FILE"
+    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/${my_array2[i]}.json" -wp re  -arg="${my_array1[i]}" &>> "$OUTPUT_FILE"
+    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/${my_array2[i]}.json" -wp pirac  -arg="${my_array1[i]}" &>> "$OUTPUT_FILE"
 done
 
 echo "-----------------------------------------------"
