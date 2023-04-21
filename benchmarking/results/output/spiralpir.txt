@@ -1,0 +1,192 @@
+Pirac Mode = None
+    log2_db_size  elem_size  spiralpir_tput
+0             14        128        9.101669
+1             14        512        9.127894
+2             14       2048       12.375900
+3             14       8192       35.281311
+4             14      32768       77.011813
+5             16        128        9.149519
+6             16        512       12.339309
+7             16       2048       35.449491
+8             16       8192       76.784827
+9             16      32768      156.335896
+10            18        128       12.379407
+11            18        512       35.573438
+12            18       2048       76.557079
+13            18       8192      156.504063
+14            18      32768      254.404899
+Throughputs in the range 9.10-254.40MB/s
+Pirac Mode = re
+    log2_db_size  elem_size  spiralpir_re_tput
+0             14        128           9.078847
+1             14        512           9.130684
+2             14       2048          12.156874
+3             14       8192          34.944969
+4             14      32768          72.711787
+5             16        128           8.939358
+6             16        512          12.203500
+7             16       2048          34.654354
+8             16       8192          72.134620
+9             16      32768         141.639040
+10            18        128          12.110771
+11            18        512          34.447964
+12            18       2048          73.019175
+13            18       8192         141.384695
+14            18      32768         216.873924
+Throughputs in the range 8.94-216.87MB/s
+Pirac Mode = pirac
+    log2_db_size  elem_size  spiralpir_pirac_tput
+0             14        128              5.848801
+1             14        512              7.953066
+2             14       2048             11.741577
+3             14       8192             33.812257
+4             14      32768             71.771584
+5             16        128              5.829419
+6             16        512             10.418061
+7             16       2048             30.725875
+8             16       8192             68.472508
+9             16      32768            137.514874
+10            18        128              7.032135
+11            18        512             22.627353
+12            18       2048             57.244683
+13            18       8192            125.104765
+14            18      32768            204.100320
+Throughputs in the range 5.83-204.10MB/s
+stream = True Pirac Mode = None
+    log2_db_size  elem_size  spiralpir_tput
+0             14        128       17.388167
+1             14        512       16.928899
+2             14       2048       26.633545
+3             14       8192       63.000240
+4             14      32768      166.030089
+5             16        128       17.809149
+6             16        512       27.467969
+7             16       2048       61.315976
+8             16       8192      167.890523
+9             16      32768      306.570356
+10            18        128       27.177503
+11            18        512       61.297158
+12            18       2048      168.439602
+13            18       8192      306.032462
+14            18      32768      462.496204
+Throughputs in the range 16.93-462.50MB/s
+stream = True Pirac Mode = re
+    log2_db_size  elem_size  spiralpir_re_tput
+0             14        128          16.993537
+1             14        512          16.804372
+2             14       2048          26.707691
+3             14       8192          59.705735
+4             14      32768         150.583505
+5             16        128          17.189038
+6             16        512          26.560079
+7             16       2048          58.992012
+8             16       8192         149.620433
+9             16      32768         253.168342
+10            18        128          25.863672
+11            18        512          58.616198
+12            18       2048         150.276281
+13            18       8192         252.382562
+14            18      32768         354.877632
+Throughputs in the range 16.80-354.88MB/s
+stream = True Pirac Mode = pirac
+    log2_db_size  elem_size  spiralpir_pirac_tput
+0             14        128              8.263831
+1             14        512             13.397131
+2             14       2048             24.421837
+3             14       8192             56.373936
+4             14      32768            146.553167
+5             16        128              8.301193
+6             16        512             19.072587
+7             16       2048             48.337569
+8             16       8192            132.686027
+9             16      32768            240.938819
+10            18        128             10.011964
+11            18        512             31.686488
+12            18       2048             95.038356
+13            18       8192            202.809658
+14            18      32768            327.708282
+Throughputs in the range 8.26-327.71MB/s
+pack = True Pirac Mode = None
+    log2_db_size  elem_size  spiralpir_tput
+0             14        128       11.483567
+1             14        512       11.547367
+2             14       2048       15.453187
+3             14       8192       38.075951
+4             14      32768       87.314370
+5             16        128       11.496346
+6             16        512       15.508153
+7             16       2048       38.108038
+8             16       8192       87.920764
+9             16      32768      192.394715
+10            18        128       15.550701
+11            18        512       38.198446
+12            18       2048       87.902683
+13            18       8192      192.358318
+14            18      32768      252.314395
+Throughputs in the range 11.48-252.31MB/s
+pack = True Pirac Mode = re
+    log2_db_size  elem_size  spiralpir_re_tput
+0             14        128          11.308938
+1             14        512          11.427563
+2             14       2048          15.318217
+3             14       8192          37.060946
+4             14      32768          83.167245
+5             16        128          11.183403
+6             16        512          15.430657
+7             16       2048          36.971273
+8             16       8192          82.649631
+9             16      32768         169.836018
+10            18        128          15.265187
+11            18        512          36.937428
+12            18       2048          82.658376
+13            18       8192         168.827469
+14            18      32768         217.624468
+Throughputs in the range 11.18-217.62MB/s
+pack = True Pirac Mode = pirac
+    log2_db_size  elem_size  spiralpir_pirac_tput
+0             14        128              6.767779
+1             14        512              9.782460
+2             14       2048             14.521484
+3             14       8192             36.364507
+4             14      32768             80.967231
+5             16        128              6.787770
+6             16        512             12.582438
+7             16       2048             32.966054
+8             16       8192             76.870829
+9             16      32768            163.811015
+10            18        128              8.003322
+11            18        512             23.915122
+12            18       2048             63.333169
+13            18       8192            146.514323
+14            18      32768            205.695394
+Throughputs in the range 6.77-205.70MB/s
+Traceback (most recent call last):
+  File "/home/ubuntu/PIRAC/benchmarking/bench-single-server/pir.py", line 90, in <module>
+    add_arguments = json.loads(args.arguments) if args.arguments else {}
+  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 19 (char 18)
+Traceback (most recent call last):
+  File "/home/ubuntu/PIRAC/benchmarking/bench-single-server/pir.py", line 90, in <module>
+    add_arguments = json.loads(args.arguments) if args.arguments else {}
+  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 19 (char 18)
+Traceback (most recent call last):
+  File "/home/ubuntu/PIRAC/benchmarking/bench-single-server/pir.py", line 90, in <module>
+    add_arguments = json.loads(args.arguments) if args.arguments else {}
+  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.10/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 19 (char 18)

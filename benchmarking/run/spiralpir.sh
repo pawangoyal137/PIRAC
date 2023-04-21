@@ -6,7 +6,7 @@ if test -f "$OUTPUT_FILE"; then
     truncate -s 0 "$OUTPUT_FILE"
 fi
 
-add_flags=('{}' '{"stream":"True"}' '{"pack":"True"}' '{"stream":"True", pack":"True"}' )
+add_flags=('{}' '{"stream":"True"}' '{"pack":"True"}' '{"stream":"True", "pack":"True"}' )
 
 for str in "${add_flags[@]}"
 do  
