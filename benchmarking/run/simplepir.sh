@@ -6,10 +6,8 @@ if test -f "$OUTPUT_FILE"; then
     truncate -s 0 "$OUTPUT_FILE"
 fi
 
-python3 "$EVAL_FILE" -n simplepir -w "$JSON_FILE_FOLDER/simplepir.json" &>> "$OUTPUT_FILE"
-python3 "$EVAL_FILE" -n simplepir -w "$JSON_FILE_FOLDER/simplepir_re.json" -wp re  &>> "$OUTPUT_FILE"
-python3 "$EVAL_FILE" -n simplepir -w "$JSON_FILE_FOLDER/simplepir_pirac.json" -wp pirac  &>> "$OUTPUT_FILE"
+python3 "$EVAL_FILE" -n simplepir -w "$JSON_FILE_FOLDER/simplepir.json" -pm bl mp fs &>> "$OUTPUT_FILE"
 
 echo "-----------------------------------------------"
 echo "Final Results are as follows:"
-grep -E "^Throughputs in the range" "$OUTPUT_FILE" 
+grep -E "^Range of" "$OUTPUT_FILE"

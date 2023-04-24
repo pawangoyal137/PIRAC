@@ -16,38 +16,30 @@ import utils
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for a pir scheme')
 parser.add_argument('-n','--pir_name',
-                     required=True, type=str,
-                     help='Name of the PIR scheme')
+                    choices=["simplepir", "spiralpir", "spiralstream", "spiralpack",
+                    "spiralstreampack", "sealpir", "fastpir", "cwpir", "paillier"],
+                    required=True, type=str,
+                    help='Name of the PIR scheme')
 parser.add_argument('-ds','--dbSizes', nargs='+',
-                     required=False, type=int, default=utils.LOG2_DB_SIZES,
-                     help='Log 2 Database sizes to run experiment on.')
+                    required=False, type=int, default=utils.LOG2_DB_SIZES,
+                    help='Log 2 Database sizes to run experiment on.')
 parser.add_argument('-es','--elemSizes', nargs='+',
-                     required=False, type=int, default=utils.ELEM_SIZES,
-                     help='Element sizes (in bits) to run experiment on.')
+                    required=False, type=int, default=utils.ELEM_SIZES,
+                    help='Element sizes (in bits) to run experiment on.')
 parser.add_argument('-o','--output', action='store_true',
-                     required=False, 
-                     help='If the flag is passed, display the output of the pir')
-parser.add_argument('-pm','--piracModes', nargs='+', #choices=['re', 'pirac'],
+                    required=False, 
+                    help='If the flag is passed, display the output of the pir')
+parser.add_argument('-pm','--piracModes', nargs='+', 
+                    choices=["bl", 'mp', 'fs'],
                     required=False, type=str,
                     help='''Tell what modes to run. bl for baseline, mp for metadata private
                     and fs for forward safe''')
 parser.add_argument('-arg','--arguments',
-                     required=False, type=str,
-                     help='Additional argument for the pir scheme')
+                    required=False, type=str,
+                    help='Additional argument for the pir scheme')
 parser.add_argument('-w','--writeFile',
-                     required=False, type=str,
-                     help='Tells where to write the results')
-
-def pretty_print(data, add_arguments):
-    metadata_string = ""
-    for k,v in add_arguments.items():
-        metadata_string += f"{k} = {v}"
-    if len(metadata_string)!=0:
-        print(metadata_string) 
-    df = utils.create_df(data)
-    print(df)
-    max_tput, min_tput = utils.find_max_min_pd_col(df, "tput")
-    print("Throughputs in the range {0:.2f}-{1:.2f}MB/s".format(min_tput, max_tput))
+                    required=False, type=str,
+                    help='Tells where to write the results')
 
 def change_dir(pir_name):
     if pir_name=="simplepir":
@@ -82,6 +74,18 @@ def cal_pir_tput(log2_db_size, elem_size, add_arguments, output):
         return cal_cwpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="paillier":
         return cal_paillier_tput(log2_db_size, elem_size, output=output, **add_arguments)
+
+def pretty_print(data, add_arguments):
+    metadata_string = ""
+    for k,v in add_arguments.items():
+        metadata_string += f"{k} = {v}"
+    if len(metadata_string)!=0:
+        print(metadata_string) 
+    df = utils.create_df(data)
+    print(df)
+    min_max_results = utils.find_max_min_pd_col(df, "tput")
+    for k,v in min_max_results.items():
+        print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
 
 if __name__ == "__main__":
     args = parser.parse_args()

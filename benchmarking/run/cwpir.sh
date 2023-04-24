@@ -15,4 +15,4 @@ python3 "$EVAL_FILE" -n cwpir -w "$JSON_FILE_FOLDER/cwpir_48.json" -ds 10 -es 16
 
 echo "-----------------------------------------------"
 echo "Final Results are as follows:"
-grep -E "^Throughputs in the|^kw|^h" "$OUTPUT_FILE" 
+grep -E "^Range of" "$OUTPUT_FILE" 

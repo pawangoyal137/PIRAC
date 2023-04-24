@@ -53,9 +53,15 @@ def create_df(data):
     return df
 
 def find_max_min_pd_col(df, col_name_like):
-    # use the filter method to select only the columns that contain "col_name_like" in their names
-    col = df.filter(like='tput')
-    # use the max method to find the maximum value in the selected columns
-    max_tput = col.max().max()
-    min_tput = col.min().min()
-    return max_tput, min_tput
+    # Filter columns that contain "tput"
+    cols = [col for col in df.columns if col_name_like in col]
+
+    # Calculate min and max values for each column
+    result = df[cols].agg(['min', 'max'])
+
+    # Convert resulting DataFrame into a dictionary
+    output_dict = {}
+    for col in cols:
+        output_dict[col] = [result.loc['min', col], result.loc['max', col]]
+
+    return output_dict
