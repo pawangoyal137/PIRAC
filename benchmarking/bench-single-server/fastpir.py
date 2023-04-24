@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 import utils
 
@@ -6,6 +7,9 @@ def cal_fastpir_tput(N, D, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
+    cwd = os.getcwd()
+    os.chdir(utils.FastPirPath)
+
     maxsize = 72960 # 9120 bytes
     factor = utils.get_factor(D, maxsize)
     elem_size = min(maxsize, D)
@@ -37,6 +41,8 @@ def cal_fastpir_tput(N, D, output=False):
     if output:
         print(f"Factor = {factor}, elem size = {elem_size}")
         print(f"Total server time: {total_us} us, Total Time after factor = {total_including_factor} us")
+    
+    os.chdir(cwd)
     return database_size_bytes/total_including_factor
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import subprocess
 import re
+import os
 
 import utils
 
@@ -7,6 +8,9 @@ def cal_sealpir_tput(N, D, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
+    cwd = os.getcwd()
+    os.chdir(utils.SealPirPath)
+
     maxsize = 24576 # 3072 bytes
     factor = utils.get_factor(D, maxsize)
     elem_size = min(maxsize, D)
@@ -45,6 +49,8 @@ def cal_sealpir_tput(N, D, output=False):
     if output:
         print(f"Total server time: {total_us} us, Expansion Time: {exp_us} us, Total Time after factor = {total_including_factor} us")
         print(f"Factor = {factor}, elem size = {elem_size}")
+    
+    os.chdir(cwd)
     return database_size_bytes/total_including_factor
 
 if __name__ == "__main__":

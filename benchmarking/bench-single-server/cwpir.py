@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 import utils
 
@@ -6,6 +7,9 @@ def cal_cwpir_tput(db_size, elem_size, kw, h, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
+    cwd = os.getcwd()
+    os.chdir(utils.CWPirPath)
+
     num_entries = (1<<db_size)
     elem_size_bytes = elem_size//8
     process = subprocess.Popen(f'./main -n {num_entries} -s {elem_size_bytes} -x {kw} -h {h} -d 13 -e 1 -t 1', 
@@ -52,6 +56,8 @@ def cal_cwpir_tput(db_size, elem_size, kw, h, output=False):
     if output:
         print(f"Throughput on CWPIR  with kw = {kw}, Hamming weight = {h} \n\
             log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}MB/s")
+    
+    os.chdir(cwd)
     return throughput
 
 

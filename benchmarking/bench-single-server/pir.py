@@ -41,39 +41,27 @@ parser.add_argument('-w','--writeFile',
                     required=False, type=str,
                     help='Tells where to write the results')
 
-def change_dir(pir_name):
+def cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output):
     if pir_name=="simplepir":
-        os.chdir(utils.SimplePirPath)
-    elif pir_name=="sealpir":
-        os.chdir(utils.SealPirPath)
-    elif pir_name=="fastpir":
-        os.chdir(utils.FastPirPath) 
-    elif pir_name=="cwpir":
-        os.chdir(utils.CWPirPath)
-    elif pir_name=="paillier":
-        os.chdir(utils.PaillierPath)
-    elif "spiral" in pir_name:  # for "spiralpir", "spiralstream", "spiralpack", "spiralstreampack"
-        os.chdir(utils.SpiralPirPath)
-
-def cal_pir_tput(log2_db_size, elem_size, add_arguments, output):
-    if pir_name=="simplepir":
-        return cal_simplepir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput =  cal_simplepir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="spiralpir":
-        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="spiralstream":
-        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, stream=True, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, stream=True, **add_arguments)
     elif pir_name=="spiralpack":
-        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, **add_arguments)
     elif pir_name=="spiralstreampack":
-        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, stream=True, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, stream=True, **add_arguments)
     elif pir_name=="sealpir":
-        return cal_sealpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_sealpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="fastpir":
-        return cal_fastpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_fastpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="cwpir":
-        return cal_cwpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_cwpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="paillier":
-        return cal_paillier_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_paillier_tput(log2_db_size, elem_size, output=output, **add_arguments)
+
+    return pir_tput
 
 def pretty_print(data, add_arguments):
     metadata_string = ""
@@ -103,13 +91,10 @@ if __name__ == "__main__":
         if v=="False":
             add_arguments[k]=False
 
-    cwd = os.getcwd()
-    change_dir(pir_name)
-
     data = []
     for log2_db_size in log2_db_sizes:
         for elem_size in elem_sizes:
-            pir_tput = cal_pir_tput(log2_db_size, elem_size, add_arguments, output=output)            
+            pir_tput = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output)            
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
             for pm in pirac_modes:
                 if pm=="bl":
@@ -128,7 +113,6 @@ if __name__ == "__main__":
             data.append(record)
     
     pretty_print(data, add_arguments)
-    os.chdir(cwd)
     if write_file is not None:
         with open(write_file, "w") as outfile:
             json.dump(data, outfile, separators=(",\n", ": "))

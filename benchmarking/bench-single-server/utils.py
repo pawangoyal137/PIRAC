@@ -21,8 +21,8 @@ LOG2_DB_SIZES = [14,16,18]
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
 
-def cal_tput_with_pirac(pir, pirac):
-    return 1/(1/pir + 1/pirac)
+def cal_tput_with_pirac(pir, pirac, batch=1):
+    return batch/(batch/pir + 1/pirac)
 
 def extract_num(s):
     """

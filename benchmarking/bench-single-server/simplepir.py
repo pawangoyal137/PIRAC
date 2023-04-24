@@ -1,8 +1,12 @@
 import subprocess
+import os
 
 import utils
 
 def cal_simplepir_tput(N, D, offline_include=False, output=False):
+    cwd = os.getcwd()
+    os.chdir(utils.SimplePirPath)
+
     if offline_include:
         test_name = "BenchmarkSimplePirOfflineIncludeSingle"
     else:
@@ -29,7 +33,8 @@ def cal_simplepir_tput(N, D, offline_include=False, output=False):
     if output:
         offline_print = "(with offline time)" if offline_include else ""
         print(f"Throughput on SimplePIR {offline_print} with log2 dbsize = {N}, elem size = {D} bits = {throughput}Mb/s")
-            
+
+    os.chdir(cwd)     
     return throughput
 
 if __name__ == "__main__":

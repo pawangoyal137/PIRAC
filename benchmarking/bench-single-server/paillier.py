@@ -1,8 +1,12 @@
 import subprocess
+import os
 
 import utils
 
 def cal_paillier_tput(db_size, elem_size, output=False):
+    cwd = os.getcwd()
+    os.chdir(utils.PaillierPath)
+
     test_name = "BenchmarkPaillierDifPrimes"
     process = subprocess.Popen(f"go test '-bench=^{test_name}$' '-run=^$'", 
                             shell=True,
@@ -25,6 +29,8 @@ def cal_paillier_tput(db_size, elem_size, output=False):
 
     if output:           
         print(f"Throughput of Paillier = {throughput} MB/s")
+    
+    os.chdir(cwd)
     return throughput
 
 if __name__ == "__main__":

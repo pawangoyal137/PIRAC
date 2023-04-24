@@ -1,10 +1,16 @@
 import subprocess
 import json
+import os
+
+import utils
 
 def cal_spiralpir_tput(N, D, stream=False, pack=False, output=False):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
+    cwd = os.getcwd()
+    os.chdir(utils.SpiralPirPath)
+
     stream_flag = "--direct-upload" if stream else ""
     pack_flag = " --high-rate" if pack else ""
     process = subprocess.Popen(f'python3 select_params.py {N} {D//8} {stream_flag} {pack_flag}', 
@@ -36,6 +42,8 @@ def cal_spiralpir_tput(N, D, stream=False, pack=False, output=False):
         stream_print = "(with streaming)" if stream else ""
         pack_print = "(with pack)" if pack else ""
         print(f"Throughput on SpiralPIR {stream_print} {pack_print} with log2 dbsize = {N}, elem size = {D} bits = {tput}MB/s")
+    
+    os.chdir(cwd)
     return tput
 
 if __name__ == "__main__":

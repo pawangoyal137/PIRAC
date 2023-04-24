@@ -1,10 +1,10 @@
 from pir import cal_pir_tput
 from pirac import cal_pirac_tput
-from concat import concat
+# from concat import concat
 
 import matplotlib
-matplotlib.use("TKAgg")
-print(matplotlib.get_backend())
+# matplotlib.use("TKAgg")
+# print(matplotlib.get_backend())
 import matplotlib.pyplot as plt
 import os
 import numpy as np
@@ -94,75 +94,84 @@ parser.add_argument('-f','--figName',
 #     return results
 
 
-def gen_save_plot(results, x_values, fig_name):
+# def gen_save_plot(results, x_values, fig_name):
+#     plt.figure()
+#     plt.yscale("log")
+#     plt.xscale("log")
+
+#     schemes = ["spiralpir", "spiralpir_stream_pack", "sealpir", "fastpir"]
+#     colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad'] #, '#c0392b', '#333']
+#     cc = itertools.cycle(colors)
+#     plot_lines = []
+
+#     for scheme in schemes:
+#         tput_with_tier2 = utils.cal_tput_with_pirac(results[scheme], results["tier2"])
+#         tput_with_tier3 = utils.cal_tput_with_pirac(results[scheme], results["tier3"])
+#         c = next(cc)
+#         l1, = plt.plot(x_values, results[scheme], color=c, linestyle='-',  alpha=0.7)
+#         l2, = plt.plot(x_values, tput_with_tier2, color=c, linestyle='--')
+#         l3, = plt.plot(x_values, tput_with_tier3, color=c, linestyle=':')
+#         plot_lines.append([l1, l2, l3])
+    
+#     scheme_labels = ["SpiralPIR", "SpiralStreamPack", "SealPIR", "FastPIR"]
+#     legend1 = plt.legend([l[0] for l in plot_lines], scheme_labels, loc="upper left")
+#     legend2 = plt.legend(plot_lines[0], ["Basic", "With MP", "With MP+FS"], loc="upper right")
+#     plt.gca().add_artist(legend1)
+#     plt.gca().add_artist(legend2)
+
+#     plt.xlabel("Entry size (in bytes)")
+#     plt.ylabel("Throughput (in MB/s)")
+
+#     plt.tight_layout()
+#     plt.savefig(f"images/{fig_name}.pdf", dpi=300)
+#     print(f"Successfully generated and save the plot with name {fig_name}")
+
+def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     plt.figure()
     plt.yscale("log")
-    plt.xscale("log")
 
-    schemes = ["spiralpir", "spiralpir_stream_pack", "sealpir", "fastpir"]
-    colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad'] #, '#c0392b', '#333']
-    cc = itertools.cycle(colors)
-    plot_lines = []
-
-    for scheme in schemes:
-        tput_with_tier2 = utils.cal_tput_with_pirac(results[scheme], results["tier2"])
-        tput_with_tier3 = utils.cal_tput_with_pirac(results[scheme], results["tier3"])
-        c = next(cc)
-        l1, = plt.plot(x_values, results[scheme], color=c, linestyle='-',  alpha=0.7)
-        l2, = plt.plot(x_values, tput_with_tier2, color=c, linestyle='--')
-        l3, = plt.plot(x_values, tput_with_tier3, color=c, linestyle=':')
-        plot_lines.append([l1, l2, l3])
+    # calculate tputs
+    log_db_size = 18 #utils.LOG2_DB_SIZE
+    elem_size = (1<<15)
+    pir_tput = cal_pir_tput(pir_name, log_db_size, elem_size, {}, False)
+    re_tput = cal_pirac_tput(log_db_size, elem_size,  10, rekeying = False)
+    pirac_tput = cal_pirac_tput(log_db_size, elem_size,  10, rekeying = True)
     
-    scheme_labels = ["SpiralPIR", "SpiralStreamPack", "SealPIR", "FastPIR"]
-    legend1 = plt.legend([l[0] for l in plot_lines], scheme_labels, loc="upper left")
-    legend2 = plt.legend(plot_lines[0], ["Basic", "With MP", "With MP+FS"], loc="upper right")
-    plt.gca().add_artist(legend1)
-    plt.gca().add_artist(legend2)
-
-    plt.xlabel("Entry size (in bytes)")
-    plt.ylabel("Throughput (in MB/s)")
-
-    plt.tight_layout()
-    plt.savefig(f"images/{fig_name}.pdf", dpi=300)
-    print(f"Successfully generated and save the plot with name {fig_name}")
-
-def gen_batched_bar_plot(pir_name, x_values, fig_name):
-    pir_tput = cal_pir_tput(pir_name, utils.LOG2_DB_SIZE, utils.ELEM_SIZE, {}, False)
-    re_tput = cal_pirac_tput(utils.LOG2_DB_SIZE, utils.ELEM_SIZE,  10, rekeying = False)
-    pirac_tput = cal_pirac_tput(utils.LOG2_DB_SIZE, utils.ELEM_SIZE,  10, rekeying = True)
-
-    groups = []
-    # create data for three bar lines per group
-    for k in x_values:
-        group = [pir_tput, 
-                utils.cal_tput_with_pirac(pir_tput, re_tput, k),
-                utils.cal_tput_with_pirac(pir_tput, pirac_tput, k)]
-        groups.append(group)
+    # calculate batch tputs
+    pir_tputs = []
+    re_tputs = []
+    pirac_tputs = []
+    for bv in batch_values:
+        pir_tputs.append(pir_tput)
+        re_tputs.append(utils.cal_tput_with_pirac(pir_tput, re_tput, bv))
+        pirac_tputs.append(utils.cal_tput_with_pirac(pir_tput, pirac_tput, bv))
 
     # set the width of each bar and colors
     barWidth = 0.25
     colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad', '#c0392b', '#333']
 
     # set the position of each group on the x-axis
-    group_positions = [np.arange(len(groups[0]))]
-    for i in range(1, len(groups)):
-        r = [x + barWidth for x in group_positions[i-1]]
-        group_positions.append(r)
-
+    pir_positions = np.arange(len(batch_values))
+    re_positions = [x + barWidth for x in pir_positions]
+    pirac_positions = [x + barWidth for x in re_positions]
+    
     # create the bar graph
-    for i in range(len(groups)):
-        plt.bar(group_positions[i], groups[i], color=colors[i], width=barWidth, edgecolor='white', label=x_values[i])
+    plt.bar(pir_positions, pir_tputs, color=colors[0], width=barWidth, edgecolor='white', label="Baseline",  hatch='////')
+    plt.bar(re_positions, re_tputs, color=colors[1], width=barWidth, edgecolor='white', label="With MP",  hatch='////')
+    plt.bar(pirac_positions, pirac_tputs, color=colors[2], width=barWidth, edgecolor='white', label="With FS",  hatch='////')
     
     # add xticks on the middle of the group bars
-    plt.xlabel('k')
-    plt.xticks([i + barWidth for i in range(len(groups))], x_values)
+    plt.xticks([i + barWidth for i in range(len(batch_values))], batch_values)
 
     # add a legend
     plt.legend()
 
+    plt.xlabel("Number of batched entries")
+    plt.ylabel("Throughput (in MB/s)")
+
     # save the plot
     plt.tight_layout()
-    plt.savefig(f"images/bar_plot.pdf", dpi=300)
+    plt.savefig(f"images/{fig_name}.pdf", dpi=300)
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -176,6 +185,6 @@ if __name__ == "__main__":
     x_values = [e//8 for e in elem_sizes]
     
     # results = run_PIRs(log2_db_sizes, elem_sizes)
-    gen_batched_bar_plot("spiralpir", x_values, fig_name)
+    gen_batched_bar_plot("spiralstreampack", [1, 5, 10, 15], "batched_opt")
 
     # get_results(["spiralpir"], [128, 512], ["mp", "fs"], run_fresh=False)
