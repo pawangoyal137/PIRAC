@@ -27,10 +27,10 @@ parser.add_argument('-es','--elemSizes', nargs='+',
 parser.add_argument('-o','--output', action='store_true',
                      required=False, 
                      help='If the flag is passed, display the output of the pir')
-parser.add_argument('-wp','--withPirac', choices=['re', 'pirac'],
-                    required=False,
-                    help='If passed "re", runs with reencryption. If passed with "pirac", run\
-                        both rekeying and reencryption')
+parser.add_argument('-pm','--piracModes', nargs='+', #choices=['re', 'pirac'],
+                    required=False, type=str,
+                    help='''Tell what modes to run. bl for baseline, mp for metadata private
+                    and fs for forward safe''')
 parser.add_argument('-arg','--arguments',
                      required=False, type=str,
                      help='Additional argument for the pir scheme')
@@ -38,14 +38,12 @@ parser.add_argument('-w','--writeFile',
                      required=False, type=str,
                      help='Tells where to write the results')
 
-def pretty_print(data, add_arguments, pirac_mode):
+def pretty_print(data, add_arguments):
     metadata_string = ""
     for k,v in add_arguments.items():
         metadata_string += f"{k} = {v}"
-    if len(metadata_string)==0:
-        print(f"Pirac Mode = {pirac_mode}") 
-    else:
-        print(metadata_string+ f" Pirac Mode = {pirac_mode}")
+    if len(metadata_string)!=0:
+        print(metadata_string) 
     df = utils.create_df(data)
     print(df)
     max_tput, min_tput = utils.find_max_min_pd_col(df, "tput")
@@ -91,7 +89,7 @@ if __name__ == "__main__":
     log2_db_sizes = args.dbSizes
     elem_sizes = args.elemSizes
     output = args.output
-    pirac_mode = args.withPirac
+    pirac_modes = args.piracModes
     write_file = args.writeFile
     add_arguments = json.loads(args.arguments) if args.arguments else {}
 
@@ -109,22 +107,23 @@ if __name__ == "__main__":
         for elem_size in elem_sizes:
             pir_tput = cal_pir_tput(log2_db_size, elem_size, add_arguments, output=output)            
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
-            if pirac_mode is None:
-                record[f"{pir_name}_tput"] = pir_tput
-            elif pirac_mode=="re":
-                re_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = False)
-                pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
-                record[f"{pir_name}_re_tput"] = pir_re_tput
-            elif pirac_mode=="pirac":
-                pirac_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = True)
-                pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
-                record[f"{pir_name}_pirac_tput"] = pir_pirac_tput
-            else:
-                raise Exception("Shouldn't reach here")
+            for pm in pirac_modes:
+                if pm=="bl":
+                    record[f"{pir_name}_tput"] = pir_tput
+                elif pm=="mp":
+                    re_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = False)
+                    pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
+                    record[f"{pir_name}_mp_tput"] = pir_re_tput
+                elif pm=="fs":
+                    pirac_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = True)
+                    pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
+                    record[f"{pir_name}_fs_tput"] = pir_pirac_tput
+                else:
+                    raise Exception("Shouldn't reach here")
 
             data.append(record)
     
-    pretty_print(data, add_arguments, pirac_mode)
+    pretty_print(data, add_arguments)
     os.chdir(cwd)
     if write_file is not None:
         with open(write_file, "w") as outfile:
