@@ -54,8 +54,6 @@ def pretty_print(data, add_arguments, pirac_mode):
 def change_dir(pir_name):
     if pir_name=="simplepir":
         os.chdir(utils.SimplePirPath)
-    elif pir_name=="spiralpir":
-        os.chdir(utils.SpiralPirPath)
     elif pir_name=="sealpir":
         os.chdir(utils.SealPirPath)
     elif pir_name=="fastpir":
@@ -64,12 +62,20 @@ def change_dir(pir_name):
         os.chdir(utils.CWPirPath)
     elif pir_name=="paillier":
         os.chdir(utils.PaillierPath)
+    elif "spiral" in pir_name:  # for "spiralpir", "spiralstream", "spiralpack", "spiralstreampack"
+        os.chdir(utils.SpiralPirPath)
 
 def cal_pir_tput(log2_db_size, elem_size, add_arguments, output):
     if pir_name=="simplepir":
         return cal_simplepir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="spiralpir":
         return cal_spiralpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+    elif pir_name=="spiralstream":
+        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, stream=True, **add_arguments)
+    elif pir_name=="spiralpack":
+        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, **add_arguments)
+    elif pir_name=="spiralstreampack":
+        return cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, stream=True, **add_arguments)
     elif pir_name=="sealpir":
         return cal_sealpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="fastpir":

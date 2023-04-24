@@ -6,13 +6,13 @@ if test -f "$OUTPUT_FILE"; then
     truncate -s 0 "$OUTPUT_FILE"
 fi
 
-add_flags=('{}' '{"stream":"True"}' '{"pack":"True"}' '{"stream":"True", "pack":"True"}' )
-pir_schemes=my_array=("spiralpir" "spiralstream" "spiralpack" "spiralstreampack")
+# add_flags=('{}' '{"stream":"True"}' '{"pack":"True"}' '{"stream":"True", "pack":"True"}' )
+pir_schemes=("spiralpir" "spiralstream" "spiralpack" "spiralstreampack")
 
-for i in "${!my_array1[@]}"; do 
-    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/${my_array2[i]}.json" -arg="${my_array1[i]}" &>> "$OUTPUT_FILE"
-    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/${my_array2[i]}.json" -wp re  -arg="${my_array1[i]}" &>> "$OUTPUT_FILE"
-    python3 "$EVAL_FILE" -n spiralpir -w "$JSON_FILE_FOLDER/${my_array2[i]}.json" -wp pirac  -arg="${my_array1[i]}" &>> "$OUTPUT_FILE"
+for i in "${!pir_schemes[@]}"; do 
+    python3 "$EVAL_FILE" -n "${pir_schemes[i]}" -w "$JSON_FILE_FOLDER/${pir_schemes[i]}.json" &>> "$OUTPUT_FILE"
+    python3 "$EVAL_FILE" -n "${pir_schemes[i]}" -w "$JSON_FILE_FOLDER/${pir_schemes[i]}_re.json" -wp re &>> "$OUTPUT_FILE"
+    python3 "$EVAL_FILE" -n "${pir_schemes[i]}" -w "$JSON_FILE_FOLDER/${pir_schemes[i]}_pirac.json" -wp pirac  &>> "$OUTPUT_FILE"
 done
 
 echo "-----------------------------------------------"
