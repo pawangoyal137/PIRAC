@@ -40,24 +40,28 @@ parser.add_argument('-arg','--arguments',
 parser.add_argument('-w','--writeFile',
                     required=False, type=str,
                     help='Tells where to write the results')
+parser.add_argument('-ni','--numIter',
+                     required=False, type=int,
+                     default=5,
+                     help='Number of interations to run experiments')
 
-def cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments={}, output=False):
+def cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments={}, output=False, num_iter=5):
     if pir_name=="simplepir":
-        pir_tput =  cal_simplepir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput =  cal_simplepir_tput(log2_db_size, elem_size, output=output, num_iter=num_iter, **add_arguments)
     elif pir_name=="spiralpir":
-        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, num_iter=num_iter, **add_arguments)
     elif pir_name=="spiralstream":
-        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, stream=True, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, stream=True, num_iter=num_iter, **add_arguments)
     elif pir_name=="spiralpack":
-        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, num_iter=num_iter,**add_arguments)
     elif pir_name=="spiralstreampack":
-        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, stream=True, **add_arguments)
+        pir_tput = cal_spiralpir_tput(log2_db_size, elem_size, output=output, pack=True, stream=True, num_iter=num_iter, **add_arguments)
     elif pir_name=="sealpir":
-        pir_tput = cal_sealpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_sealpir_tput(log2_db_size, elem_size, output=output, num_iter=num_iter, **add_arguments)
     elif pir_name=="fastpir":
-        pir_tput = cal_fastpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_fastpir_tput(log2_db_size, elem_size, output=output, num_iter=num_iter, **add_arguments)
     elif pir_name=="cwpir":
-        pir_tput = cal_cwpir_tput(log2_db_size, elem_size, output=output, **add_arguments)
+        pir_tput = cal_cwpir_tput(log2_db_size, elem_size, output=output, num_iter=num_iter, **add_arguments)
     elif pir_name=="paillier":
         pir_tput = cal_paillier_tput(log2_db_size, elem_size, output=output, **add_arguments)
 
@@ -87,6 +91,7 @@ if __name__ == "__main__":
     pirac_modes = args.piracModes
     write_file = args.writeFile
     add_arguments = json.loads(args.arguments) if args.arguments else {}
+    num_iter = args.numIter
 
     for k,v in add_arguments.items():
         if v=="True":
@@ -97,21 +102,21 @@ if __name__ == "__main__":
     data = []
     for log2_db_size in log2_db_sizes:
         for elem_size in elem_sizes:
-            pir_tput = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output)            
+            pir_tput = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output, num_iter=num_iter)            
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
             for pm in pirac_modes:
                 if pm=="bl":
                     record[f"{pir_name}_bl_tput"] = pir_tput
                 elif pm=="mp":
-                    re_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = False)
+                    re_tput = cal_pirac_tput(log2_db_size, elem_size,  num_iter, rekeying = False)
                     pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
                     record[f"{pir_name}_mp_tput"] = pir_re_tput
                     record[f"{pir_name}_mp_overhead"] = pir_tput/pir_re_tput
                 elif pm=="fs":
-                    pirac_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = True)
+                    pirac_tput = cal_pirac_tput(log2_db_size, elem_size,  num_iter, rekeying = True)
                     pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
                     record[f"{pir_name}_fs_tput"] = pir_pirac_tput
-                    record[f"{pir_name}_fs_overhead"] = pir_pirac_tput/pir_re_tput
+                    record[f"{pir_name}_fs_overhead"] = pir_tput/ pir_pirac_tput
                 else:
                     raise Exception("Shouldn't reach here")
 

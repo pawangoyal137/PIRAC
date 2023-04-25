@@ -34,7 +34,7 @@ parser.add_argument('-exp','--expType', choices=["es", "batch"],
                      required=True, type=str,
                      help='What type of plot to plot')
 parser.add_argument('-bv','--batchValues', nargs='+',
-                     required=False, type=int, default=[1,10,20,30],
+                     required=False, type=int, default=[1,5,10,20],
                      help='Batch values to run experiment on.')
 parser.add_argument('-p','--pirName', default="spiralstreampack",
                      required=False, type=str,
@@ -113,7 +113,7 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     re_tputs = []
     pirac_tputs = []
     for bv in batch_values:
-        pir_tputs.append(pir_tput)
+        pir_tputs.append(pir_tput/pir_tput)
         re_tputs.append(utils.cal_tput_with_pirac(pir_tput, re_tput, bv)/pir_tput)
         pirac_tputs.append(utils.cal_tput_with_pirac(pir_tput, pirac_tput, bv)/pir_tput)
 

@@ -45,7 +45,7 @@ parser.add_argument('-o','--output', action='store_true',
                      required=False, 
                      help='If the flag is passed, display the output of the pirac')
 
-def cal_rekeying_tput(num_iter):
+def cal_rekeying_tput(num_iter=5):
     time_array = []
     db_size = 1 << utils.LOG2_DB_SIZE
     for _ in range(num_iter):
@@ -54,7 +54,7 @@ def cal_rekeying_tput(num_iter):
     
     return records_per_sec_array
 
-def cal_pirac_tput(log2_db_size, elem_size,  num_iter, rekeying = False, throughput=True, output=False):
+def cal_pirac_tput(log2_db_size, elem_size,  num_iter=5, rekeying = False, throughput=True, output=False):
     """
     Take db sizes in log base 2 and elem_sizes in bits
     """

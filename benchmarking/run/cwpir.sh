@@ -15,4 +15,4 @@ python3 "$EVAL_FILE" -n cwpir -w "$JSON_FILE_FOLDER/cwpir_48.json" -ds 10 -es 16
 
 echo "-----------------------------------------------"
 echo "Final Results are as follows:"
-grep -E "^Range of" "$OUTPUT_FILE" 
+grep -E "^Range of|^Overhead of" "$OUTPUT_FILE" 
