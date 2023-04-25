@@ -41,7 +41,7 @@ parser.add_argument('-w','--writeFile',
                     required=False, type=str,
                     help='Tells where to write the results')
 
-def cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output):
+def cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments={}, output=False):
     if pir_name=="simplepir":
         pir_tput =  cal_simplepir_tput(log2_db_size, elem_size, output=output, **add_arguments)
     elif pir_name=="spiralpir":
@@ -72,8 +72,11 @@ def pretty_print(data, add_arguments):
     df = utils.create_df(data)
     print(df)
     min_max_results = utils.find_max_min_pd_col(df, "tput")
+    min_max_overhead = utils.find_max_min_pd_col(df, "overhead")
     for k,v in min_max_results.items():
         print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
+    for k,v in min_max_overhead.items():
+        print("Overhead of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -98,15 +101,17 @@ if __name__ == "__main__":
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
             for pm in pirac_modes:
                 if pm=="bl":
-                    record[f"{pir_name}_tput"] = pir_tput
+                    record[f"{pir_name}_bl_tput"] = pir_tput
                 elif pm=="mp":
                     re_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = False)
                     pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
                     record[f"{pir_name}_mp_tput"] = pir_re_tput
+                    record[f"{pir_name}_mp_overhead"] = pir_tput/pir_re_tput
                 elif pm=="fs":
                     pirac_tput = cal_pirac_tput(log2_db_size, elem_size,  10, rekeying = True)
                     pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
                     record[f"{pir_name}_fs_tput"] = pir_pirac_tput
+                    record[f"{pir_name}_fs_overhead"] = pir_pirac_tput/pir_re_tput
                 else:
                     raise Exception("Shouldn't reach here")
 
