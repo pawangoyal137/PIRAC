@@ -31,7 +31,7 @@ parser.add_argument('-o','--output', action='store_true',
                     help='If the flag is passed, display the output of the pir')
 parser.add_argument('-pm','--piracModes', nargs='+', 
                     choices=["bl", 'mp', 'fs'],
-                    required=False, type=str,
+                    required=False, type=str, default=["bl"],
                     help='''Tell what modes to run. bl for baseline, mp for metadata private
                     and fs for forward safe''')
 parser.add_argument('-arg','--arguments',
@@ -77,10 +77,12 @@ def pretty_print(data, add_arguments):
     print(df)
     min_max_results = utils.find_max_min_pd_col(df, "tput")
     min_max_overhead = utils.find_max_min_pd_col(df, "overhead")
-    for k,v in min_max_results.items():
-        print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
-    for k,v in min_max_overhead.items():
-        print("Overhead of {0:s}: {1:.2f}-{2:.2f}".format(k, v[0], v[1]))
+    if min_max_results is not None:
+        for k,v in min_max_results.items():
+            print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
+    if min_max_overhead is not None:
+        for k,v in min_max_overhead.items():
+            print("Overhead of {0:s}: {1:.2f}-{2:.2f}".format(k, v[0], v[1]))
 
 if __name__ == "__main__":
     args = parser.parse_args()

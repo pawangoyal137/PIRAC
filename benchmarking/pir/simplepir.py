@@ -9,7 +9,7 @@ def cal_simplepir_tput(N, D, offline_include=False, output=False, num_iter=5):
     os.chdir(utils.SimplePirPath)
 
     tputs = []
-    for _ in range(num_iter//5): #simple pir by default benchmark over 5 runs
+    for _ in range(max(num_iter//5,1)): #simple pir by default benchmark over 5 runs
         if offline_include:
             test_name = "BenchmarkSimplePirOfflineIncludeSingle"
         else:

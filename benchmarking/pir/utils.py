@@ -6,7 +6,7 @@ import pandas as pd
 # declare the paths for the other PIR schemes
 # relative to benchmarking folder
 FastPirPath = "../../FastPIR"
-SimplePirPath = "../../simplepir/pir"
+SimplePirPath = "../../SimplePIR/pir"
 SpiralPirPath = "../../spiral"
 SealPirPath = "../../SealPIR/bin"
 PaillierPath = "../paillier"
@@ -55,6 +55,8 @@ def create_df(data):
 def find_max_min_pd_col(df, col_name_like):
     # Filter columns that contain "tput"
     cols = [col for col in df.columns if col_name_like in col]
+    if len(cols)==0:
+        return None
 
     # Calculate min and max values for each column
     result = df[cols].agg(['min', 'max'])

@@ -82,7 +82,7 @@ sudo cmake --install build
 
 # clone SEAL PIR
 cd ~
-git clone https://github.com/microsoft/SealPIR
+git clone https://github.com/pawangoyal137/SealPIR
 cd SealPIR
 
 # build and test
@@ -91,6 +91,16 @@ make
 ctest .
 ```
 More information can be found at https://github.com/microsoft/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
+
+### Setup Fast
+
+```
+git clone https://github.com/ishtiyaque/FastPIR
+cd FastPIR/src/
+cmake .
+make
+```
+
 ## Setup
 
 ### Create shared library

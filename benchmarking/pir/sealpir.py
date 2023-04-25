@@ -17,7 +17,7 @@ def cal_sealpir_tput(N, D, output=False, num_iter=5):
     elem_size = min(maxsize, D)
 
     tputs = []
-    for _ in range(tputs):
+    for _ in range(num_iter):
         process = subprocess.Popen(f'./main {N} {elem_size//8}', 
                                 shell=True,
                                 stdout=subprocess.PIPE, 
