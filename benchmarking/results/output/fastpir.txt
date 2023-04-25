@@ -1,0 +1,13 @@
+   log2_db_size  elem_size  ...  fastpir_fs_tput  fastpir_fs_overhead
+0            18        128  ...        14.093224             6.840322
+1            18        512  ...        46.354429             3.617533
+2            18       2048  ...       106.020918             1.855790
+3            18       8192  ...       156.155926             1.333910
+4            18      32768  ...       177.689874             1.187806
+
+[5 rows x 7 columns]
+Range of fastpir_bl_tput: 96.40-211.06MB/s
+Range of fastpir_mp_tput: 83.19-185.23MB/s
+Range of fastpir_fs_tput: 14.09-177.69MB/s
+Overhead of fastpir_mp_overhead: 1.13-1.16MB/s
+Overhead of fastpir_fs_overhead: 1.19-6.84MB/s

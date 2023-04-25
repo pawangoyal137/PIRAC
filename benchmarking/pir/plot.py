@@ -3,6 +3,7 @@ from pirac import cal_pirac_tput
 
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import os
 import numpy as np
 import argparse
@@ -114,8 +115,8 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     pirac_tputs = []
     for bv in batch_values:
         pir_tputs.append(pir_tput/pir_tput)
-        re_tputs.append(utils.cal_tput_with_pirac(pir_tput, re_tput, bv)/pir_tput)
-        pirac_tputs.append(utils.cal_tput_with_pirac(pir_tput, pirac_tput, bv)/pir_tput)
+        re_tputs.append(pir_tput / utils.cal_tput_with_pirac(pir_tput, re_tput, bv))
+        pirac_tputs.append(pir_tput / utils.cal_tput_with_pirac(pir_tput, pirac_tput, bv))
 
     # set the width of each bar and colors
     barWidth = 0.25
@@ -135,10 +136,15 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     plt.xticks([i + barWidth for i in range(len(batch_values))], batch_values)
 
     # add a legend
-    plt.legend()
+    plt.legend(loc="upper right")
 
     plt.xlabel("Number of batched entries")
-    plt.ylabel("Throughput (normalized)")
+    plt.ylabel("Overhead (over baseline)")
+
+    # set y scale
+    plt.ylim(0, 2.5)
+    plt.yticks(ticker.MultipleLocator(0.5).tick_values(0.5, 2.0))
+    plt.yticks(ticker.MultipleLocator(.25).tick_values(0.25, 2.25), minor=True)
 
     # save the plot
     plt.tight_layout()

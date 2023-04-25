@@ -80,7 +80,7 @@ def pretty_print(data, add_arguments):
     for k,v in min_max_results.items():
         print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
     for k,v in min_max_overhead.items():
-        print("Overhead of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
+        print("Overhead of {0:s}: {1:.2f}-{2:.2f}".format(k, v[0], v[1]))
 
 if __name__ == "__main__":
     args = parser.parse_args()
