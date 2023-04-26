@@ -49,11 +49,11 @@ def gen_elem_comp_plot(fig_name):
     """
     NOTE: Don't rerun the experiment due to high latency
     """
-    PIR_NAMES = ["spiralpir","spiralstreampack", "sealpir"]
-    PIR_LABELS = ["SpiralPIR", "SpiralStreamPack", "SealPIR"] #, "FastPIR"]
+    PIR_NAMES = ["spiralpir","spiralstreampack", "sealpir", "fastpir"]
+    PIR_LABELS = ["SpiralPIR", "SpiralStreamPack", "SealPIR", "FastPIR"]
     PIRAC_MODES = ["bl", "mp", "fs"]
 
-    def generate_results(log2_db_size, elem_sizes, verbose=False):
+    def generate_results(log2_db_size, elem_sizes, verbose=True):
         df_all = utils.concatenate_jsons("results/data", verbose)
         
         # create new dataframe with only those rows corresponding to elem_sizes
