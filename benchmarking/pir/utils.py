@@ -1,7 +1,8 @@
-
+import os
 import re
 import math
 import pandas as pd
+from functools import reduce
 
 # declare the paths for the other PIR schemes
 # relative to benchmarking folder
@@ -13,10 +14,10 @@ PaillierPath = "../paillier"
 CWPirPath = "../../constant-weight-pir/src/build"
 
 # declare the constants/ defaults for the experiments
-LOG2_DB_SIZE = 16
+LOG2_DB_SIZE = 20
 ELEM_SIZE = 1024
 
-LOG2_DB_SIZES = [14,16,18]
+LOG2_DB_SIZES = [16,18,20]
 
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
@@ -67,3 +68,26 @@ def find_max_min_pd_col(df, col_name_like):
         output_dict[col] = [result.loc['min', col], result.loc['max', col]]
 
     return output_dict
+
+def concatenate_jsons(directory, verbose=False):
+    """
+    Create a combined json merged on log2_db_size and elem_size
+    """
+    filenames = []
+    for filename in os.listdir(directory):
+        if filename.endswith(".json"): 
+            filenames.append(os.path.join(directory, filename))
+            continue
+
+    dfs = []
+    for fname in filenames:
+        dfs.append(pd.read_json(fname))
+
+    df_merged = reduce(lambda  left,right: pd.merge(left,right,
+                on=['log2_db_size', "elem_size"], how='outer'), dfs).fillna('void')
+    df_merged = df_merged.sort_values(by=['log2_db_size', 'elem_size'])
+
+    if verbose:
+        print(df_merged)
+    
+    return df_merged

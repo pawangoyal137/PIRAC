@@ -8,6 +8,7 @@ import os
 import numpy as np
 import argparse
 import itertools
+import pandas as pd
 
 import utils
 
@@ -27,7 +28,6 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=MEDIUM_SIZE)    # legend fontsize
 plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
 plt.rc('hatch', linewidth=0.5)
-# plt.rcParams['savefig.dpi'] = 300
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Create plots for the paper')
@@ -44,53 +44,56 @@ parser.add_argument('-f','--figName',
                      required=False, type=str,
                      help='Name of the saved image')
 
+
 def gen_elem_comp_plot(fig_name):
+    """
+    NOTE: Don't rerun the experiment due to high latency
+    """
+    PIR_NAMES = ["spiralpir","spiralstreampack", "sealpir"]
+    PIR_LABELS = ["SpiralPIR", "SpiralStreamPack", "SealPIR"] #, "FastPIR"]
+    PIRAC_MODES = ["bl", "mp", "fs"]
 
-    def generate_results(log2_db_sizes, elem_sizes):
-        results = {"spiralpir":[],
-                "spiralstreampack":[],
-                "sealpir":[],
-                "fastpir":[],
-                "re":[],
-                "pirac":[]}
-
-        for log2_db_size in log2_db_sizes:
-            for elem_size in elem_sizes:
-                results["spiralpir"].append(cal_pir_tput("spiralpir", log2_db_size, elem_size))
-                results["spiralpirstreampack"].append(cal_pir_tput("spiralpirstreampack", log2_db_size, elem_size))
-                results["sealpir"].append(cal_pir_tput("sealpir", log2_db_size, elem_size))
-                results["fastpir"].append(cal_pir_tput("fastpir", log2_db_size, elem_size))
-                results["re"] = cal_pirac_tput(log2_db_size, elem_size, num_iter=5, rekeying=False)
-                results["pirac"] = cal_pirac_tput(log2_db_size, elem_size, num_iter=5, rekeying=True)
+    def generate_results(log2_db_size, elem_sizes, verbose=False):
+        df_all = utils.concatenate_jsons("results/data", verbose)
         
-        return results
+        # create new dataframe with only those rows corresponding to elem_sizes
+        df_es = df_all[(df_all['log2_db_size'] == log2_db_size)
+                                & (df_all['elem_size'].isin(elem_sizes))]
+        assert len(df_es)==len(elem_sizes)
+
+        tput_columns = [f"{pir_name}_{pirac_mode}_tput" for pir_name in PIR_NAMES
+                                                        for pirac_mode in PIRAC_MODES]
+        col_filter = ["elem_size"]+tput_columns
+        df_col = df_es[col_filter]
+        assert len(PIR_NAMES)*len(PIRAC_MODES)==sum(['tput' in col for col in df_col.columns])
+
+        if verbose:
+            print(df_col)
+        return df_col
 
     # get results
-    results = generate_results(utils.LOG2_DB_SIZES, utils.ELEM_SIZES)
-    x_values = utils.ELEM_SIZES
+    results = generate_results(utils.LOG2_DB_SIZE, utils.ELEM_SIZES)
+    x_values = results["elem_size"].values
 
     # set image scale
     plt.figure()
     plt.yscale("log")
     plt.xscale("log")
 
-    schemes = ["spiralpir", "spiralpirstreampack", "sealpir", "fastpir"]
     colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad'] #, '#c0392b', '#333']
     cc = itertools.cycle(colors)
     plot_lines = []
 
-    for scheme in schemes:
-        tput_with_tier2 = utils.cal_tput_with_pirac(results[scheme], results["tier2"])
-        tput_with_tier3 = utils.cal_tput_with_pirac(results[scheme], results["tier3"])
+    for pir in PIR_NAMES:
         c = next(cc)
-        l1, = plt.plot(x_values, results[scheme], color=c, linestyle='-',  alpha=0.7)
-        l2, = plt.plot(x_values, tput_with_tier2, color=c, linestyle='--')
-        l3, = plt.plot(x_values, tput_with_tier3, color=c, linestyle=':')
+        l1, = plt.plot(x_values, results[f'{pir}_bl_tput'].values, color=c, linestyle='-',  alpha=0.7)
+        l2, = plt.plot(x_values, results[f'{pir}_mp_tput'].values, color=c, linestyle='--')
+        l3, = plt.plot(x_values, results[f'{pir}_fs_tput'].values, color=c, linestyle=':')
         plot_lines.append([l1, l2, l3])
     
-    scheme_labels = ["SpiralPIR", "SpiralStreamPack", "SealPIR", "FastPIR"]
-    legend1 = plt.legend([l[0] for l in plot_lines], scheme_labels, loc="upper left")
-    legend2 = plt.legend(plot_lines[0], ["Basic", "With MP", "With FS"], loc="upper right")
+    
+    legend1 = plt.legend([l[0] for l in plot_lines], PIR_LABELS, loc="upper left")
+    legend2 = plt.legend(plot_lines[0], ["Baseline", "With MP", "With FS"], loc="lower right")
     plt.gca().add_artist(legend1)
     plt.gca().add_artist(legend2)
 
@@ -105,7 +108,7 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     plt.figure().set_figheight(3)
 
     # calculate tputs
-    log_db_size = 20 #utils.LOG2_DB_SIZE
+    log_db_size = utils.LOG2_DB_SIZE
     elem_size = (1<<15)
     pir_tput = cal_pir_tput(pir_name, log_db_size, elem_size, {}, False, num_iter=5)
     re_tput = cal_pirac_tput(log_db_size, elem_size,  5, rekeying = False)
@@ -141,11 +144,6 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
 
     plt.xlabel("Number of batched entries (T)")
     plt.ylabel("Throughput (MB/s)")
-
-    # set y scale
-    # plt.ylim(0, 3.0)
-    # plt.yticks(ticker.MultipleLocator(0.5).tick_values(0.5, 2.5))
-    # plt.yticks(ticker.MultipleLocator(.25).tick_values(0.25, 2.75), minor=True)
 
     # save the plot
     plt.tight_layout()
