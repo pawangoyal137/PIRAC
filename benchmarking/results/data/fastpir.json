@@ -39,4 +39,7 @@
 "fastpir_bl_tput": 200.30942076137376},
 {"log2_db_size": 20,
 "elem_size": 8192,
-"fastpir_bl_tput": 211.14936608495515}]
+"fastpir_bl_tput": 211.14936608495515},
+{"log2_db_size": 20,
+"elem_size": 32768,
+"fastpir_bl_tput": 211.79456354623}]
