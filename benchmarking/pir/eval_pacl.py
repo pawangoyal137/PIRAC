@@ -7,7 +7,7 @@ from pirac import cal_pirac_tput
 
 import utils
 
-SCHEMES = ["xor", "pir", "pir_keyword", "pir_pacl"]
+SCHEMES = ["xor", "pir", "pir_keyword", "pir_pacl", "pir_keyword_baseline"]
 JSON_PATH = '../../pacl/bench-pir/pir.json'
 
 # define the parser for running the experiments
@@ -38,7 +38,7 @@ def process_results(output=False):
         db_size_log2 = int(math.log2(d["db_size"]))
         item_size_bits = 8*d["item_size"]
         if (db_size_log2, item_size_bits) not in pirac_tput_results:
-            pirac_tput_results[(db_size_log2, item_size_bits)] = cal_pirac_tput(db_size_log2, 
+            pirac_tput_results[(db_size_log2, item_size_bits)] = cal_pirac_tput(16, 
                                                                     item_size_bits, 10, rekeying = True, output=True)
         tput_pirac = pirac_tput_results[(db_size_log2, item_size_bits)]
         row["xor_pirac_tput"] = utils.cal_tput_with_pirac(row["xor_tput"], tput_pirac)
