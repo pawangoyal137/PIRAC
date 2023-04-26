@@ -1,0 +1,23 @@
+    log2_db_size  ...  spiralstreampack_fs_overhead
+0             16  ...                     19.295149
+1             16  ...                      5.620067
+2             16  ...                      2.238825
+3             16  ...                      1.626541
+4             16  ...                      1.488127
+5             18  ...                     19.082584
+6             18  ...                      5.545949
+7             18  ...                      2.911369
+8             18  ...                      2.002646
+9             18  ...                      1.935365
+10            20  ...                     18.855761
+11            20  ...                      8.004854
+12            20  ...                      4.081337
+13            20  ...                      2.917194
+14            20  ...                      2.247040
+
+[15 rows x 7 columns]
+Range of spiralstreampack_bl_tput: 342.57-1920.43MB/s
+Range of spiralstreampack_mp_tput: 240.67-1032.39MB/s
+Range of spiralstreampack_fs_tput: 17.84-854.65MB/s
+Overhead of spiralstreampack_mp_overhead: 1.14-1.86
+Overhead of spiralstreampack_fs_overhead: 1.49-19.30
