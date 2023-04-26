@@ -4,7 +4,7 @@ import numpy as np
 
 import utils
 
-def cal_cwpir_tput(db_size, elem_size, kw, h, output=False, num_iter=5):
+def cal_cwpir_tput(db_size, elem_size, h, kw = None, output=False, num_iter=5):
     """
     Take db sizes in log 2 and elem_sizes in bits
     """
@@ -13,7 +13,8 @@ def cal_cwpir_tput(db_size, elem_size, kw, h, output=False, num_iter=5):
 
     num_entries = (1<<db_size)
     elem_size_bytes = elem_size//8
-    
+    kw = db_size if kw is None else kw
+
     tputs = []
     for _ in range(num_iter):
         process = subprocess.Popen(f'./main -n {num_entries} -s {elem_size_bytes} -x {kw} -h {h} -d 13 -e 1 -t 1', 
@@ -34,7 +35,7 @@ def cal_cwpir_tput(db_size, elem_size, kw, h, output=False, num_iter=5):
             if "Number of Keywords" in line:
                 assert utils.extract_num(line)==num_entries
             elif "Keyword Max Bitlength" in line:
-                assert utils.extract_num(line)==kw
+                assert utils.extract_num(line)==kw, (line,kw)
             elif "Max Item Hex Length" in line:
                 assert utils.extract_num(line)==elem_size_bytes*2
             elif "Hamming Weight" in line:

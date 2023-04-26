@@ -102,47 +102,50 @@ def gen_elem_comp_plot(fig_name):
     print(f"Successfully generated and save the plot with name {fig_name}")
 
 def gen_batched_bar_plot(pir_name, batch_values, fig_name):
-    plt.figure()
+    plt.figure().set_figheight(3)
 
     # calculate tputs
     log_db_size = 20 #utils.LOG2_DB_SIZE
     elem_size = (1<<15)
-    pir_tput = cal_pir_tput(pir_name, log_db_size, elem_size, {}, False, num_iter=1)
+    pir_tput = cal_pir_tput(pir_name, log_db_size, elem_size, {}, False, num_iter=5)
     re_tput = cal_pirac_tput(log_db_size, elem_size,  5, rekeying = False)
     pirac_tput = cal_pirac_tput(log_db_size, elem_size,  5, rekeying = True)
     
     # calculate batch tputs
+    pir_tputs = []
     re_tputs = []
     pirac_tputs = []
     for bv in batch_values:
-        re_tputs.append(pir_tput / utils.cal_tput_with_pirac(pir_tput, re_tput, bv))
-        pirac_tputs.append(pir_tput / utils.cal_tput_with_pirac(pir_tput, pirac_tput, bv))
-    print(re_tputs, pirac_tputs)
+        pir_tputs.append(pir_tput)
+        re_tputs.append(utils.cal_tput_with_pirac(pir_tput, re_tput, bv))
+        pirac_tputs.append(utils.cal_tput_with_pirac(pir_tput, pirac_tput, bv))
     # set the width of each bar and colors
-    barWidth = 0.33
+    barWidth = 0.25
     colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad', '#c0392b', '#333']
 
     # set the position of each group on the x-axis
-    re_positions = np.arange(len(batch_values))
+    pir_positions = np.arange(len(batch_values))
+    re_positions = [x + barWidth for x in pir_positions]
     pirac_positions = [x + barWidth for x in re_positions]
     
     # create the bar graph
-    plt.bar(re_positions, re_tputs, color=colors[0], width=barWidth, edgecolor='white', label="With MP",  hatch='////')
-    plt.bar(pirac_positions, pirac_tputs, color=colors[1], width=barWidth, edgecolor='white', label="With FS",  hatch='////')
+    plt.bar(pir_positions, pir_tputs, color=colors[0], width=barWidth, edgecolor='white', label="Baseline",  hatch='////')
+    plt.bar(re_positions, re_tputs, color=colors[1], width=barWidth, edgecolor='white', label="With MP",  hatch='////')
+    plt.bar(pirac_positions, pirac_tputs, color=colors[2], width=barWidth, edgecolor='white', label="With FS",  hatch='////')
     
     # add xticks on the middle of the group bars
-    plt.xticks([i + 0.5*barWidth for i in range(len(batch_values))], batch_values)
+    plt.xticks([i + barWidth for i in range(len(batch_values))], batch_values)
 
     # add a legend
-    plt.legend(loc="upper right")
+    plt.legend(loc="lower right") # bbox_to_anchor=(0.1, 1.0)
 
-    plt.xlabel("Number of batched entries")
-    plt.ylabel("Overhead (compared to baseline)")
+    plt.xlabel("Number of batched entries (T)")
+    plt.ylabel("Throughput (MB/s)")
 
     # set y scale
-    plt.ylim(0, 2.5)
-    plt.yticks(ticker.MultipleLocator(0.5).tick_values(0.5, 2.0))
-    plt.yticks(ticker.MultipleLocator(.25).tick_values(0.25, 2.25), minor=True)
+    # plt.ylim(0, 3.0)
+    # plt.yticks(ticker.MultipleLocator(0.5).tick_values(0.5, 2.5))
+    # plt.yticks(ticker.MultipleLocator(.25).tick_values(0.25, 2.75), minor=True)
 
     # save the plot
     plt.tight_layout()
