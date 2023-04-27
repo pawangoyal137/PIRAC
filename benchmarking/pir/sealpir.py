@@ -50,14 +50,15 @@ def cal_sealpir_tput(N, D, output=False, num_iter=5):
         
         database_size_bytes = (1<<N)*(D//8)
         total_including_factor = (factor * (total_us-exp_us) + exp_us)
-        if output:
-            print(f"Total server time: {total_us} us, Expansion Time: {exp_us} us, Total Time after factor = {total_including_factor} us")
-            print(f"Factor = {factor}, elem size = {elem_size}")
         tput = database_size_bytes/total_including_factor
         tputs.append(tput)
 
+    if output:
+        print(f"Total server time: {total_us} us, Expansion Time: {exp_us} us, Total Time after factor = {total_including_factor} us")
+        print(f"Factor = {factor}, elem size = {elem_size}")
+        print(f"Throughput on Sealpir = {np.mean(tputs)}+-{np.std(tputs)}MB/s")
     os.chdir(cwd)
-    return np.mean(tputs)
+    return np.mean(tputs), np.std(tputs)
 
 if __name__ == "__main__":
     pass

@@ -42,14 +42,14 @@ def cal_spiralpir_tput(N, D, stream=False, pack=False, output=False, num_iter=5)
         
         assert statistics is not None
         tput = statistics["dbsize"]/statistics["total_us"]
-        if output:
-            stream_print = "(with streaming)" if stream else ""
-            pack_print = "(with pack)" if pack else ""
-            print(f"Throughput on SpiralPIR {stream_print} {pack_print} with log2 dbsize = {N}, elem size = {D} bits = {tput}MB/s")
         tputs.append(tput)
 
+    if output:
+        stream_print = "(with streaming)" if stream else ""
+        pack_print = "(with pack)" if pack else ""
+        print(f"Throughput on SpiralPIR {stream_print} {pack_print} with log2 dbsize = {N}, elem size = {D} bits = {np.mean(tputs)}+-{np.std(tputs)}MB/s")
     os.chdir(cwd)
-    return np.mean(tputs)
+    return np.mean(tputs), np.std(tputs)
 
 if __name__ == "__main__":
     pass

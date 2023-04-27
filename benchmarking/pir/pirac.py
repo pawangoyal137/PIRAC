@@ -70,14 +70,16 @@ def cal_pirac_tput(log2_db_size, elem_size,  num_iter=5, rekeying = False, throu
         db_size_bits = db_size * elem_size_128 * 128
         db_size_mB = db_size_bits / BITS_IN_MB
         throughput = 1000*db_size_mB/np.mean(t)
+        tput_std = throughput*np.std(t)/np.mean(t)
         if output:
             print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size_128} bits = {throughput}MB/s")
-        return throughput
+        return throughput, tput_std
     else:
         records_per_sec = 1000*db_size/np.mean(t) 
+        records_per_sec_std = records_per_sec*np.std(t)/np.mean(t)
         if output:
             print(f"Throughput on PIRAC with log2 dbsize = {np.log2(db_size)}, elem size = {128*elem_size_128} bits = {records_per_sec}records/s")
-        return records_per_sec
+        return records_per_sec, records_per_sec_std
 
 def pretty_print(data, bench_type):
     print(f"Running Experiments for = {bench_type}")
