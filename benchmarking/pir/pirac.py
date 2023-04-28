@@ -30,7 +30,7 @@ parser.add_argument('-ds','--dbSizes', nargs='+', default=utils.LOG2_DB_SIZES,
 parser.add_argument('-es','--elemSizes', nargs='+', default=utils.ELEM_SIZES,
                      required=False, type=int,
                      help='Element sizes (in bits) to run experiment on.')
-parser.add_argument('-n','--numIter',
+parser.add_argument('-ni','--numIter',
                      required=False, type=int,
                      default=NUM_ITER,
                      help='Number of interations to run experiments')
@@ -75,8 +75,8 @@ def pretty_print(data, bench_type):
     print(f"Running Experiments for = {bench_type}")
     df = utils.create_df(data)
     print(df)
-    max_tput, min_tput = utils.find_max_min_pd_col(df, "tput")
-    print("Throughputs in the range {0:.2f}-{1:.2f}MB/s".format(min_tput, max_tput))
+    # max_tput, min_tput = utils.find_max_min_pd_col(df, "tput")
+    # print("Throughputs in the range {0:.2f}-{1:.2f}MB/s".format(min_tput, max_tput))
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -96,11 +96,11 @@ if __name__ == "__main__":
                 record[f"{bench_type}_tput"] = np.mean(entries_per_sec)
                 record[f"{bench_type}_std"] = np.std(entries_per_sec)
             elif bench_type == "re":
-                re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter)
+                re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, output=output)
                 record[f"{bench_type}_tput"] = re_tput
                 record[f"{bench_type}_tput_std"] = re_tput_std
             elif bench_type == "pirac":
-                pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, True)
+                pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, True, output=output)
                 record[f"{bench_type}_tput"]  = pirac_tput
                 record[f"{bench_type}_tput_std"]  = pirac_tput_std
             
