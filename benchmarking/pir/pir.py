@@ -79,7 +79,10 @@ def pretty_print(data, add_arguments):
     min_max_overhead = utils.find_max_min_pd_col(df, "overhead")
     if min_max_results is not None:
         for k,v in min_max_results.items():
-            print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
+            units = "MB/s"
+            if "std" in k:
+                units="%"
+            print("Range of {0:s}: {1:.2f}-{2:.2f}{3:s}".format(k, v[0], v[1], units))
     if min_max_overhead is not None:
         for k,v in min_max_overhead.items():
             print("Overhead of {0:s}: {1:.2f}-{2:.2f}".format(k, v[0], v[1]))
@@ -115,14 +118,14 @@ if __name__ == "__main__":
                     pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
                     record[f"{pir_name}_mp_tput"] = pir_re_tput
                     record[f"{pir_name}_mp_overhead"] = pir_tput/pir_re_tput
-                    record[f"{pir_name}_mp_tput_std_pct"] = pir_re_tput*(pir_tput_std/np.square(pir_tput)+
+                    record[f"{pir_name}_mp_tput_std_pct"] = 100*pir_re_tput*(pir_tput_std/np.square(pir_tput)+
                                                                         re_tput_std/np.square(re_tput))
                 elif pm=="fs":
                     pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, rekeying = True)
                     pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
                     record[f"{pir_name}_fs_tput"] = pir_pirac_tput
                     record[f"{pir_name}_fs_overhead"] = pir_tput/ pir_pirac_tput
-                    record[f"{pir_name}_fs_tput_std_pct"] = pir_pirac_tput*(pir_tput_std/np.square(pir_tput)+
+                    record[f"{pir_name}_fs_tput_std_pct"] = 100*pir_pirac_tput*(pir_tput_std/np.square(pir_tput)+
                                                                         pirac_tput_std/np.square(pirac_tput))
                 else:
                     raise Exception("Shouldn't reach here")
