@@ -1,0 +1,869 @@
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 32
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        154 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19792 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21885 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 32
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        153 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19789 ms
+26 	Inner Product   :       1780 ms
+27 	Total Server    :      21882 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 32
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        152 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19787 ms
+26 	Inner Product   :       1783 ms
+27 	Total Server    :      21883 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 32
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        152 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19750 ms
+26 	Inner Product   :       1781 ms
+27 	Total Server    :      21844 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14104 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 32
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        153 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19820 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21912 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+Throughput on CWPIR  with kw = 10, Hamming weight = 2 
+            log2 dbsize = 10, elem size = 128 bits = 0.9584273532799245+-0.0009501654677531198MB/s
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 128
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        157 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19743 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21834 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 128
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        156 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19750 ms
+26 	Inner Product   :       1778 ms
+27 	Total Server    :      21840 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 128
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        153 ms
+24 	Expansion time: :        307 ms
+25 	Sel. Vec. Calc. :      19755 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21848 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 102 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 128
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        152 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19803 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21896 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 102 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 128
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        153 ms
+24 	Expansion time: :        304 ms
+25 	Sel. Vec. Calc. :      19799 ms
+26 	Inner Product   :       1780 ms
+27 	Total Server    :      21890 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+Throughput on CWPIR  with kw = 10, Hamming weight = 2 
+            log2 dbsize = 10, elem size = 512 bits = 0.959287053758807+-0.001144327757018947MB/s
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 512
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        161 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19788 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21878 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 512
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        161 ms
+24 	Expansion time: :        304 ms
+25 	Sel. Vec. Calc. :      19777 ms
+26 	Inner Product   :       1780 ms
+27 	Total Server    :      21868 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 512
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        162 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19793 ms
+26 	Inner Product   :       1780 ms
+27 	Total Server    :      21885 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 512
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        161 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19769 ms
+26 	Inner Product   :       1778 ms
+27 	Total Server    :      21861 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 512
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        163 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19811 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21903 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+Throughput on CWPIR  with kw = 10, Hamming weight = 2 
+            log2 dbsize = 10, elem size = 2048 bits = 0.9585232079842451+-0.0006370950734315205MB/s
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 2048
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        193 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19828 ms
+26 	Inner Product   :       1781 ms
+27 	Total Server    :      21921 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 2048
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        198 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19767 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21858 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1083 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 2048
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        200 ms
+24 	Expansion time: :        304 ms
+25 	Sel. Vec. Calc. :      19819 ms
+26 	Inner Product   :       1781 ms
+27 	Total Server    :      21911 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 2048
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        196 ms
+24 	Expansion time: :        304 ms
+25 	Sel. Vec. Calc. :      19758 ms
+26 	Inner Product   :       1780 ms
+27 	Total Server    :      21849 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 2048
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        200 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19776 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21868 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+Throughput on CWPIR  with kw = 10, Hamming weight = 2 
+            log2 dbsize = 10, elem size = 8192 bits = 0.9584193407523607+-0.0012721293109136725MB/s
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 8192
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        385 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19762 ms
+26 	Inner Product   :       1779 ms
+27 	Total Server    :      21853 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 8192
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        380 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19738 ms
+26 	Inner Product   :       1780 ms
+27 	Total Server    :      21831 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 8192
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        372 ms
+24 	Expansion time: :        305 ms
+25 	Sel. Vec. Calc. :      19781 ms
+26 	Inner Product   :       1785 ms
+27 	Total Server    :      21879 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1083 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 8192
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        372 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19849 ms
+26 	Inner Product   :       1781 ms
+27 	Total Server    :      21944 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14103 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+0 Performing Simple PIR ...
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2 -------------------------- Crypto Parameters --------------------------
+3 	Poly Mod Degree: 8192
+4 	Plain Modulus: 1785857 (21 bits)
+5 	Ciphertext Modulus Bitcount: 218
+6 --------------------- Database Specific Parameters ---------------------
+7 	Number of Keywords: 1024
+8 	Keyword Max Bitlength: 10
+9 	Max Item Hex Length: 8192
+10 	Response Cipher Count: 1
+11 --------------------- Query Specific Parameters ---------------------
+12 	Equality Type: Constant Weight
+13 	Hamming Weight: 2
+14 	Compression Factor: 6
+15 	Encoding size: 46
+16 	Number of Input Ciphers: 1
+17 --------------------------------------------------------------------
+18 	Number of Threads: 1
+19 --------------------------------------------------------------------
+20 --- End of process ---
+21 Correct Response!
+22 ------------------------ Timing ----------------------------------------------
+23 	Database Prep   :        375 ms
+24 	Expansion time: :        306 ms
+25 	Sel. Vec. Calc. :      19798 ms
+26 	Inner Product   :       1778 ms
+27 	Total Server    :      21890 ms
+28 --------------------- Communication ------------------------------------------
+29 	Data Independant: 1084 KB (Relin keys) + 14102 KB (Gal Keys)
+30 	Data Dependant: 216 KB (Query) + 103 KB (Reponse)
+31 
+32 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+33 
+Throughput on CWPIR  with kw = 10, Hamming weight = 2 
+            log2 dbsize = 10, elem size = 32768 bits = 0.9585081915443328+-0.0016753692462524394MB/s
+h = 2
+   log2_db_size  elem_size  cwpir_bl_tput  cwpir_bl_tput_std_pct
+0            10        128       0.958427               0.099138
+1            10        512       0.959287               0.119289
+2            10       2048       0.958523               0.066466
+3            10       8192       0.958419               0.132732
+4            10      32768       0.958508               0.174789
+Range of cwpir_bl_tput: 0.96-0.96MB/s
+Range of cwpir_bl_tput_std_pct: 0.07-0.17%

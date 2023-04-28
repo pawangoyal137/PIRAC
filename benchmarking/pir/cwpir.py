@@ -57,14 +57,13 @@ def cal_cwpir_tput(db_size, elem_size, h, kw = None, output=False, num_iter=5):
         elem_size_mb =  ((2**13) * statistics["num_output_ciphers"] * 20 / 8000000)
         db_size_mb = num_entries * elem_size_mb
         throughput = 1000*db_size_mb/statistics["total_ms"]
-
-        if output:
-            print(f"Throughput on CWPIR  with kw = {kw}, Hamming weight = {h} \n\
-                log2 dbsize = {db_size}, elem size = {elem_size} bits = {throughput}MB/s")
         tputs.append(throughput)
 
+    if output:
+        print(f"Throughput on CWPIR  with kw = {kw}, Hamming weight = {h} \n\
+            log2 dbsize = {db_size}, elem size = {elem_size} bits = {np.mean(tputs)}+-{np.std(tputs)}MB/s")
     os.chdir(cwd)
-    return np.mean(tputs)
+    return np.mean(tputs), np.std(tputs)
 
 
 if __name__ == "__main__":
