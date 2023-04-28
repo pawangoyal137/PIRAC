@@ -25,6 +25,9 @@ ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
 def cal_tput_with_pirac(pir, pirac, batch=1):
     return batch/(batch/pir + 1/pirac)
 
+def cal_tput_for_comb(pir, pir_with_pirac, batch=1):
+    return batch/((batch-1)/pir + 1/pir_with_pirac)
+
 def extract_num(s):
     """
     Return the numbers in s

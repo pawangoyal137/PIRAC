@@ -1,23 +1,26 @@
-    log2_db_size  elem_size  ...  spiralpack_fs_tput  spiralpack_fs_overhead
-0             16        128  ...            6.816031                1.561392
-1             16        512  ...           11.958658                1.191444
-2             16       2048  ...           30.994875                1.126220
-3             16       8192  ...           76.800493                1.101227
-4             16      32768  ...          171.306913                1.109436
-5             18        128  ...            8.164380                1.746672
-6             18        512  ...           23.774419                1.464586
-7             18       2048  ...           64.912147                1.301023
-8             18       8192  ...          156.334631                1.220246
-9             18      32768  ...          227.846319                1.146645
-10            20        128  ...           12.323704                2.830974
-11            20        512  ...           39.673022                2.124101
-12            20       2048  ...          113.423265                1.672928
-13            20       8192  ...          199.948723                1.302659
-14            20      32768  ...          344.763575                1.285167
+    log2_db_size  elem_size  ...  spiralpack_fs_overhead  spiralpack_fs_tput_std_pct
+0             16        128  ...                1.577221                    0.540234
+1             16        512  ...                1.196150                    0.379029
+2             16       2048  ...                1.126731                    0.373730
+3             16       8192  ...                1.101795                    0.301750
+4             16      32768  ...                1.109553                    0.305153
+5             18        128  ...                1.751107                    0.266090
+6             18        512  ...                1.469260                    0.253685
+7             18       2048  ...                1.308045                    0.534808
+8             18       8192  ...                1.224122                    0.329116
+9             18      32768  ...                1.148585                    0.425434
+10            20        128  ...                2.849812                    0.503624
+11            20        512  ...                2.133440                    0.530988
+12            20       2048  ...                1.687302                    0.187591
+13            20       8192  ...                1.309562                    0.502758
+14            20      32768  ...                1.294907                    0.428986
 
-[15 rows x 7 columns]
-Range of spiralpack_bl_tput: 10.64-443.08MB/s
-Range of spiralpack_mp_tput: 10.51-369.79MB/s
-Range of spiralpack_fs_tput: 6.82-344.76MB/s
+[15 rows x 10 columns]
+Range of spiralpack_bl_tput: 10.78-443.72MB/s
+Range of spiralpack_bl_tput_std_pct: 0.18-0.79%
+Range of spiralpack_mp_tput: 10.64-368.35MB/s
+Range of spiralpack_mp_tput_std_pct: 0.18-0.78%
+Range of spiralpack_fs_tput: 6.84-342.67MB/s
+Range of spiralpack_fs_tput_std_pct: 0.19-0.54%
 Overhead of spiralpack_mp_overhead: 1.01-1.20
-Overhead of spiralpack_fs_overhead: 1.10-2.83
+Overhead of spiralpack_fs_overhead: 1.10-2.85
