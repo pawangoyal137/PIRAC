@@ -21,7 +21,7 @@ c_lib.testReEncryption.restype = ctypes.c_float
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for PIRAC')
-parser.add_argument('-b','--benchType', choices=['rk', 're', 'pirac'],    # re-keying, re-encryption and pirac
+parser.add_argument('-b','--benchType', choices=['prf', 'rk', 're', 'pirac'],    # re-keying, re-encryption and pirac
                      required=True, type=str,
                      help='Tells script what aspect to benchmark')
 parser.add_argument('-ds','--dbSizes', nargs='+', default=utils.LOG2_DB_SIZES,
@@ -49,6 +49,21 @@ def cal_rekeying_tput(num_iter=5):
     records_per_sec_array = [db_size*1000/i for i in time_array]
     
     return records_per_sec_array
+
+def cal_prf_tput(num_iter=5):
+    '''
+    One PRF evaluation is equivalent to one rekeying and 
+    one encryption of 128 bit all zero message
+    '''
+    time_array = []
+    db_size = 1 << utils.LOG2_DB_SIZE
+    for _ in range(num_iter):
+        re_encrypt_time = c_lib.testReEncryption(db_size, 1)
+        rekeying_time = c_lib.testReKeying(db_size)
+        time_array.append(re_encrypt_time+rekeying_time)
+    prf_eval_per_sec_array = [db_size*1000/i for i in time_array]
+    
+    return prf_eval_per_sec_array
 
 def cal_pirac_tput(log2_db_size, elem_size,  num_iter=5, rekeying = False, output=False):
     """
@@ -91,7 +106,11 @@ if __name__ == "__main__":
     for log2_db_size in log2_db_sizes:
         for elem_size in elem_sizes:
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
-            if bench_type == "rk":
+            if bench_type == "prf":
+                prf_eval_per_sec = cal_prf_tput(num_iter)
+                record[f"{bench_type}_tput"] = np.mean(prf_eval_per_sec)
+                record[f"{bench_type}_std"] = np.std(prf_eval_per_sec)
+            elif bench_type == "rk":
                 entries_per_sec = cal_rekeying_tput(num_iter)
                 record[f"{bench_type}_tput"] = np.mean(entries_per_sec)
                 record[f"{bench_type}_std"] = np.std(entries_per_sec)
