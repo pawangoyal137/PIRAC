@@ -30,8 +30,8 @@ def process_results(output=False):
     for d in data:
         db_size_bytes = d["db_size"]*d["item_size"]
         row = {
-            'db_size': d['db_size'],
-            'item_size': d['item_size']
+            'log2_db_size': d['db_size'],
+            'elem_size': d['item_size']
         }
         for s in SCHEMES:
             row[f"{s}_us"] = np.mean(d[f'server_{s}_processing_ms'])
@@ -40,31 +40,31 @@ def process_results(output=False):
         
         db_size_log2 = int(math.log2(d["db_size"]))
         item_size_bits = 8*d["item_size"]
-        if (db_size_log2, item_size_bits) not in pirac_tput_results:
-            pirac_tput_results[(db_size_log2, item_size_bits)] = cal_pirac_tput(18, 
-                                                                    item_size_bits, 5, rekeying = True, output=True)
-        pirac_tput, pirac_tput_std = pirac_tput_results[(db_size_log2, item_size_bits)]
-        row["xor_pirac_tput"] = utils.cal_tput_with_pirac(row["xor_tput"], pirac_tput)
-        row["pir_pirac_tput"] = utils.cal_tput_with_pirac(row["pir_tput"], pirac_tput)
+        # if (db_size_log2, item_size_bits) not in pirac_tput_results:
+        #     pirac_tput_results[(db_size_log2, item_size_bits)] = cal_pirac_tput(18, 
+        #                                                             item_size_bits, 5, rekeying = True, output=True)
+        # pirac_tput, pirac_tput_std = pirac_tput_results[(db_size_log2, item_size_bits)]
+        # row["xor_pirac_tput"] = utils.cal_tput_with_pirac(row["xor_tput"], pirac_tput)
+        # row["pir_pirac_tput"] = utils.cal_tput_with_pirac(row["pir_tput"], pirac_tput)
 
-        row["xor_pirac_tput_std_pct"] = (100*row["xor_pirac_tput"]*
-                                (pirac_tput_std/np.square(pirac_tput)+0.01*row["xor_tput_std_pct"]/row["xor_tput"]))
-        row["pir_pirac_tput_std_pct"] = (100*row["pir_pirac_tput"]*
-                                (pirac_tput_std/np.square(pirac_tput)+0.01*row["pir_tput_std_pct"]/row["pir_tput"]))
+        # row["xor_pirac_tput_std_pct"] = (100*row["xor_pirac_tput"]*
+        #                         (pirac_tput_std/np.square(pirac_tput)+0.01*row["xor_tput_std_pct"]/row["xor_tput"]))
+        # row["pir_pirac_tput_std_pct"] = (100*row["pir_pirac_tput"]*
+        #                         (pirac_tput_std/np.square(pirac_tput)+0.01*row["pir_tput_std_pct"]/row["pir_tput"]))
         processed_data.append(row)
     
-    with open("results/data/multi_server.json", "w") as f:
-        json.dump(processed_data, f)
+    with open("results/data/multi_server/multi_server_smaller_peice.json", "w") as f:
+        json.dump(processed_data, f, separators=(",\n", ": "))
 
     if output:
         # Create a pandas DataFrame from the list of dictionaries
         df = pd.DataFrame(processed_data)
 
         # Set the db_size column as the index of the DataFrame
-        df = df.set_index('db_size')
+        df = df.set_index('elem_size')
 
         # Sort the DataFrame by db_size and item_size in ascending order
-        df = df.sort_values(['db_size', 'item_size'], ascending=[True, True])
+        df = df.sort_values(['log2_db_size', 'elem_size'], ascending=[True, True])
 
         # Print the sorted DataFrame
         print(df)
