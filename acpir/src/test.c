@@ -7,7 +7,7 @@
 #include <time.h>
 #include "../include/aes.h"
 
-float testKeyRefresh(uint64_t numRefreshOps)
+float runKeyRefresh(uint64_t numRefreshOps)
 {
     static EVP_CIPHER_CTX *prfCtx;
     if (!prfCtx)
@@ -31,7 +31,7 @@ float testKeyRefresh(uint64_t numRefreshOps)
 
         uint8_t epoch[16]; // TODO: set desired epoch number; currently zero
 
-        // apply PRF to old key to get new key
+        // apply PRF to epoch to get new key
         int len = 0;
         if (1 != EVP_EncryptUpdate(prfCtx, (uint8_t *)newKey, &len, (uint8_t *)&epoch, 16))
             printf("failed to generate new key\n");
@@ -47,11 +47,11 @@ float testKeyRefresh(uint64_t numRefreshOps)
 
     clock_t end = clock();
     float totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    // printf("Key refresh took %f ms\n", totalTime);
+    printf("Key refresh took %f ms\n", totalTime);
     return totalTime;
 }
 
-float testReEncryption(uint64_t size, uint64_t elemsize)
+float runReEncryption(uint64_t size, uint64_t elemsize)
 {
     uint128_t *seeds = malloc(sizeof(uint128_t) * 1);
     RAND_bytes((uint8_t *)seeds, sizeof(uint128_t) * 1);
@@ -71,13 +71,11 @@ float testReEncryption(uint64_t size, uint64_t elemsize)
     }
     RAND_bytes((uint8_t *)database, sizeof(uint128_t) * size * elemsize);
 
-    // printf("Done filling database with random bytes\n");
-
     clock_t start = clock();
     reencrypt(aes, size, elemsize, database, output);
     clock_t end = clock();
     totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    // printf("Re-encryption took %f ms\n", totalTime);
+    printf("Re-encryption took %f ms\n", totalTime);
 
     free(database);
     free(output);
@@ -86,64 +84,18 @@ float testReEncryption(uint64_t size, uint64_t elemsize)
     return totalTime;
 }
 
-void runTests()
-{
-    uint64_t size = 1 << 20;
-    uint64_t elemsize = 128; // in blocks 62 * 128 bits = 1KB
-
-    uint128_t *seeds = malloc(sizeof(uint128_t) * size);
-    RAND_bytes((uint8_t *)seeds, sizeof(uint128_t) * size);
-
-    float totalTime = 0;
-    clock_t start = clock();
-    testKeyRefresh(size);
-    clock_t end = clock();
-    float ms = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    totalTime += ms;
-    printf("KeyRefresh AES took %f ms\n", ms);
-
-    uint128_t seed = seeds[0];
-    free(seeds);
-    struct AES *aes = initAES((uint8_t *)&seed);
-
-    uint128_t *database = malloc(sizeof(uint128_t) * size * elemsize);
-    uint128_t *output = malloc(sizeof(uint128_t) * size * elemsize);
-
-    if (database == NULL || output == NULL)
-    {
-        printf("failed to allocate space");
-        exit(0);
-    }
-    RAND_bytes((uint8_t *)database, sizeof(uint128_t) * size * elemsize);
-
-    printf("Done filling database with random bytes\n");
-
-    start = clock();
-    reencrypt(aes, size, elemsize, database, output);
-    end = clock();
-    ms = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    totalTime += ms;
-    printf("Re-encryption took %f ms\n", ms);
-
-    uint64_t dbSizeBits = size * elemsize * 128;
-    uint64_t bitsInMB = 8 * 1000000;
-    uint64_t dbSizeMB = dbSizeBits / bitsInMB;
-    printf("Re-encryption MB/s %f\n", dbSizeMB / (totalTime / 1000.0));
-
-    free(database);
-    free(output);
-    destroyAES(aes);
-}
-
 int main(int argc, char **argv)
 {
 
-    int testTrials = 20;
+    uint64_t size = 1<<16;
+    uint64_t elemsize_128bits = 2;
+
 
     printf("******************************************\n");
     printf("Testing\n");
-    runTests();
+    runKeyRefresh(size),
     printf("******************************************\n");
-    printf("DONE\n");
+    runReEncryption(size, elemsize_128bits);
     printf("******************************************\n\n");
+    printf("DONE\n");
 }

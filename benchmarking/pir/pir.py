@@ -114,14 +114,14 @@ if __name__ == "__main__":
                     record[f"{pir_name}_bl_tput"] = pir_tput
                     record[f"{pir_name}_bl_tput_std_pct"] = 100*pir_tput_std/pir_tput
                 elif pm=="mp":
-                    re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, rekeying = False)
+                    re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, key_refresh = False)
                     pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
                     record[f"{pir_name}_mp_tput"] = pir_re_tput
                     record[f"{pir_name}_mp_overhead"] = pir_tput/pir_re_tput
                     record[f"{pir_name}_mp_tput_std_pct"] = 100*pir_re_tput*(pir_tput_std/np.square(pir_tput)+
                                                                         re_tput_std/np.square(re_tput))
                 elif pm=="fs":
-                    pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, rekeying = True)
+                    pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, key_refresh = True)
                     pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
                     record[f"{pir_name}_fs_tput"] = pir_pirac_tput
                     record[f"{pir_name}_fs_overhead"] = pir_tput/ pir_pirac_tput

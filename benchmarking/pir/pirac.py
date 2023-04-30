@@ -16,12 +16,12 @@ libname = "../acpir/src/test.so"
 c_lib = ctypes.CDLL(libname)
 
 # Set return type as float
-c_lib.testReKeying.restype = ctypes.c_float
-c_lib.testReEncryption.restype = ctypes.c_float
+c_lib.runKeyRefresh.restype = ctypes.c_float
+c_lib.runReEncryption.restype = ctypes.c_float
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for PIRAC')
-parser.add_argument('-b','--benchType', choices=['prf', 'rk', 're', 'pirac'],    # re-keying, re-encryption and pirac
+parser.add_argument('-b','--benchType', choices=['kr', 're', 'pirac'],    # re-keying, re-encryption and pirac
                      required=True, type=str,
                      help='Tells script what aspect to benchmark')
 parser.add_argument('-ds','--dbSizes', nargs='+', default=utils.LOG2_DB_SIZES,
@@ -41,31 +41,16 @@ parser.add_argument('-o','--output', action='store_true',
                      required=False, 
                      help='If the flag is passed, display the output of the pirac')
 
-def cal_rekeying_tput(num_iter=5):
+def cal_key_refresh_tput(num_iter=5):
     time_array = []
     db_size = 1 << utils.LOG2_DB_SIZE
     for _ in range(num_iter):
-        time_array.append(c_lib.testReKeying(db_size))
+        time_array.append(c_lib.runKeyRefresh(db_size))
     records_per_sec_array = [db_size*1000/i for i in time_array]
     
     return records_per_sec_array
 
-def cal_prf_tput(num_iter=5):
-    '''
-    One PRF evaluation is equivalent to one rekeying and 
-    one encryption of 128 bit all zero message
-    '''
-    time_array = []
-    db_size = 1 << utils.LOG2_DB_SIZE
-    for _ in range(num_iter):
-        re_encrypt_time = c_lib.testReEncryption(db_size, 1)
-        rekeying_time = c_lib.testReKeying(db_size)
-        time_array.append(re_encrypt_time+rekeying_time)
-    prf_eval_per_sec_array = [db_size*1000/i for i in time_array]
-    
-    return prf_eval_per_sec_array
-
-def cal_pirac_tput(log2_db_size, elem_size,  num_iter=5, rekeying = False, output=False):
+def cal_pirac_tput(log2_db_size, elem_size,  num_iter=5, key_refresh = False, output=False):
     """
     Take db sizes in log base 2 and elem_sizes in bits
     """
@@ -74,9 +59,9 @@ def cal_pirac_tput(log2_db_size, elem_size,  num_iter=5, rekeying = False, outpu
 
     t = []
     for _ in range(num_iter):
-        re_encrypt_time = c_lib.testReEncryption(db_size, elem_size_128)
-        rekeying_time = c_lib.testReKeying(db_size) if rekeying else 0
-        t.append(re_encrypt_time+rekeying_time)
+        re_encrypt_time = c_lib.runReEncryption(db_size, elem_size_128)
+        key_refresh_time = c_lib.runKeyRefresh(db_size) if key_refresh else 0
+        t.append(re_encrypt_time+key_refresh_time)
 
     db_size_bits = db_size * elem_size_128 * 128
     db_size_mB = db_size_bits / BITS_IN_MB
@@ -90,8 +75,9 @@ def pretty_print(data, bench_type):
     print(f"Running Experiments for = {bench_type}")
     df = utils.create_df(data)
     print(df)
-    # max_tput, min_tput = utils.find_max_min_pd_col(df, "tput")
-    # print("Throughputs in the range {0:.2f}-{1:.2f}MB/s".format(min_tput, max_tput))
+    min_max_results = utils.find_max_min_pd_col(df, "tput")
+    for k,v in min_max_results.items():
+        print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -103,29 +89,26 @@ if __name__ == "__main__":
     output = args.output
 
     data = []
-    for log2_db_size in log2_db_sizes:
-        for elem_size in elem_sizes:
-            record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
-            if bench_type == "prf":
-                prf_eval_per_sec = cal_prf_tput(num_iter)
-                record[f"{bench_type}_tput"] = np.mean(prf_eval_per_sec)
-                record[f"{bench_type}_std"] = np.std(prf_eval_per_sec)
-            elif bench_type == "rk":
-                entries_per_sec = cal_rekeying_tput(num_iter)
-                record[f"{bench_type}_tput"] = np.mean(entries_per_sec)
-                record[f"{bench_type}_std"] = np.std(entries_per_sec)
-            elif bench_type == "re":
-                re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, output=output)
-                record[f"{bench_type}_tput"] = re_tput
-                record[f"{bench_type}_tput_std"] = re_tput_std
-            elif bench_type == "pirac":
-                pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, True, output=output)
-                record[f"{bench_type}_tput"]  = pirac_tput
-                record[f"{bench_type}_tput_std"]  = pirac_tput_std
-            
-            data.append(record)
+
+    if bench_type=="kr":
+        entries_per_sec = cal_key_refresh_tput(num_iter)
+        print(f"Mean = {np.mean(entries_per_sec)} records/sec, std = {np.std(entries_per_sec)}")
+    else:
+        for log2_db_size in log2_db_sizes:
+            for elem_size in elem_sizes:
+                record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
+                if bench_type == "re":
+                    re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, output=output)
+                    record[f"{bench_type}_tput"] = re_tput
+                    record[f"{bench_type}_tput_std"] = re_tput_std
+                elif bench_type == "pirac":
+                    pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, True, output=output)
+                    record[f"{bench_type}_tput"]  = pirac_tput
+                    record[f"{bench_type}_tput_std"]  = pirac_tput_std
+                
+                data.append(record)
     
-    pretty_print(data, bench_type)
-    if write_file is not None:
-        with open(write_file, "w") as outfile:
-            json.dump(data, outfile, separators=(",\n", ": "))
+        pretty_print(data, bench_type)
+        if write_file is not None:
+            with open(write_file, "w") as outfile:
+                json.dump(data, outfile, separators=(",\n", ": "))
