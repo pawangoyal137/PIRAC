@@ -3,6 +3,7 @@ import os
 import json
 import sys
 import numpy as np
+import pandas as pd
 
 from pirac import cal_pirac_tput
 from cwpir import cal_cwpir_tput
@@ -107,7 +108,14 @@ if __name__ == "__main__":
     data = []
     for log2_db_size in log2_db_sizes:
         for elem_size in elem_sizes:
-            pir_tput, pir_tput_std = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output, num_iter=num_iter)            
+            # pir_tput, pir_tput_std = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output, num_iter=num_iter)            
+            with open(f"results/data/single_server/{pir_name}.json") as f:
+                df = pd.read_json(f)
+                pir_tput = df.loc[(df['log2_db_size'] == log2_db_size) &
+                                    (df['elem_size'] == elem_size), f"{pir_name}_bl_tput"].values[0]
+                pir_tput_std_pct = df.loc[(df['log2_db_size'] == log2_db_size) &
+                                    (df['elem_size'] == elem_size), f"{pir_name}_tput_std_pct"].values[0]
+                pir_tput_std = 0.01*pir_tput_std_pct*pir_tput
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
             for pm in pirac_modes:
                 if pm=="bl":
