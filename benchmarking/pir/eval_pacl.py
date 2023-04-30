@@ -27,6 +27,7 @@ def process_results(output=False):
     # Create a list of dictionaries with the desired columns
     processed_data = []
     pirac_tput_results = {}
+    pir_tputs_std = {}
     for d in data:
         db_size_bytes = d["db_size"]*d["item_size"]
         row = {
@@ -37,23 +38,26 @@ def process_results(output=False):
             row[f"{s}_us"] = np.mean(d[f'server_{s}_processing_ms'])
             row[f"{s}_tput"] = db_size_bytes/ (row[f"{s}_us"])
             row[f"{s}_tput_std_pct"] = 100*np.std(d[f'server_{s}_processing_ms'])/np.mean(d[f'server_{s}_processing_ms'])
+
+            pir_tputs_std[f"{s}_tput_std"] = np.std(d[f'server_{s}_processing_ms'])
         
         db_size_log2 = int(math.log2(d["db_size"]))
-        item_size_bits = 8*d["item_size"]
-        # if (db_size_log2, item_size_bits) not in pirac_tput_results:
-        #     pirac_tput_results[(db_size_log2, item_size_bits)] = cal_pirac_tput(18, 
-        #                                                             item_size_bits, 5, rekeying = True, output=True)
-        # pirac_tput, pirac_tput_std = pirac_tput_results[(db_size_log2, item_size_bits)]
-        # row["xor_pirac_tput"] = utils.cal_tput_with_pirac(row["xor_tput"], pirac_tput)
-        # row["pir_pirac_tput"] = utils.cal_tput_with_pirac(row["pir_tput"], pirac_tput)
+        elem_size_bits = 8*d["item_size"]
+        
+        if (db_size_log2, elem_size_bits) not in pirac_tput_results:
+            pirac_tput_results[(db_size_log2, elem_size_bits)] = cal_pirac_tput(18, 
+                                                                    elem_size_bits, 5, key_refresh = True, output=True)
+        pirac_tput, pirac_tput_std = pirac_tput_results[(db_size_log2, elem_size_bits)]
+        row["xor_pirac_tput"] = utils.cal_tput_with_pirac(row["xor_tput"], pirac_tput)
+        row["pir_pirac_tput"] = utils.cal_tput_with_pirac(row["pir_tput"], pirac_tput)
 
-        # row["xor_pirac_tput_std_pct"] = (100*row["xor_pirac_tput"]*
-        #                         (pirac_tput_std/np.square(pirac_tput)+0.01*row["xor_tput_std_pct"]/row["xor_tput"]))
-        # row["pir_pirac_tput_std_pct"] = (100*row["pir_pirac_tput"]*
-        #                         (pirac_tput_std/np.square(pirac_tput)+0.01*row["pir_tput_std_pct"]/row["pir_tput"]))
+        row["xor_pirac_tput_std_pct"] = (100*row["xor_pirac_tput"]*
+                                (pirac_tput_std/np.square(pirac_tput)+pir_tputs_std["xor_tput_std_pct"]/np.square(row["xor_tput"])))
+        row["pir_pirac_tput_std_pct"] = (100*row["pir_pirac_tput"]*
+                                (pirac_tput_std/np.square(pirac_tput)+pir_tputs_std["pir_tput_std_pct"]/np.square(row["pir_tput"])))
         processed_data.append(row)
     
-    with open("results/data/multi_server/multi_server_smaller_peice.json", "w") as f:
+    with open("results/data/multi_server/multi_server.json", "w") as f:
         json.dump(processed_data, f, separators=(",\n", ": "))
 
     if output:
