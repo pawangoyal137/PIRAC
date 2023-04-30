@@ -7,51 +7,47 @@
 #include <time.h>
 #include "../include/aes.h"
 
-float testReKeying(uint64_t size)
+float testKeyRefresh(uint64_t numRefreshOps)
 {
-    uint128_t *seeds = malloc(sizeof(uint128_t) * size);
-    RAND_bytes((uint8_t *)seeds, sizeof(uint128_t) * size);
-
-    static uint8_t *prfKey = NULL; //(uint8_t*) malloc(16);
     static EVP_CIPHER_CTX *prfCtx;
-    static uint128_t counter = 0;
-
-    if (!prfKey)
+    if (!prfCtx)
     {
-        prfKey = (uint8_t *)malloc(16);
-
         if (!(prfCtx = EVP_CIPHER_CTX_new()))
             printf("errors ocurred when generating context\n");
-
-        if (!RAND_bytes(prfKey, 16))
-        {
-            printf("failed to seed randomness\n");
-        }
-
-        if (1 != EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ecb(), NULL, prfKey, NULL))
-            printf("errors ocurred when generating context\n");
-        EVP_CIPHER_CTX_set_padding(prfCtx, 0);
     }
 
-    float totalTime = 0;
+    uint8_t *oldKey = (uint8_t *)malloc(16);
+    uint8_t *newKey = (uint8_t *)malloc(16);
+    if (!RAND_bytes(oldKey, 16))
+        printf("failed to seed randomness\n");
+
     clock_t start = clock();
-    uint64_t i;
-    for (i = 0; i < size; i++)
+
+    for (int i = 0; i < numRefreshOps; i++)
     {
+        if (1 != EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ecb(), NULL, oldKey, NULL))
+            printf("errors ocurred when generating context\n");
+        EVP_CIPHER_CTX_set_padding(prfCtx, 0);
+
+        uint8_t epoch[16]; // TODO: set desired epoch number; currently zero
+
         // apply PRF to old key to get new key
-        uint8_t newKey[16];
         int len = 0;
-        if (1 != EVP_EncryptUpdate(prfCtx, (uint8_t *)&newKey, &len, (uint8_t *)&seeds[i], 16))
+        if (1 != EVP_EncryptUpdate(prfCtx, (uint8_t *)newKey, &len, (uint8_t *)&epoch, 16))
             printf("failed to generate new key\n");
 
         // key AES with the new key
-        struct AES *aes = initAES((uint8_t *)&newKey);
+        initAES((uint8_t *)newKey);
+
+        *oldKey = *newKey;
     }
 
+    free(oldKey);
+    free(newKey);
+
     clock_t end = clock();
-    totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    // printf("Re-Keying took %f ms\n", totalTime);
-    free(seeds);
+    float totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
+    // printf("Key refresh took %f ms\n", totalTime);
     return totalTime;
 }
 
@@ -90,7 +86,7 @@ float testReEncryption(uint64_t size, uint64_t elemsize)
     return totalTime;
 }
 
-void testReEncrypt()
+void runTests()
 {
     uint64_t size = 1 << 20;
     uint64_t elemsize = 128; // in blocks 62 * 128 bits = 1KB
@@ -100,11 +96,11 @@ void testReEncrypt()
 
     float totalTime = 0;
     clock_t start = clock();
-    testReKeying(size);
+    testKeyRefresh(size);
     clock_t end = clock();
     float ms = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
     totalTime += ms;
-    printf("Re-keying AES took %f ms\n", ms);
+    printf("KeyRefresh AES took %f ms\n", ms);
 
     uint128_t seed = seeds[0];
     free(seeds);
@@ -146,7 +142,7 @@ int main(int argc, char **argv)
 
     printf("******************************************\n");
     printf("Testing\n");
-    testReEncrypt();
+    runTests();
     printf("******************************************\n");
     printf("DONE\n");
     printf("******************************************\n\n");
