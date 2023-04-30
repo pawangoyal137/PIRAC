@@ -1,26 +1,16 @@
-    log2_db_size  elem_size  ...  simplepir_fs_overhead  simplepir_fs_tput_std_pct
-0             16        128  ...             410.335617                   0.808306
-1             16        512  ...             117.752397                   0.952283
-2             16       2048  ...              38.922707                   0.577779
-3             16       8192  ...              14.297234                   0.344060
-4             16      32768  ...               7.100638                   0.898179
-5             18        128  ...             481.710222                   0.566546
-6             18        512  ...             134.357995                   0.517488
-7             18       2048  ...              40.392621                   0.307243
-8             18       8192  ...              13.531655                   0.582321
-9             18      32768  ...               7.510176                   0.910056
-10            20        128  ...             540.481278                   0.291357
-11            20        512  ...             146.708816                   0.202106
-12            20       2048  ...              41.615142                   0.446353
-13            20       8192  ...              14.373686                   0.311984
-14            20      32768  ...               8.228846                   0.575513
+   log2_db_size  elem_size  ...  simplepir_fs_overhead  simplepir_fs_tput_std_pct
+0            20        128  ...             986.631763                   0.460503
+1            20        512  ...             266.727772                   0.266660
+2            20       2048  ...              73.211346                   0.497467
+3            20       8192  ...              22.315290                   0.143656
+4            20      32768  ...              10.243356                   0.447699
 
-[15 rows x 10 columns]
-Range of simplepir_bl_tput: 7768.17-11550.35MB/s
-Range of simplepir_bl_tput_std_pct: 1.10-26.18%
-Range of simplepir_mp_tput: 716.54-2223.25MB/s
-Range of simplepir_mp_tput_std_pct: 0.45-11.93%
-Range of simplepir_fs_tput: 18.93-1539.48MB/s
-Range of simplepir_fs_tput_std_pct: 0.20-0.95%
-Overhead of simplepir_mp_overhead: 4.95-13.86
-Overhead of simplepir_fs_overhead: 7.10-540.48
+[5 rows x 10 columns]
+Range of simplepir_bl_tput: 10446.71-11545.06MB/s
+Range of simplepir_bl_tput_std_pct: 1.30-2.75%
+Range of simplepir_mp_tput: 743.32-2201.09MB/s
+Range of simplepir_mp_tput_std_pct: 0.52-1.19%
+Range of simplepir_fs_tput: 10.59-1074.25MB/s
+Range of simplepir_fs_tput_std_pct: 0.14-0.50%
+Overhead of simplepir_mp_overhead: 5.25-14.05
+Overhead of simplepir_fs_overhead: 10.24-986.63

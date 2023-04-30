@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 pir_tput = df.loc[(df['log2_db_size'] == log2_db_size) &
                                     (df['elem_size'] == elem_size), f"{pir_name}_bl_tput"].values[0]
                 pir_tput_std_pct = df.loc[(df['log2_db_size'] == log2_db_size) &
-                                    (df['elem_size'] == elem_size), f"{pir_name}_tput_std_pct"].values[0]
+                                    (df['elem_size'] == elem_size), f"{pir_name}_bl_tput_std_pct"].values[0]
                 pir_tput_std = 0.01*pir_tput_std_pct*pir_tput
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
             for pm in pirac_modes:

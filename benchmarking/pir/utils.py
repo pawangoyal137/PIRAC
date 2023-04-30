@@ -17,7 +17,7 @@ CWPirPath = "../../constant-weight-pir/src/build"
 LOG2_DB_SIZE = 20
 ELEM_SIZE = 1024
 
-LOG2_DB_SIZES = [16,18,20]
+LOG2_DB_SIZES = [20]
 
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits

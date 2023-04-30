@@ -1,0 +1,26 @@
+    log2_db_size  elem_size  ...  spiralpir_fs_overhead  spiralpir_fs_tput_std_pct
+0             16        128  ...               1.492354                   0.593559
+1             16        512  ...               1.166180                   0.419958
+2             16       2048  ...               1.134333                   0.275573
+3             16       8192  ...               1.099558                   1.035945
+4             16      32768  ...               1.081507                   0.269162
+5             18        128  ...               1.638333                   0.407281
+6             18        512  ...               1.493490                   0.502286
+7             18       2048  ...               1.305915                   0.925424
+8             18       8192  ...               1.169726                   0.191388
+9             18      32768  ...               1.148275                   0.590981
+10            20        128  ...               2.949816                   0.373850
+11            20        512  ...               2.111689                   0.854424
+12            20       2048  ...               1.521375                   0.245638
+13            20       8192  ...               1.305539                   0.725918
+14            20      32768  ...               1.208483                   0.668574
+
+[15 rows x 10 columns]
+Range of spiralpir_bl_tput: 9.21-315.13MB/s
+Range of spiralpir_bl_tput_std_pct: 0.16-1.54%
+Range of spiralpir_mp_tput: 9.11-275.21MB/s
+Range of spiralpir_mp_tput_std_pct: 0.19-1.48%
+Range of spiralpir_fs_tput: 6.17-260.76MB/s
+Range of spiralpir_fs_tput_std_pct: 0.19-1.04%
+Overhead of spiralpir_mp_overhead: 1.01-1.15
+Overhead of spiralpir_fs_overhead: 1.08-2.95

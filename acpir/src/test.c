@@ -47,7 +47,7 @@ float runKeyRefresh(uint64_t numRefreshOps)
 
     clock_t end = clock();
     float totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    printf("Key refresh took %f ms\n", totalTime);
+    // printf("Key refresh took %f ms\n", totalTime);
     return totalTime;
 }
 
@@ -75,7 +75,7 @@ float runReEncryption(uint64_t size, uint64_t elemsize)
     reencrypt(aes, size, elemsize, database, output);
     clock_t end = clock();
     totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    printf("Re-encryption took %f ms\n", totalTime);
+    // printf("Re-encryption took %f ms\n", totalTime);
 
     free(database);
     free(output);

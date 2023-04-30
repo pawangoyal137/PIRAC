@@ -77,7 +77,10 @@ def pretty_print(data, bench_type):
     print(df)
     min_max_results = utils.find_max_min_pd_col(df, "tput")
     for k,v in min_max_results.items():
-        print("Range of {0:s}: {1:.2f}-{2:.2f}MB/s".format(k, v[0], v[1]))
+        units = "MB/s"
+        if "std" in k:
+            units="%"
+        print("Range of {0:s}: {1:.2f}-{2:.2f}{3:s}".format(k, v[0], v[1], units))
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -100,11 +103,11 @@ if __name__ == "__main__":
                 if bench_type == "re":
                     re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, output=output)
                     record[f"{bench_type}_tput"] = re_tput
-                    record[f"{bench_type}_tput_std"] = re_tput_std
+                    record[f"{bench_type}_tput_std_pct"] = 100*re_tput_std/re_tput
                 elif bench_type == "pirac":
                     pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, True, output=output)
                     record[f"{bench_type}_tput"]  = pirac_tput
-                    record[f"{bench_type}_tput_std"]  = pirac_tput_std
+                    record[f"{bench_type}_tput_std_pct"]  = 100*pirac_tput_std/pirac_tput
                 
                 data.append(record)
     

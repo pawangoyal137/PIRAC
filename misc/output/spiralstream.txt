@@ -1,0 +1,26 @@
+    log2_db_size  ...  spiralstream_fs_tput_std_pct
+0             16  ...                      0.704520
+1             16  ...                      1.145636
+2             16  ...                      2.933407
+3             16  ...                      0.421059
+4             16  ...                      0.604305
+5             18  ...                      0.484255
+6             18  ...                      0.365031
+7             18  ...                      1.195418
+8             18  ...                      0.568390
+9             18  ...                      0.430537
+10            20  ...                      1.143439
+11            20  ...                      0.871874
+12            20  ...                      0.509376
+13            20  ...                      0.414416
+14            20  ...                      0.484484
+
+[15 rows x 10 columns]
+Range of spiralstream_bl_tput: 22.94-556.58MB/s
+Range of spiralstream_bl_tput_std_pct: 0.20-3.78%
+Range of spiralstream_mp_tput: 22.33-443.56MB/s
+Range of spiralstream_mp_tput_std_pct: 0.29-3.54%
+Range of spiralstream_fs_tput: 10.34-407.76MB/s
+Range of spiralstream_fs_tput_std_pct: 0.37-2.93%
+Overhead of spiralstream_mp_overhead: 1.02-1.25
+Overhead of spiralstream_fs_overhead: 1.16-4.89
