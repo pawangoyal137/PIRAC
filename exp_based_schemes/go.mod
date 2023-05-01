@@ -1,3 +1,3 @@
-module exp_based_schemes
+module github.com/pawangoyal137/PIRAC/exp_based_schemes
 
-go 1.20
+go 1.17
