@@ -19,7 +19,7 @@ ELEM_SIZE = 1024
 
 LOG2_DB_SIZES = [20]
 
-LOG2_ELEM_SIZES = [7, 9, 11, 13, 15]
+LOG2_ELEM_SIZES = [7, 9, 11, 13, 15, 16, 17]
 ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
 
 def cal_tput_with_pirac(pir, pirac, batch=1):

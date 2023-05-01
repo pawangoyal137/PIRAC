@@ -1,5 +1,5 @@
-OUTPUT_FOLDER=results/output_new
-JSON_FILE_FOLDER=results/data/single_server_new
+OUTPUT_FOLDER=results/output
+JSON_FILE_FOLDER=results/data/single_server
 EVAL_FILE=pir/pir.py
 
 pir_schemes=("simplepir" "spiralpir" "spiralstream" "spiralpack" "spiralstreampack" "sealpir" "fastpir")
