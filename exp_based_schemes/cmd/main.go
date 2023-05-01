@@ -7,7 +7,7 @@ import (
 	"math/big"
 	"time"
 
-	"../elgamal"
+	"exp_based_schemes/elgamal"
 )
 
 var NUM_TRIALS = 1000

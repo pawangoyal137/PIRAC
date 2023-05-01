@@ -5,7 +5,7 @@ import (
 	crand "crypto/rand"
 	"math/big"
 
-	"../ec"
+	"exp_based_schemes/ec"
 )
 
 type PublicKey struct {

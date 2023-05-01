@@ -4,7 +4,7 @@ import (
 	"crypto/rand"
 	"math/big"
 
-	"../ec"
+	"exp_based_schemes/ec"
 )
 
 type Ciphertext struct {

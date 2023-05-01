@@ -6,6 +6,8 @@ import (
 	"math/big"
 	"math/rand"
 	"testing"
+
+	"exp_based_schemes/ec"
 )
 
 func TestEncryptDecrypt(t *testing.T) {
