@@ -5,6 +5,10 @@ git clone git@github.com:pawangoyal137/PIRAC.git
 ```
 
 ## Dependencies 
+```
+sudo apt-get update
+```
+ 
 <!-- * GMP -->
 * Go 1.13 or higher 
 * OpenSSL 1.1.1f 
