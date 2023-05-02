@@ -108,21 +108,28 @@ if __name__ == "__main__":
     data = []
     for log2_db_size in log2_db_sizes:
         for elem_size in elem_sizes:
-            pir_tput, pir_tput_std = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output, num_iter=num_iter)            
+            pir_tput, pir_tput_std = cal_pir_tput(pir_name, log2_db_size, elem_size, add_arguments, output=output, num_iter=num_iter)
+            # with open(f"results/data/single_server/{pir_name}.json") as f:
+            #     df = pd.read_json(f)
+            #     pir_tput = df.loc[(df['log2_db_size'] == log2_db_size) &
+            #                         (df['elem_size'] == elem_size), f"{pir_name}_bl_tput"].values[0]
+            #     pir_tput_std_pct = df.loc[(df['log2_db_size'] == log2_db_size) &
+            #                         (df['elem_size'] == elem_size), f"{pir_name}_bl_tput_std_pct"].values[0]
+            #     pir_tput_std = 0.01*pir_tput_std_pct*pir_tput            
             record = {"log2_db_size":log2_db_size, "elem_size":elem_size}
             for pm in pirac_modes:
                 if pm=="bl":
                     record[f"{pir_name}_bl_tput"] = pir_tput
                     record[f"{pir_name}_bl_tput_std_pct"] = 100*pir_tput_std/pir_tput
                 elif pm=="mp":
-                    re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, key_refresh = False)
+                    re_tput, re_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, key_refresh = False, output=output)
                     pir_re_tput = utils.cal_tput_with_pirac(pir_tput, re_tput)
                     record[f"{pir_name}_mp_tput"] = pir_re_tput
                     record[f"{pir_name}_mp_overhead"] = pir_tput/pir_re_tput
                     record[f"{pir_name}_mp_tput_std_pct"] = 100*pir_re_tput*(pir_tput_std/np.square(pir_tput)+
                                                                         re_tput_std/np.square(re_tput))
                 elif pm=="fs":
-                    pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, key_refresh = True)
+                    pirac_tput, pirac_tput_std = cal_pirac_tput(log2_db_size, elem_size,  num_iter, key_refresh = True, output=output)
                     pir_pirac_tput = utils.cal_tput_with_pirac(pir_tput, pirac_tput)
                     record[f"{pir_name}_fs_tput"] = pir_pirac_tput
                     record[f"{pir_name}_fs_overhead"] = pir_tput/ pir_pirac_tput
