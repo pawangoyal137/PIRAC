@@ -1,3 +1,3 @@
-module github.com/pawangoyal137/PIRAC/exp_based_schemes
+module github.com/pawangoyal137/PIRAC/pke
 
 go 1.17
