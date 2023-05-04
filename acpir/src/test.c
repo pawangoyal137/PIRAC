@@ -25,15 +25,18 @@ float runKeyRefresh(uint64_t numRefreshOps)
 
     for (int i = 0; i < numRefreshOps; i++)
     {
-        if (1 != EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ecb(), NULL, oldKey, NULL))
-            printf("errors ocurred when generating context\n");
+        int status = EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ecb(), NULL, oldKey, NULL);
+        if (status != 1)
+            printf("errors ocurred when initializing context\n");
+
         EVP_CIPHER_CTX_set_padding(prfCtx, 0);
 
         uint8_t epoch[16]; // TODO: set desired epoch number; currently zero
 
         // apply PRF to epoch to get new key
         int len = 0;
-        if (1 != EVP_EncryptUpdate(prfCtx, (uint8_t *)newKey, &len, (uint8_t *)&epoch, 16))
+        status = EVP_EncryptUpdate(prfCtx, (uint8_t *)newKey, &len, (uint8_t *)&epoch, 16);
+        if (status != 1)
             printf("failed to generate new key\n");
 
         // key AES with the new key
@@ -47,7 +50,6 @@ float runKeyRefresh(uint64_t numRefreshOps)
 
     clock_t end = clock();
     float totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    // printf("Key refresh took %f ms\n", totalTime);
     return totalTime;
 }
 
@@ -75,7 +77,6 @@ float runReEncryption(uint64_t size, uint64_t elemsize)
     reencrypt(aes, size, elemsize, database, output);
     clock_t end = clock();
     totalTime = (float)(end - start) / (CLOCKS_PER_SEC / 1000);
-    // printf("Re-encryption took %f ms\n", totalTime);
 
     free(database);
     free(output);
@@ -87,15 +88,17 @@ float runReEncryption(uint64_t size, uint64_t elemsize)
 int main(int argc, char **argv)
 {
 
-    uint64_t size = 1<<16;
+    uint64_t size = 1 << 16;
     uint64_t elemsize_128bits = 2;
 
-
     printf("******************************************\n");
-    printf("Testing\n");
-    runKeyRefresh(size),
+    printf("Testing with n=%llu and l=%llu (aes blocks)\n", size, elemsize_128bits);
     printf("******************************************\n");
-    runReEncryption(size, elemsize_128bits);
-    printf("******************************************\n\n");
+    float totalTime = runKeyRefresh(size);
+    printf("Key refresh took %f ms\n", totalTime);
+    printf("******************************************\n");
+    totalTime = runReEncryption(size, elemsize_128bits);
+    printf("Re-encryption took %f ms\n", totalTime);
+    printf("******************************************\n");
     printf("DONE\n");
 }
