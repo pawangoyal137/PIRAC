@@ -1,3 +1,5 @@
+// From: https://github.com/privacypass/challenge-bypass-server
+
 package ec
 
 import (

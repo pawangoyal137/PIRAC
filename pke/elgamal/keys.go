@@ -5,7 +5,7 @@ import (
 	crand "crypto/rand"
 	"math/big"
 
-	"github.com/pawangoyal137/PIRAC/exp_based_schemes/ec"
+	"github.com/pawangoyal137/PIRAC/pke/ec"
 )
 
 type PublicKey struct {

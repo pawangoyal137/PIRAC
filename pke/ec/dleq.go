@@ -1,3 +1,5 @@
+// From: https://github.com/privacypass/challenge-bypass-server
+
 // An implementation of the widely-used (honest-verifier) NIZK proof of
 // discrete logarithm equality originally described in the Chaum and Pedersen
 // paper "Wallet Databases with Observers", using Go's standard crypto/elliptic

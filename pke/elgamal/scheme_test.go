@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/pawangoyal137/PIRAC/exp_based_schemes/ec"
+	"github.com/pawangoyal137/PIRAC/pke/ec"
 )
 
 func TestEncryptDecrypt(t *testing.T) {

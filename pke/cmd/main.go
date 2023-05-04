@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/pawangoyal137/PIRAC/exp_based_schemes/elgamal"
+	"github.com/pawangoyal137/PIRAC/pke/elgamal"
 )
 
 var NUM_TRIALS = 1000
