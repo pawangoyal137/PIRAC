@@ -13,11 +13,12 @@ JSON_PATH = '../../PACLs/bench-pir/pir.json'
 
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Run benchmarking for paillier')
-parser.add_argument('-o','--output', action='store_true',
-                     required=False, 
-                     help='If the flag is passed, display the output of the simplepir')
+parser.add_argument('-o', '--output', action='store_true',
+                    required=False,
+                    help='If the flag is passed, display the output of the simplepir')
 
 pd.set_option('display.max_columns', None)
+
 
 def process_results(output=False):
     # Read the JSON file
@@ -36,27 +37,33 @@ def process_results(output=False):
         }
         for s in SCHEMES:
             row[f"{s}_us"] = np.mean(d[f'server_{s}_processing_ms'])
-            row[f"{s}_tput"] = db_size_bytes/ (row[f"{s}_us"])
-            row[f"{s}_tput_std_pct"] = 100*np.std(d[f'server_{s}_processing_ms'])/np.mean(d[f'server_{s}_processing_ms'])
+            row[f"{s}_tput"] = db_size_bytes / (row[f"{s}_us"])
+            row[f"{s}_tput_std_pct"] = 100 * \
+                np.std(d[f'server_{s}_processing_ms']) / \
+                np.mean(d[f'server_{s}_processing_ms'])
 
-            pir_tputs_std[f"{s}_tput_std"] = row[f"{s}_tput"]*np.std(d[f'server_{s}_processing_ms'])/np.mean(d[f'server_{s}_processing_ms'])
-        
+            pir_tputs_std[f"{s}_tput_std"] = row[f"{s}_tput"]*np.std(
+                d[f'server_{s}_processing_ms'])/np.mean(d[f'server_{s}_processing_ms'])
+
         db_size_log2 = int(math.log2(d["db_size"]))
         elem_size_bits = 8*d["item_size"]
-        
-        if (db_size_log2, elem_size_bits) not in pirac_tput_results:
-            pirac_tput_results[(db_size_log2, elem_size_bits)] = cal_pirac_tput(db_size_log2, 
-                                                                    elem_size_bits, 5, key_refresh = True, output=True)
-        pirac_tput, pirac_tput_std = pirac_tput_results[(db_size_log2, elem_size_bits)]
-        row["xor_pirac_tput"] = utils.cal_tput_with_pirac(row["xor_tput"], pirac_tput)
-        row["pir_pirac_tput"] = utils.cal_tput_with_pirac(row["pir_tput"], pirac_tput)
 
-        row["xor_pirac_tput_std_pct"] = (100*row["xor_pirac_tput"]*
-                                (pirac_tput_std/np.square(pirac_tput)+pir_tputs_std["xor_tput_std"]/np.square(row["xor_tput"])))
-        row["pir_pirac_tput_std_pct"] = (100*row["pir_pirac_tput"]*
-                                (pirac_tput_std/np.square(pirac_tput)+pir_tputs_std["pir_tput_std"]/np.square(row["pir_tput"])))
+        if (db_size_log2, elem_size_bits) not in pirac_tput_results:
+            pirac_tput_results[(db_size_log2, elem_size_bits)] = cal_pirac_tput(db_size_log2,
+                                                                                elem_size_bits, 5, key_refresh=True, output=True)
+        pirac_tput, pirac_tput_std = pirac_tput_results[(
+            db_size_log2, elem_size_bits)]
+        row["xor_pirac_tput"] = utils.cal_tput_with_pirac(
+            row["xor_tput"], pirac_tput)
+        row["pir_pirac_tput"] = utils.cal_tput_with_pirac(
+            row["pir_tput"], pirac_tput)
+
+        row["xor_pirac_tput_std_pct"] = (100*row["xor_pirac_tput"] *
+                                         (pirac_tput_std/np.square(pirac_tput)+pir_tputs_std["xor_tput_std"]/np.square(row["xor_tput"])))
+        row["pir_pirac_tput_std_pct"] = (100*row["pir_pirac_tput"] *
+                                         (pirac_tput_std/np.square(pirac_tput)+pir_tputs_std["pir_tput_std"]/np.square(row["pir_tput"])))
         processed_data.append(row)
-    
+
     with open("results/data/multi_server/multi_server.json", "w") as f:
         json.dump(processed_data, f, separators=(",\n", ": "))
 
@@ -68,15 +75,17 @@ def process_results(output=False):
         df = df.set_index('elem_size')
 
         # Sort the DataFrame by db_size and item_size in ascending order
-        df = df.sort_values(['log2_db_size', 'elem_size'], ascending=[True, True])
+        df = df.sort_values(['log2_db_size', 'elem_size'],
+                            ascending=[True, True])
 
         # Print the sorted DataFrame
         print(df)
 
     return processed_data
 
+
 if __name__ == "__main__":
     args = parser.parse_args()
     output = args.output
-    
+
     process_results(output)

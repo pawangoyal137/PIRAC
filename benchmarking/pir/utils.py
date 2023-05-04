@@ -20,13 +20,16 @@ ELEM_SIZE = 1024
 LOG2_DB_SIZES = [20]
 
 LOG2_ELEM_SIZES = [7, 9, 11, 13, 15, 16, 17]
-ELEM_SIZES = [1<<i for i in LOG2_ELEM_SIZES]    # in bits
+ELEM_SIZES = [1 << i for i in LOG2_ELEM_SIZES]    # in bits
+
 
 def cal_tput_with_pirac(pir, pirac, batch=1):
     return batch/(batch/pir + 1/pirac)
 
+
 def cal_tput_for_comb(pir, pir_with_pirac, batch=1):
     return batch/((batch-1)/pir + 1/pir_with_pirac)
+
 
 def extract_num(s):
     """
@@ -39,6 +42,7 @@ def extract_num(s):
     else:
         return None
 
+
 def get_factor(itemsize, maxsize):
     factor = 1
     if itemsize <= maxsize:
@@ -46,6 +50,7 @@ def get_factor(itemsize, maxsize):
     else:
         factor = math.ceil(itemsize / maxsize)
     return factor
+
 
 def create_df(data):
     # Create a pandas DataFrame from the list of dictionaries
@@ -56,10 +61,11 @@ def create_df(data):
 
     return df
 
+
 def find_max_min_pd_col(df, col_name_like):
     # Filter columns that contain "tput"
     cols = [col for col in df.columns if col_name_like in col]
-    if len(cols)==0:
+    if len(cols) == 0:
         return None
 
     # Calculate min and max values for each column
@@ -72,13 +78,14 @@ def find_max_min_pd_col(df, col_name_like):
 
     return output_dict
 
+
 def concatenate_jsons(directory, verbose=False):
     """
     Create a combined json merged on log2_db_size and elem_size
     """
     filenames = []
     for filename in os.listdir(directory):
-        if filename.endswith(".json"): 
+        if filename.endswith(".json"):
             filenames.append(os.path.join(directory, filename))
             continue
 
@@ -86,11 +93,11 @@ def concatenate_jsons(directory, verbose=False):
     for fname in filenames:
         dfs.append(pd.read_json(fname))
 
-    df_merged = reduce(lambda  left,right: pd.merge(left,right,
-                on=['log2_db_size', "elem_size"], how='outer'), dfs).fillna('void')
+    df_merged = reduce(lambda left, right: pd.merge(left, right,
+                                                    on=['log2_db_size', "elem_size"], how='outer'), dfs).fillna('void')
     df_merged = df_merged.sort_values(by=['log2_db_size', 'elem_size'])
 
     if verbose:
         print(df_merged)
-    
+
     return df_merged
