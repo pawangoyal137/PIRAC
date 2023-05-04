@@ -5,16 +5,11 @@ git clone git@github.com:pawangoyal137/PIRAC.git
 ```
 
 ## Dependencies 
-```
-sudo apt-get update
-```
- 
-<!-- * GMP -->
+
 * Go 1.13 or higher 
 * OpenSSL 1.1.1f 
 * GNU Make
 * Cmake
-
 
 |Dependency |Install dependencies (Ubuntu): | Install dependencies (CentOS):|
 |--------------|--------------|-----------|
@@ -24,7 +19,7 @@ sudo apt-get update
 |Cmake |```sudo apt-get install cmake```| ```sudo yum install cmake```|
 
 
-## Python Packages
+### Python Packages
 Install following python packages
 ```
 sudo apt install python3-pip
@@ -35,15 +30,15 @@ sudo apt-get install python3-pandas
 
 ## Setup PIR schemes
 
-### Setup Spiral
-Run following commands to download and setup Spiral PIR in home direcotry 
+### Setup SimplePIR
+Run following commands to download and setup Spiral PIR in *home* direcotry 
 ```
 cd ~
 git clone https://github.com/pawangoyal137/simplepir
 ```
 The above repo is a copy of the original repo with slight modifications
 
-### Setup Spiral
+### Setup Spiral PIR
 Run following commands to download and setup Spiral PIR in home direcotry 
 ```
 # install dependencies
@@ -57,7 +52,7 @@ git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 ./vcpkg/vcpkg install hexl
 
-# clone the spiral github
+# clone the Spiral PIR repo
 git clone https://github.com/menonsamir/spiral.git
 ```
 
@@ -68,10 +63,10 @@ python3 select_params.py 20 256
 ```
 More information can be found at https://github.com/menonsamir/spiral
 
-### Setup Seal
+### Setup Seal PIR
 Run following commands to download and setup Seal PIR in home direcotry
 ```
-# clone the SEAL
+# clone the SEAL repo
 cd ~
 git clone https://github.com/microsoft/SEAL
 cd SEAL
@@ -84,7 +79,7 @@ cmake -S . -B build
 cmake --build build
 sudo cmake --install build
 
-# clone SEAL PIR
+# clone the SEAL PIR repo
 cd ~
 git clone https://github.com/pawangoyal137/SealPIR
 cd SealPIR
@@ -96,7 +91,7 @@ ctest .
 ```
 More information can be found at https://github.com/microsoft/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
 
-### Setup Fast
+### Setup FastPIR
 
 ```
 git clone https://github.com/ishtiyaque/FastPIR
@@ -105,10 +100,15 @@ cmake .
 make
 ```
 
-## Setup
+## Setup Pirac
 
-### Create shared library
+### Compile the C library
 ```
 cd acpir/src
-make test.so
+make 
+```
+
+Run Pirac encryption/re-keying benchmarks
+```
+./test
 ```
