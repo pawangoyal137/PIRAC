@@ -28,18 +28,18 @@ sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pandas
 ```
 
-## Setup PIR schemes
+## Set up PIR schemes
 
-### Setup SimplePIR
-Run following commands to download and setup Spiral PIR in *home* direcotry 
+### Set up SimplePIR
+Run following commands to download and set up Spiral PIR in *home* direcotry 
 ```
 cd ~
 git clone https://github.com/pawangoyal137/simplepir
 ```
 The above repo is a copy of the original repo with slight modifications
 
-### Setup Spiral PIR
-Run following commands to download and setup Spiral PIR in home direcotry 
+### Set up Spiral PIR
+Run following commands to download and set up Spiral PIR in home direcotry 
 ```
 # install dependencies
 sudo apt-get install curl zip unzip tar
@@ -63,8 +63,8 @@ python3 select_params.py 20 256
 ```
 More information can be found at https://github.com/menonsamir/spiral
 
-### Setup Seal PIR
-Run following commands to download and setup Seal PIR in home direcotry
+### Set up Seal PIR
+Run following commands to download and set up Seal PIR in home direcotry
 ```
 # clone the SEAL repo
 cd ~
