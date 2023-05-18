@@ -1,6 +1,6 @@
 OUTPUT_FOLDER=results/output/
 JSON_FILE_FOLDER=results/data
-EVAL_FILE=pir/pir.py
+EVAL_FILE=pir/single_server_pir.py
 
 # 48 bit keywords 
 OUTPUT_FILE="${OUTPUT_FOLDER}/cwpir_48.txt"
