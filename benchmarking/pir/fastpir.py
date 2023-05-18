@@ -11,7 +11,7 @@ def cal_fastpir_tput(N, D, output=False, num_iter=5):
     cwd = os.getcwd()
     os.chdir(utils.FastPirPath)
 
-    maxsize = 72960 # 9120 bytes
+    maxsize = 65536 # 8192 bytes
     factor = utils.get_factor(D, maxsize)
     elem_size = min(maxsize, D)
 

@@ -28,19 +28,33 @@ sudo apt-get install python3-numpy
 sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pandas
 ```
+## Setup PIRAC
+### Create shared library
+```
+cd acpir/src
+make test.so
+```
 
-## Setup PIR schemes
+## Setup Single Server PIR Schemes
 
-### Setup Spiral
+All the PIR schemes are downloaded in `other_pir_schemes` folder. Run the following command to get the relevant githubs
+```
+git pull
+git submodule init
+```
+
+Now additional steps are required to build a few of these githubs which are described below. 
+
+<!-- ### Setup Spiral
 Run following commands to download and setup Spiral PIR in home direcotry 
 ```
 cd ~
 git clone https://github.com/pawangoyal137/simplepir
 ```
-The above repo is a copy of the original repo with slight modifications
+The above repo is a copy of the original repo with slight modifications -->
 
 ### Setup Spiral
-Run following commands to download and setup Spiral PIR in home direcotry 
+Run following commands to build Spiral PIR 
 ```
 # install dependencies
 sudo apt-get install curl zip unzip tar
@@ -52,19 +66,17 @@ cd ~
 git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 ./vcpkg/vcpkg install hexl
-
-# clone the spiral github
-git clone https://github.com/menonsamir/spiral.git
 ```
 
 Run following commands to ensure spiral pir is correctly working
 ```
-cd ~/spiral
+# cd to the Spiral github
+cd other_pir_schemes/Spiral
 python3 select_params.py 20 256
 ```
 More information can be found at https://github.com/menonsamir/spiral
 
-### Setup Seal
+### Setup SealPIR
 Run following commands to download and setup Seal PIR in home direcotry
 ```
 # clone the SEAL
@@ -80,31 +92,45 @@ cmake -S . -B build
 cmake --build build
 sudo cmake --install build
 
-# clone SEAL PIR
-cd ~
-git clone https://github.com/pawangoyal137/SealPIR
-cd SealPIR
-
-# build and test
+# build and test SealPIR
+cd other_pir_schemes/SealPIR/
 cmake .
 make
 ctest .
 ```
-More information can be found at https://github.com/microsoft/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
+More information can be found at https://github.com/pawangoyal137/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
 
-### Setup Fast
+### Setup FastPIR
 
 ```
-git clone https://github.com/ishtiyaque/FastPIR
-cd FastPIR/src/
+# build FastPIR
+cd other_pir_schemes/FastPIR/src/
 cmake .
 make
 ```
+More information can be found at https://github.com/ishtiyaque/FastPIR
 
-## Setup
+### Setup Constant-Weight-PIR
+```
+# build CWPIR
+cd other_pir_schemes/CWPIR/src/build
+cmake ..
+make
+```
+More information can be found at https://github.com/pawangoyal137/Constant-Weight-PIR
 
-### Create shared library
+## Setup Multi-Server PIR Schemes
+
+### Setup Percy++
+We present detailed steps to setup Percy++ in the README in https://github.com/pawangoyal137/Percyxx. **TODO: Currently this repo does not download this repo when submodules are initialized**.
+
+### Setup PACLs and multi server
 ```
-cd acpir/src
-make test.so
+cd other_pir_schemes/PACLs
+git submodule update --init --recursive
+go mod tidy
+cd vdpf/src && make
 ```
+More information can be found at https://github.com/pawangoyal137/PACLs
+<!-- head -c 1G </dev/urandom >myfile
+shred -n 1 -s 45G database_45G -->
