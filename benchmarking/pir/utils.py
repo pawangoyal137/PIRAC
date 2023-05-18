@@ -4,14 +4,21 @@ import math
 import pandas as pd
 from functools import reduce
 
+OTHER_PIR_SCHEMEs_FOLDER = "../other_pir_schemes"
 # declare the paths for the other PIR schemes
 # relative to benchmarking folder
-FastPirPath = "../../FastPIR"
-SimplePirPath = "../../SimplePIR/pir"
-SpiralPirPath = "../../spiral"
-SealPirPath = "../../SealPIR/bin"
-PaillierPath = "../paillier"
-CWPirPath = "../../constant-weight-pir/src/build"
+# Single Server PIR schemes
+FastPirPath = f"{OTHER_PIR_SCHEMEs_FOLDER}/FastPIR"
+SimplePirPath = f"{OTHER_PIR_SCHEMEs_FOLDER}/SimplePIR/pir"
+SpiralPirPath = f"{OTHER_PIR_SCHEMEs_FOLDER}/Spiral"
+SealPirPath = f"{OTHER_PIR_SCHEMEs_FOLDER}/SealPIR/bin"
+
+# Keyword based PIR scheme
+CWPirPath = f"{OTHER_PIR_SCHEMEs_FOLDER}/CWPIR/src/build"
+
+
+# Paillier
+PaillierPath = "../pke/paillier"
 
 # declare the constants/ defaults for the experiments
 LOG2_DB_SIZE = 20
@@ -25,7 +32,7 @@ ELEM_SIZES = [1 << i for i in LOG2_ELEM_SIZES]    # in bits
 
 def cal_tput_with_pirac(pir, pirac, batch=1):
     return batch/(batch/pir + 1/pirac)
-
+    
 
 def cal_tput_for_comb(pir, pir_with_pirac, batch=1):
     return batch/((batch-1)/pir + 1/pir_with_pirac)

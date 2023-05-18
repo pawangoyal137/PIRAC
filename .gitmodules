@@ -1,0 +1,15 @@
+[submodule "other_pir_schemes/SimplePIR"]
+	path = other_pir_schemes/SimplePIR
+	url = https://github.com/pawangoyal137/SimplePIR
+[submodule "other_pir_schemes/Spiral"]
+	path = other_pir_schemes/Spiral
+	url = https://github.com/menonsamir/spiral.git
+[submodule "other_pir_schemes/FastPIR"]
+	path = other_pir_schemes/FastPIR
+	url = https://github.com/ishtiyaque/FastPIR
+[submodule "other_pir_schemes/CWPIR"]
+	path = other_pir_schemes/CWPIR
+	url = https://github.com/pawangoyal137/Constant-Weight-PIR
+[submodule "other_pir_schemes/SealPIR"]
+	path = other_pir_schemes/SealPIR
+	url = https://github.com/pawangoyal137/SealPIR
