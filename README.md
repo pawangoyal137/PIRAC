@@ -1,7 +1,6 @@
 # Getting started
-Clone the repository (fix it, assume ssh keys)
 ```
-git clone git@github.com:pawangoyal137/PIRAC.git
+git clone https://github.com/pawangoyal137/PIRAC
 ```
 
 ## Dependencies 
@@ -27,14 +26,14 @@ sudo apt-get install python3-numpy
 sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pandas
 ```
-## Setup PIRAC
+## Set up PIRAC
 ### Create shared library
 ```
 cd acpir/src
 make test.so
 ```
 
-## Setup Single Server PIR Schemes
+## Set up Single Server PIR Schemes
 
 All the PIR schemes are downloaded in `other_pir_schemes` folder. Run the following command to get the relevant githubs
 ```
@@ -52,7 +51,7 @@ git clone https://github.com/pawangoyal137/simplepir
 ```
 The above repo is a copy of the original repo with slight modifications -->
 
-### Setup Spiral
+### Set up Spiral
 Run following commands to build Spiral PIR 
 ```
 # install dependencies
@@ -75,7 +74,7 @@ python3 select_params.py 20 256
 ```
 More information can be found at https://github.com/menonsamir/spiral
 
-### Setup SealPIR
+### Set up SealPIR
 Run following commands to download and setup Seal PIR in home direcotry
 ```
 # clone the SEAL repo
@@ -99,7 +98,7 @@ ctest .
 ```
 More information can be found at https://github.com/pawangoyal137/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
 
-### Setup FastPIR
+### Set up FastPIR
 
 ```
 # build FastPIR
@@ -109,7 +108,7 @@ make
 ```
 More information can be found at https://github.com/ishtiyaque/FastPIR
 
-### Setup Constant-Weight-PIR
+### Set up Constant-Weight-PIR
 ```
 # build CWPIR
 cd other_pir_schemes/CWPIR/src/build
@@ -118,12 +117,12 @@ make
 ```
 More information can be found at https://github.com/pawangoyal137/Constant-Weight-PIR
 
-## Setup Multi-Server PIR Schemes
+## Set up Multi-Server PIR Schemes
 
-### Setup Percy++
+### Set up Percy++
 We present detailed steps to setup Percy++ in the README in https://github.com/pawangoyal137/Percyxx. **TODO: Currently this repo does not download this repo when submodules are initialized**.
 
-### Setup PACLs and multi server
+### Set up PACLs and multi server
 ```
 cd other_pir_schemes/PACLs
 git submodule update --init --recursive

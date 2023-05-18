@@ -1,4 +1,3 @@
-from pir import cal_pir_tput
 from pirac import cal_pirac_tput
 
 import matplotlib
