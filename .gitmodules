@@ -13,3 +13,6 @@
 [submodule "other_pir_schemes/SealPIR"]
 	path = other_pir_schemes/SealPIR
 	url = https://github.com/pawangoyal137/SealPIR
+[submodule "other_pir_schemes/PACLs"]
+	path = other_pir_schemes/PACLs
+	url = https://github.com/pawangoyal137/PACLs
