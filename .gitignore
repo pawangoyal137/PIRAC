@@ -7,3 +7,4 @@ __pycache__
 *.a
 *.o
 /acpir/src/test
+/benchmarking/images

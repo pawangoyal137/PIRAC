@@ -5,12 +5,11 @@ git clone git@github.com:pawangoyal137/PIRAC.git
 ```
 
 ## Dependencies 
-<!-- * GMP -->
+
 * Go 1.13 or higher 
 * OpenSSL 1.1.1f 
 * GNU Make
 * Cmake
-
 
 |Dependency |Install dependencies (Ubuntu): | Install dependencies (CentOS):|
 |--------------|--------------|-----------|
@@ -20,7 +19,7 @@ git clone git@github.com:pawangoyal137/PIRAC.git
 |Cmake |```sudo apt-get install cmake```| ```sudo yum install cmake```|
 
 
-## Python Packages
+### Python Packages
 Install following python packages
 ```
 sudo apt install python3-pip
@@ -79,7 +78,7 @@ More information can be found at https://github.com/menonsamir/spiral
 ### Setup SealPIR
 Run following commands to download and setup Seal PIR in home direcotry
 ```
-# clone the SEAL
+# clone the SEAL repo
 cd ~
 git clone https://github.com/microsoft/SEAL
 cd SEAL

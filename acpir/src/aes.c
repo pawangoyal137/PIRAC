@@ -1,12 +1,5 @@
-// Implementation of the Matyas–Meyer–Oseas one-way compression function.
-// See https://crypto.stackexchange.com/questions/56247/matyas-meyer-oseas-for-super-fast-single-block-hash-function
-// and https://en.wikipedia.org/wiki/One-way_compression_function
-
 #include "../include/aes.h"
-#include <openssl/rand.h>
 #include <stdint.h>
-#include <time.h>
-#include <math.h>
 
 struct AES *initAES(uint8_t *seed)
 {
@@ -14,21 +7,16 @@ struct AES *initAES(uint8_t *seed)
     struct AES *aes = malloc(sizeof(struct AES));
 
     if (!(ctx = EVP_CIPHER_CTX_new()))
-        printf("errors occured in creating context\n");
+        printf("aes context error\n");
 
-    if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_ecb(), NULL, (uint8_t *)seed, NULL))
-        printf("errors occurred in randomness init\n");
+    int status = EVP_EncryptInit_ex(ctx, EVP_aes_128_ecb(), NULL, (uint8_t *)seed, NULL);
+    if (status != 1)
+        printf("aes randomness init error\n");
 
     EVP_CIPHER_CTX_set_padding(ctx, 0);
 
     aes->ctx = ctx;
     return aes;
-}
-
-void destroyAES(struct AES *aes)
-{
-    EVP_CIPHER_CTX_free(aes->ctx);
-    free(aes);
 }
 
 void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint128_t *input, uint128_t *output)
@@ -37,7 +25,14 @@ void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint128_t *inp
     for (i = 0; i < size * elemsize; i += elemsize)
     {
         int len = 0;
-        if (1 != EVP_EncryptUpdate(aes->ctx, (uint8_t *)&output[i], &len, (uint8_t *)&input[i], sizeof(uint128_t) * elemsize))
+        int status = EVP_EncryptUpdate(aes->ctx, (uint8_t *)&output[i], &len, (uint8_t *)&input[i], sizeof(uint128_t) * elemsize);
+        if (status != 1)
             printf("errors occurred when encrypting\n");
     }
+}
+
+void destroyAES(struct AES *aes)
+{
+    EVP_CIPHER_CTX_free(aes->ctx);
+    free(aes);
 }

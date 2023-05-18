@@ -4,6 +4,7 @@ import numpy as np
 
 import utils
 
+
 def cal_fastpir_tput(N, D, output=False, num_iter=5):
     """
     Take db sizes in log 2 and elem_sizes in bits
@@ -11,17 +12,17 @@ def cal_fastpir_tput(N, D, output=False, num_iter=5):
     cwd = os.getcwd()
     os.chdir(utils.FastPirPath)
 
-    maxsize = 65536 # 8192 bytes
+    maxsize = 65536   # 8192 bytes
     factor = utils.get_factor(D, maxsize)
     elem_size = min(maxsize, D)
 
     tputs = []
     for _ in range(num_iter):
-        process = subprocess.Popen(f'bin/fastpir -n {1<<N} -s {elem_size//8}', 
-                                shell=True,
-                                stdout=subprocess.PIPE, 
-                                stderr=subprocess.PIPE,
-                                universal_newlines=True)
+        process = subprocess.Popen(f'bin/fastpir -n {1<<N} -s {elem_size//8}',
+                                   shell=True,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE,
+                                   universal_newlines=True)
 
         correct_result = False
         while True:
@@ -39,7 +40,7 @@ def cal_fastpir_tput(N, D, output=False, num_iter=5):
                 break
 
         assert correct_result
-        database_size_bytes = (1<<N)*(D//8)
+        database_size_bytes = (1 << N)*(D//8)
         total_including_factor = factor * total_us
 
         tput = database_size_bytes/total_including_factor
@@ -47,10 +48,12 @@ def cal_fastpir_tput(N, D, output=False, num_iter=5):
 
     if output:
         print(f"Factor = {factor}, elem size = {elem_size}")
-        print(f"Total server time: {total_us} us, Total Time after factor = {total_including_factor} us")
+        print(
+            f"Total server time: {total_us} us, Total Time after factor = {total_including_factor} us")
         print(f"Throughput on Fastpir = {np.mean(tputs)}+-{np.std(tputs)}MB/s")
     os.chdir(cwd)
     return np.mean(tputs), np.std(tputs)
+
 
 if __name__ == "__main__":
     pass

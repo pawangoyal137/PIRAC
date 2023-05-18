@@ -3,12 +3,9 @@ from pirac import cal_pirac_tput
 
 import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import os
 import numpy as np
 import argparse
 import itertools
-import pandas as pd
 
 import utils
 
@@ -34,26 +31,27 @@ error_opacity = 0.15
 colorb = "#8e44ad"
 # define the parser for running the experiments
 parser = argparse.ArgumentParser(description='Create plots for the paper')
-parser.add_argument('-exp','--expType', choices=["es", "batch"],
-                     required=True, type=str,
-                     help='What type of plot to plot')
-parser.add_argument('-bv','--batchValues', nargs='+',
-                     required=False, type=int, default=[1,10,20,50],
-                     help='Batch values to run experiment on.')
-parser.add_argument('-p','--pirName', default="spiralstreampack",
-                     required=False, type=str,
-                     help='PIR scheme to run batch experiments')
-parser.add_argument('-f','--figName',
-                     required=False, type=str,
-                     help='Name of the saved image')
+parser.add_argument('-exp', '--expType', choices=["es", "batch"],
+                    required=True, type=str,
+                    help='What type of plot to plot')
+parser.add_argument('-bv', '--batchValues', nargs='+',
+                    required=False, type=int, default=[1, 5, 10, 20],
+                    help='Batch values to run experiment on.')
+parser.add_argument('-p', '--pirName', default="spiralstreampack",
+                    required=False, type=str,
+                    help='PIR scheme to run batch experiments')
+parser.add_argument('-f', '--figName',
+                    required=False, type=str,
+                    help='Name of the saved image')
+
 
 def generate_results(log2_db_size, elem_sizes, tput_columns, verbose=False):
     df_all = utils.concatenate_jsons("results/data/single_server", verbose)
     
     # create new dataframe with only those rows corresponding to elem_sizes
     df_es = df_all[(df_all['log2_db_size'] == log2_db_size)
-                            & (df_all['elem_size'].isin(elem_sizes))]
-    assert len(df_es)==len(elem_sizes)
+                   & (df_all['elem_size'].isin(elem_sizes))]
+    assert len(df_es) == len(elem_sizes)
 
     col_filter = ["elem_size"]+tput_columns
     df_col = df_es[col_filter]
@@ -62,11 +60,12 @@ def generate_results(log2_db_size, elem_sizes, tput_columns, verbose=False):
         print(df_col)
     return df_col
 
+
 def gen_elem_comp_plot(fig_name):
     """
     NOTE: Don't rerun the experiment due to high latency
     """
-    PIR_NAMES = ["spiralpir","spiralstreampack", "sealpir", "fastpir"]
+    PIR_NAMES = ["spiralpir", "spiralstreampack", "sealpir", "fastpir"]
     PIR_LABELS = ["SpiralPIR", "SpiralStreamPack", "SealPIR", "FastPIR"]
     PIRAC_MODES = ["bl", "mp", "fs"]
 
@@ -82,7 +81,7 @@ def gen_elem_comp_plot(fig_name):
     # create a 2 by 1 figure
     fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, sharey=False)
 
-    # set fig height 
+    # set fig height
     fig.set_figheight(6)
 
     # set figure scale
@@ -92,8 +91,8 @@ def gen_elem_comp_plot(fig_name):
     ax2.set_xscale("log")
     # plt.grid(True, linewidth=1, color='grey', alpha=0.5)
 
-
-    colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad'] #, '#c0392b', '#333']
+    # , '#c0392b', '#333']
+    colors = ['#08519c', '#ff7f00', '#16a085', '#8e44ad']
     cc = itertools.cycle(colors)
     plot_lines = []
 
@@ -128,7 +127,6 @@ def gen_elem_comp_plot(fig_name):
                         color=colorb, alpha=error_opacity)
         
         plot_lines.append([l1, l2, l3, l4])
-    
 
     # set labels, x axis is common
     ax1.set_ylabel("Throughput (in MB/s)")
@@ -162,11 +160,13 @@ def gen_elem_comp_plot(fig_name):
     fig.savefig(f"images/{fig_name}.pdf", dpi=300)
     print(f"Successfully generated and save the plot with name {fig_name}")
 
+
 def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     PIR_NAME = "spiralstreampack"
     tput_columns = [f"{PIR_NAME}_{pm}_tput" for pm in ["bl", "mp", "fs"]]
-    results = generate_results(utils.LOG2_DB_SIZE, [1<<15], tput_columns, verbose=False)
-    
+    results = generate_results(
+        utils.LOG2_DB_SIZE, [1 << 15], tput_columns, verbose=False)
+
     # calculate tputs
     pir_tput = results[f'{PIR_NAME}_bl_tput'].values[0]
     pir_mp_tput = results[f'{PIR_NAME}_mp_tput'].values[0]
@@ -195,7 +195,7 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     pir_positions = np.arange(len(batch_values))
     re_positions = [x + barWidth for x in pir_positions]
     pirac_positions = [x + barWidth for x in re_positions]
-    
+
     # set figure height
     plt.figure().set_figheight(3)
 
@@ -224,16 +224,17 @@ def gen_batched_bar_plot(pir_name, batch_values, fig_name):
     # print the overheads
     print(overheads)
 
+
 if __name__ == "__main__":
     args = parser.parse_args()
     exp = args.expType
     bv = args.batchValues
     pir_name = args.pirName
     fig_name = args.figName
-    
-    if exp=="es":
+
+    if exp == "es":
         fig_name = "comparision_elem_sizes" if fig_name is None else fig_name
         gen_elem_comp_plot(fig_name)
-    elif exp=="batch":
+    elif exp == "batch":
         fig_name = "batched_opt" if fig_name is None else fig_name
         gen_batched_bar_plot(pir_name, bv, fig_name)
