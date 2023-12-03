@@ -9,7 +9,7 @@ struct AES *initAES(uint8_t *seed)
     if (!(ctx = EVP_CIPHER_CTX_new()))
         printf("aes context error\n");
 
-    int status = EVP_EncryptInit_ex(ctx, EVP_aes_128_ecb(), NULL, (uint8_t *)seed, NULL);
+    int status = EVP_EncryptInit_ex(ctx, EVP_aes_128_ctr(), NULL, (uint8_t *)seed, NULL);
     if (status != 1)
         printf("aes randomness init error\n");
 

@@ -25,7 +25,7 @@ float runKeyRefresh(uint64_t numRefreshOps)
 
     for (int i = 0; i < numRefreshOps; i++)
     {
-        int status = EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ecb(), NULL, oldKey, NULL);
+        int status = EVP_EncryptInit_ex(prfCtx, EVP_aes_128_ctr(), NULL, oldKey, NULL);
         if (status != 1)
             printf("errors ocurred when initializing context\n");
 
