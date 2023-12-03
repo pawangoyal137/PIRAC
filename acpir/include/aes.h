@@ -17,8 +17,8 @@ struct AES
 typedef struct aes AES;
 
 // cipher context
-extern struct AES *initAES(uint8_t *seed);
-extern void destroyAES(struct AES *aes);
-extern void reencrypt(struct AES *aes, uint64_t size, uint64_t elemsize, uint128_t *input, uint128_t *output);
+extern struct AES *initAESKeys(uint128_t *seed, int num_keys);
+extern void destroyAESKeys(struct AES *aes, int num_keys);
+extern void reEncrypt(struct AES *aes_keys, uint64_t db_size, uint64_t elem_size, uint128_t *input, uint128_t *output);
 
 #endif

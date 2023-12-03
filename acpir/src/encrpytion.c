@@ -3,24 +3,18 @@
 #include "../include/encryption.h"
 #include "../include/aes.h"
 
-uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t size, uint64_t elemsize)
+uint128_t *encryptDatabase(uint128_t *database, uint128_t seed, uint64_t db_size, uint64_t elem_size)
 {
-    struct AES *aes = initAES((uint8_t *)&seed);
-    uint128_t *encrpytedDB = malloc(sizeof(uint128_t) * size * elemsize);
+    struct AES *aes_keys = initAESkeys((uint8_t *)&seed, db_size);
+    uint128_t *encrpyted_dB = malloc(sizeof(uint128_t) * db_size * elem_size);
 
-    if (encrpytedDB == NULL)
+    if (encrpyted_dB == NULL)
     {
         printf("failed to allocate space");
         exit(0);
     }
 
-    if (sizeof(*encrpytedDB) != sizeof(*database))
-    {
-        printf("different size of input and output database");
-        exit(0);
-    }
+    reEncrypt(aes_keys, db_size, elem_size, database, encrpyted_db);
 
-    reencrypt(aes, size, elemsize, database, encrpytedDB);
-
-    return encrpytedDB;
+    return encrpyted_db;
 }
