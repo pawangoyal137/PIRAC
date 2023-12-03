@@ -9,7 +9,7 @@ NUM_ITER = 5
 BITS_IN_MB = 8 * 1000000
 
 # Load the shared library into ctypes
-libname = "../acpir/src/test.so"
+libname = "../pirac/src/test.so"
 c_lib = ctypes.CDLL(libname)
 
 # Set return type as float
