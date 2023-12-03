@@ -1,6 +1,6 @@
 TARGET = test
 CFLAGS = -O3 -fpic
-LDFLAGS = -lcrypto -lssl -lm
+LDFLAGS = -march=native -lcrypto -lssl -lm -maes -ffast-math
 
 $(TARGET): test.o libpir.a
 	gcc $^ -o $@ $(LDFLAGS)
