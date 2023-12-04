@@ -85,7 +85,9 @@ func BenchmarkPaillier(b *testing.B) {
 
 func BenchmarkPaillierDifPrimes(b *testing.B) {
 	numIter := int(math.Max(float64(NUMITERS), float64(b.N)))
-	var totalTime time.Duration
+    var totalTime time.Duration
+    var times []float64
+
     for i := 0; i < numIter; i++ {
 		x := generateRandomNumber(BITS)
 		y := generateRandomNumber(BITS)
@@ -94,11 +96,25 @@ func BenchmarkPaillierDifPrimes(b *testing.B) {
         start := time.Now()
         new(big.Int).Exp(x, y, z)
         new(big.Int).Mod(new(big.Int).Mul(x, y), z)
-        totalTime += time.Since(start)
+
+        elapsed := time.Since(start)
+        times = append(times, float64(elapsed.Microseconds()))
+        totalTime += elapsed
     }
 
-    // calculate and print the average time taken per iteration
-    averageTime := totalTime / time.Duration(numIter)
+    averageTime := float64(totalTime.Milliseconds()) / float64(numIter) // in milli seconds
+
+    // calculate standard deviation
+	sumSquares := 0.0
+	for _, elapsed := range times {
+		diff := elapsed/1000 - averageTime
+		sumSquares += diff * diff
+    }
+    stdDev := math.Sqrt(sumSquares / float64(numIter))
+    
+    // calculate tput and std in tput
+    tput := (float64(BITS)/8)/(1000*float64(averageTime))
     fmt.Printf("Average time for paillier per iteration over %d loops: %v\n", numIter, averageTime)
-    fmt.Printf("Average throughput for paillier: %f MB/s\n", (float64(BITS)/8)/float64(averageTime.Microseconds()))
+    fmt.Printf("Average throughput for paillier: %f MB/s\n", tput)
+    fmt.Printf("Standard Deviation in throughput for paillier: %f MB/s\n", tput*stdDev/averageTime)
 }

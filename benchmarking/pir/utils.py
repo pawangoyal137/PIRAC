@@ -10,7 +10,7 @@ FastPirPath = "../../FastPIR"
 SimplePirPath = "../../SimplePIR/pir"
 SpiralPirPath = "../../spiral"
 SealPirPath = "../../SealPIR/bin"
-PaillierPath = "../paillier"
+PaillierPath = "../exp_based_schemes/paillier"
 CWPirPath = "../../constant-weight-pir/src/build"
 
 # declare the constants/ defaults for the experiments

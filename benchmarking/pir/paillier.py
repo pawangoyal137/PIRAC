@@ -14,12 +14,14 @@ def cal_paillier_tput(db_size, elem_size, output=False):
                             stderr=subprocess.PIPE,
                             universal_newlines=True)
 
-    throughput = None
+    tput = None
+    tput_std = None
     while True:
         line = process.stdout.readline()
         if "Average throughput for paillier" in line:
-            throughput = utils.extract_num(line)
-        
+            tput = utils.extract_num(line)
+        if "Standard Deviation" in line:
+            tput_std = utils.extract_num(line)
         if output:
             print(line.rstrip())
 
@@ -28,10 +30,10 @@ def cal_paillier_tput(db_size, elem_size, output=False):
             break
 
     if output:           
-        print(f"Throughput of Paillier = {throughput} MB/s")
+        print(f"Throughput of Paillier = {tput} +- {tput_std} MB/s")
     
     os.chdir(cwd)
-    return throughput
+    return tput, tput_std
 
 if __name__ == "__main__":
     pass
