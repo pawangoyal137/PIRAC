@@ -1,31 +1,27 @@
 # Getting started
-Clone the repository (fix it, assume ssh keys)
+
 ```
-git clone git@github.com:pawangoyal137/PIRAC.git
+git clone https://github.com/pawangoyal137/PIRAC
 ```
 
-## Dependencies 
-```
-sudo apt-get update
-```
- 
-<!-- * GMP -->
-* Go 1.13 or higher 
-* OpenSSL 1.1.1f 
-* GNU Make
-* Cmake
+## Dependencies
 
+- Go 1.13 or higher
+- OpenSSL 1.1.1f
+- GNU Make
+- Cmake
 
-|Dependency |Install dependencies (Ubuntu): | Install dependencies (CentOS):|
-|--------------|--------------|-----------|
-|Go |```sudo apt-get install golang-go```| ```sudo yum install golang```|
-|OpenSSL |```sudo apt install libssl-dev```|```sudo yum install openssl-devel```|
-|Make |```sudo apt-get install build-essential``` |  ```sudo yum groupinstall 'Development Tools'```|
-|Cmake |```sudo apt-get install cmake```| ```sudo yum install cmake```|
+| Dependency | Install dependencies (Ubuntu):         | Install dependencies (CentOS):              |
+| ---------- | -------------------------------------- | ------------------------------------------- |
+| Go         | `sudo apt-get install golang-go`       | `sudo yum install golang`                   |
+| OpenSSL    | `sudo apt install libssl-dev`          | `sudo yum install openssl-devel`            |
+| Make       | `sudo apt-get install build-essential` | `sudo yum groupinstall 'Development Tools'` |
+| Cmake      | `sudo apt-get install cmake`           | `sudo yum install cmake`                    |
 
+### Python Packages
 
-## Python Packages
 Install following python packages
+
 ```
 sudo apt install python3-pip
 sudo apt-get install python3-numpy
@@ -33,18 +29,38 @@ sudo apt-get install python3-matplotlib
 sudo apt-get install python3-pandas
 ```
 
-## Setup PIR schemes
+## Set up PIRAC
 
-### Setup Spiral
-Run following commands to download and setup Spiral PIR in home direcotry 
+### Create shared library
+
+```
+cd pirac/src
+make test.so
+```
+
+## Set up Single Server PIR Schemes
+
+All the PIR schemes are downloaded in `other_pir_schemes` folder. Run the following command to get the relevant githubs
+
+```
+git pull
+git submodule init
+```
+
+Now additional steps are required to build a few of these githubs which are described below.
+
+<!-- ### Setup Spiral
+Run following commands to download and setup Spiral PIR in home direcotry
 ```
 cd ~
 git clone https://github.com/pawangoyal137/simplepir
 ```
-The above repo is a copy of the original repo with slight modifications
+The above repo is a copy of the original repo with slight modifications -->
 
-### Setup Spiral
-Run following commands to download and setup Spiral PIR in home direcotry 
+### Set up Spiral
+
+Run following commands to build Spiral PIR
+
 ```
 # install dependencies
 sudo apt-get install curl zip unzip tar
@@ -56,22 +72,24 @@ cd ~
 git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 ./vcpkg/vcpkg install hexl
-
-# clone the spiral github
-git clone https://github.com/menonsamir/spiral.git
 ```
 
 Run following commands to ensure spiral pir is correctly working
+
 ```
-cd ~/spiral
+# cd to the Spiral github
+cd other_pir_schemes/Spiral
 python3 select_params.py 20 256
 ```
+
 More information can be found at https://github.com/menonsamir/spiral
 
-### Setup Seal
+### Set up SealPIR
+
 Run following commands to download and setup Seal PIR in home direcotry
+
 ```
-# clone the SEAL
+# clone the SEAL repo
 cd ~
 git clone https://github.com/microsoft/SEAL
 cd SEAL
@@ -84,31 +102,53 @@ cmake -S . -B build
 cmake --build build
 sudo cmake --install build
 
-# clone SEAL PIR
-cd ~
-git clone https://github.com/pawangoyal137/SealPIR
-cd SealPIR
-
-# build and test
+# build and test SealPIR
+cd other_pir_schemes/SealPIR/
 cmake .
 make
 ctest .
 ```
-More information can be found at https://github.com/microsoft/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
 
-### Setup Fast
+More information can be found at https://github.com/pawangoyal137/SealPIR and https://github.com/microsoft/SEAL/tree/4.0.0
+
+### Set up FastPIR
 
 ```
-git clone https://github.com/ishtiyaque/FastPIR
-cd FastPIR/src/
+# build FastPIR
+cd other_pir_schemes/FastPIR/src/
 cmake .
 make
 ```
 
-## Setup
+More information can be found at https://github.com/ishtiyaque/FastPIR
 
-### Create shared library
+### Set up Constant-Weight-PIR
+
 ```
-cd acpir/src
-make test.so
+# build CWPIR
+cd other_pir_schemes/CWPIR/src/build
+cmake ..
+make
 ```
+
+More information can be found at https://github.com/pawangoyal137/Constant-Weight-PIR
+
+## Set up Multi-Server PIR Schemes
+
+### Set up Percy++
+
+We present detailed steps to setup Percy++ in the README in https://github.com/pawangoyal137/Percyxx. **TODO: Currently this repo does not download this repo when submodules are initialized**.
+
+### Set up PACLs and multi server
+
+```
+cd other_pir_schemes/PACLs
+git submodule update --init --recursive
+go mod tidy
+cd vdpf/src && make
+```
+
+More information can be found at https://github.com/pawangoyal137/PACLs
+
+<!-- head -c 1G </dev/urandom >myfile
+shred -n 1 -s 45G database_45G -->
