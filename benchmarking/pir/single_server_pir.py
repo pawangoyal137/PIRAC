@@ -1,6 +1,7 @@
 import argparse
 import json
 import numpy as np
+import pandas as pd
 
 from pirac import cal_pirac_tput
 from cwpir import cal_cwpir_tput
@@ -74,7 +75,11 @@ def pretty_print(data, add_arguments):
     if len(metadata_string) != 0:
         print(metadata_string)
     df = utils.create_df(data)
-    print(df)
+    with pd.option_context('display.max_rows', None,
+                       'display.max_columns', None,
+                       'display.precision', 3,
+                       ):
+        print(df)
     min_max_results = utils.find_max_min_pd_col(df, "tput")
     min_max_overhead = utils.find_max_min_pd_col(df, "overhead")
     if min_max_results is not None:
@@ -144,7 +149,6 @@ if __name__ == "__main__":
                                                                                 pirac_tput_std/np.square(pirac_tput))
                 else:
                     raise Exception("Shouldn't reach here")
-
             data.append(record)
 
     pretty_print(data, add_arguments)
