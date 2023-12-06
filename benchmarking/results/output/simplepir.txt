@@ -1,16 +1,8 @@
-   log2_db_size  elem_size  ...  simplepir_fs_overhead  simplepir_fs_tput_std_pct
-0            20        128  ...             986.631763                   0.460503
-1            20        512  ...             266.727772                   0.266660
-2            20       2048  ...              73.211346                   0.497467
-3            20       8192  ...              22.315290                   0.143656
-4            20      32768  ...              10.243356                   0.447699
-
-[5 rows x 10 columns]
-Range of simplepir_bl_tput: 10446.71-11545.06MB/s
-Range of simplepir_bl_tput_std_pct: 1.30-2.75%
-Range of simplepir_mp_tput: 743.32-2201.09MB/s
-Range of simplepir_mp_tput_std_pct: 0.52-1.19%
-Range of simplepir_fs_tput: 10.59-1074.25MB/s
-Range of simplepir_fs_tput_std_pct: 0.14-0.50%
-Overhead of simplepir_mp_overhead: 5.25-14.05
-Overhead of simplepir_fs_overhead: 10.24-986.63
+Traceback (most recent call last):
+  File "/home/ubuntu/PIRAC/benchmarking/pir/single_server_pir.py", line 117, in <module>
+    pir_tput, pir_tput_std = cal_pir_tput(
+  File "/home/ubuntu/PIRAC/benchmarking/pir/single_server_pir.py", line 52, in cal_pir_tput
+    return cal_simplepir_tput(log2_db_size, elem_size, output=output, num_iter=num_iter, **add_arguments)
+  File "/home/ubuntu/PIRAC/benchmarking/pir/simplepir.py", line 40, in cal_simplepir_tput
+    tput_stds.append(tput_std)
+UnboundLocalError: local variable 'tput_std' referenced before assignment

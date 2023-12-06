@@ -1,16 +1,52 @@
-   log2_db_size  ...  spiralstreampack_fs_tput_std_pct
-0            20  ...                          0.426821
-1            20  ...                          0.265640
-2            20  ...                          0.801532
-3            20  ...                          0.624224
-4            20  ...                          0.282075
+   log2_db_size  elem_size  spiralstreampack_bl_tput  \
+0            20        128                   345.378   
+1            20        512                   532.739   
+2            20       2048                   871.163   
+3            20       8192                  1663.760   
+4            20      32768                  1911.819   
+5            20      65536                  1966.309   
+6            20     131072                  2131.424   
 
-[5 rows x 10 columns]
-Range of spiralstreampack_bl_tput: 345.67-1957.15MB/s
-Range of spiralstreampack_bl_tput_std_pct: 0.36-1.87%
-Range of spiralstreampack_mp_tput: 241.59-1035.56MB/s
-Range of spiralstreampack_mp_tput_std_pct: 0.28-1.53%
-Range of spiralstreampack_fs_tput: 10.21-740.50MB/s
-Range of spiralstreampack_fs_tput_std_pct: 0.27-0.80%
-Overhead of spiralstreampack_mp_overhead: 1.28-1.92
-Overhead of spiralstreampack_fs_overhead: 2.64-33.86
+   spiralstreampack_bl_tput_std_pct  spiralstreampack_mp_tput  \
+0                             0.450                   148.150   
+1                             0.421                   302.072   
+2                             0.538                   552.073   
+3                             0.504                   966.221   
+4                             1.227                  1009.451   
+5                             1.575                  1030.720   
+6                             0.796                  1075.792   
+
+   spiralstreampack_mp_overhead  spiralstreampack_mp_tput_std_pct  \
+0                         2.331                             0.823   
+1                         1.764                             1.405   
+2                         1.578                             0.416   
+3                         1.722                             0.645   
+4                         1.894                             0.835   
+5                         1.908                             1.090   
+6                         1.981                             0.557   
+
+   spiralstreampack_fs_tput  spiralstreampack_fs_overhead  \
+0                    11.520                        29.981   
+1                    42.726                        12.469   
+2                   146.762                         5.936   
+3                   435.920                         3.817   
+4                   766.023                         2.496   
+5                   885.838                         2.220   
+6                   991.598                         2.149   
+
+   spiralstreampack_fs_tput_std_pct  
+0                             0.428  
+1                             0.681  
+2                             0.462  
+3                             0.363  
+4                             0.768  
+5                             0.784  
+6                             0.602  
+Range of spiralstreampack_bl_tput: 345.38-2131.42MB/s
+Range of spiralstreampack_bl_tput_std_pct: 0.42-1.58%
+Range of spiralstreampack_mp_tput: 148.15-1075.79MB/s
+Range of spiralstreampack_mp_tput_std_pct: 0.42-1.41%
+Range of spiralstreampack_fs_tput: 11.52-991.60MB/s
+Range of spiralstreampack_fs_tput_std_pct: 0.36-0.78%
+Overhead of spiralstreampack_mp_overhead: 1.58-2.33
+Overhead of spiralstreampack_fs_overhead: 2.15-29.98

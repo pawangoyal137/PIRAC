@@ -1,16 +1,41 @@
-   log2_db_size  elem_size  ...  sealpir_fs_overhead  sealpir_fs_tput_std_pct
-0            20        128  ...             6.060466                 0.269436
-1            20        512  ...             2.787257                 0.202630
-2            20       2048  ...             1.551620                 0.366022
-3            20       8192  ...             1.167553                 0.335961
-4            20      32768  ...             1.054205                 0.237224
+{'log2_db_size': 20, 'elem_size': 128, 'sealpir_bl_tput': 53.39884931335142, 'sealpir_bl_tput_std_pct': 0.6449795324612015, 'sealpir_mp_tput': 44.63979137768101, 'sealpir_mp_overhead': 1.1962163725534292, 'sealpir_mp_tput_std_pct': 0.7271986348947883, 'sealpir_fs_tput': 9.906023119611225, 'sealpir_fs_overhead': 5.390543578243448, 'sealpir_fs_tput_std_pct': 0.24984754258265893}
+{'log2_db_size': 20, 'elem_size': 512, 'sealpir_bl_tput': 74.41691564396808, 'sealpir_bl_tput_std_pct': 0.2151964333406287, 'sealpir_mp_tput': 66.7316146818343, 'sealpir_mp_overhead': 1.1151673161031106, 'sealpir_mp_tput_std_pct': 0.4615317131861609, 'sealpir_fs_tput': 28.824923321733216, 'sealpir_fs_overhead': 2.581686508350908, 'sealpir_fs_tput_std_pct': 0.6240075963516276}
+{'log2_db_size': 20, 'elem_size': 2048, 'sealpir_bl_tput': 87.89703879964978, 'sealpir_bl_tput_std_pct': 0.2793139069646004, 'sealpir_mp_tput': 83.31969064421436, 'sealpir_mp_overhead': 1.0549371717542888, 'sealpir_mp_tput_std_pct': 0.31420852112222, 'sealpir_fs_tput': 58.95365978332032, 'sealpir_fs_overhead': 1.490951352684611, 'sealpir_fs_tput_std_pct': 0.3704780065862112}
+{'log2_db_size': 20, 'elem_size': 8192, 'sealpir_bl_tput': 90.6816112256913, 'sealpir_bl_tput_std_pct': 0.4230347448943135, 'sealpir_mp_tput': 87.29417831429997, 'sealpir_mp_overhead': 1.03880479748827, 'sealpir_mp_tput_std_pct': 0.4123807252726047, 'sealpir_fs_tput': 78.74456067388567, 'sealpir_fs_overhead': 1.1515920648950213, 'sealpir_fs_tput_std_pct': 0.4429221679310256}
+{'log2_db_size': 20, 'elem_size': 32768, 'sealpir_bl_tput': 64.69284691893627, 'sealpir_bl_tput_std_pct': 0.2742263268205611, 'sealpir_mp_tput': 62.79922246460391, 'sealpir_mp_overhead': 1.030153628978443, 'sealpir_mp_tput_std_pct': 0.27486562758552147, 'sealpir_fs_tput': 61.585212232192184, 'sealpir_fs_overhead': 1.0504607287059027, 'sealpir_fs_tput_std_pct': 0.27359044518025616}
+{'log2_db_size': 20, 'elem_size': 65536, 'sealpir_bl_tput': 86.42362432671493, 'sealpir_bl_tput_std_pct': 0.32694168675088975, 'sealpir_mp_tput': 83.11411014910243, 'sealpir_mp_overhead': 1.0398189208989352, 'sealpir_mp_tput_std_pct': 0.33567837239218656, 'sealpir_fs_tput': 82.02742980083217, 'sealpir_fs_overhead': 1.0535942005809156, 'sealpir_fs_tput_std_pct': 0.3250951464079773}
+{'log2_db_size': 20, 'elem_size': 131072, 'sealpir_bl_tput': 86.99521662038329, 'sealpir_bl_tput_std_pct': 0.33356277289475966, 'sealpir_mp_tput': 83.65514382216512, 'sealpir_mp_overhead': 1.0399266876561533, 'sealpir_mp_tput_std_pct': 0.3323919394896106, 'sealpir_fs_tput': 83.10566968027419, 'sealpir_fs_overhead': 1.046802425816109, 'sealpir_fs_tput_std_pct': 0.33006216528580573}
+   log2_db_size  elem_size  sealpir_bl_tput  sealpir_bl_tput_std_pct  \
+0            20        128           53.399                    0.645   
+1            20        512           74.417                    0.215   
+2            20       2048           87.897                    0.279   
+3            20       8192           90.682                    0.423   
+4            20      32768           64.693                    0.274   
+5            20      65536           86.424                    0.327   
+6            20     131072           86.995                    0.334   
 
-[5 rows x 10 columns]
-Range of sealpir_bl_tput: 53.64-91.09MB/s
-Range of sealpir_bl_tput_std_pct: 0.24-0.40%
-Range of sealpir_mp_tput: 50.28-88.11MB/s
-Range of sealpir_mp_tput_std_pct: 0.24-0.39%
-Range of sealpir_fs_tput: 8.85-78.02MB/s
-Range of sealpir_fs_tput_std_pct: 0.20-0.37%
-Overhead of sealpir_mp_overhead: 1.03-1.07
-Overhead of sealpir_fs_overhead: 1.05-6.06
+   sealpir_mp_tput  sealpir_mp_overhead  sealpir_mp_tput_std_pct  \
+0           44.640                1.196                    0.727   
+1           66.732                1.115                    0.462   
+2           83.320                1.055                    0.314   
+3           87.294                1.039                    0.412   
+4           62.799                1.030                    0.275   
+5           83.114                1.040                    0.336   
+6           83.655                1.040                    0.332   
+
+   sealpir_fs_tput  sealpir_fs_overhead  sealpir_fs_tput_std_pct  
+0            9.906                5.391                    0.250  
+1           28.825                2.582                    0.624  
+2           58.954                1.491                    0.370  
+3           78.745                1.152                    0.443  
+4           61.585                1.050                    0.274  
+5           82.027                1.054                    0.325  
+6           83.106                1.047                    0.330  
+Range of sealpir_bl_tput: 53.40-90.68MB/s
+Range of sealpir_bl_tput_std_pct: 0.22-0.64%
+Range of sealpir_mp_tput: 44.64-87.29MB/s
+Range of sealpir_mp_tput_std_pct: 0.27-0.73%
+Range of sealpir_fs_tput: 9.91-83.11MB/s
+Range of sealpir_fs_tput_std_pct: 0.25-0.62%
+Overhead of sealpir_mp_overhead: 1.03-1.20
+Overhead of sealpir_fs_overhead: 1.05-5.39
